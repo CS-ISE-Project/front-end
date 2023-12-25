@@ -1,4 +1,6 @@
+import ConnexioButton from './ConnexionButton';
 import image from './Group1.png';
+import SinscrireButton from './SinscrireButton';
 const Hero = () => {
     return ( 
         <section className="flex flex-col gap-8 md:flex-row" >
@@ -13,8 +15,8 @@ const Hero = () => {
                 <p className='text-[#515151] max-md:text-center text-base 2xl:text-2xl xl:text-xl lg:text-lg mb-4'>Plongez dans le domaine de l'information avec une joie retrouvée en parcourant les documents sans effort. Découvrez une multitude d'informations et tirez le meilleur parti de votre exploration, transformant chaque recherche en un délicieux voyage de découverte.</p>
 
                 <div className='flex flex-col md:flex-row items-center md:my-10 lg:my-15 '>
-                    <button className='md:mr-4 h-10 lg:h-12 xl:h-14 w-36 lg:w-40 xl:w-44 bg-[#8D92C9] text-white border border-solid border-[#8D92C9]'>Connexion</button>
-                    <button className='lg:mb-0 max-md:my-3 h-10 lg:h-12 xl:h-14 w-36 lg:w-40 xl:w-44 bg-white text-[#8D92C9] border border-solid border-[#8D92C9]'>S'inscrire</button>
+                    <ConnexioButton></ConnexioButton>
+                    <SinscrireButton></SinscrireButton>
                 </div>
              
             </div>
