@@ -30,27 +30,27 @@ function FAQElement(props) {
 const faqs = [
   {
     id: 1,
-    question: "Comment utiliser Banky?",
+    question: "Pourquoi 'Science'?",
     answer:
-      "Vous pouver simplement consulter offres des banques avec ses profiles ou bien comparer deux banques entre eux.",
+      "'Science' propose une interface conviviale pour des recherches approfondies d'articles scientifiques. Explorez des contenus de qualité, effectuez des recherches ciblées",
   },
   {
     id: 2,
-    question: "Pourquoi Banky?",
+    question: "Est-ce que je peux sauvegarder l'article?",
     answer:
-      "Puisque Banky offre une meilleur experience pour l'utilisateur et meme un systeme des annonces pour les banques et les partenaires.",
+      "Oui, vous avez la possibilité de sauvegarder l'article préférés. De plus, vous pouvez également le télécharger pour une consultation hors ligne.",
   },
   {
     id: 3,
-    question: "Les données de Banky sont réelles?",
+    question: "Comment rechercher des articles ?",
     answer:
-      "Oui, effectivement les données stocekr dans le site Banky sont a jour et fiables.",
+      "accédez à la page de recherche, et saisissez des mots-clés dans la barre de recherche. Vous pouvez affiner les résultats par titre, auteurs, institutions et période de publication.",
   },
   {
     id: 4,
-    question: "Comment ajouter des annonces?",
+    question: "'Science' respecte-t-il la crédibilité scientifique?",
     answer:
-      "Vous pouver envoyer vos annonces en utilsans le contact form dans la page 'Contactez-Nous' et attendre la validation de l'admin.",
+      "Absolument, 'Science' s'engage à maintenir la plus haute crédibilité scientifique. Nous veillons à ce que les articles présentés sur la plateforme soient issus de sources fiables et respectent les normes académiques. De plus, les modérateurs ont la possibilité de corriger les erreurs éventuelles pour assurer la qualité et la fiabilité des contenus.",
   },
 ];
 

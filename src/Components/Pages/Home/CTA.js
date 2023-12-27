@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 function CTA() {
-  let userNb = 221846;
+  let userNb = 0;
   return (
     <section className="px-8">
       <p className="font-regular text-Typo font-Natasha md:text-[4rem] text-[2rem] text-center">
