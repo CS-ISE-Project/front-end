@@ -27,6 +27,9 @@ module.exports = {
       Natasha: ["Alchadera", "sans-serif"],
     },
     extend: {},
+    backgroundImage :{
+      'About-image' : "url('../public/image1.png')" ,
+    }
   },
   plugins: [],
 };
