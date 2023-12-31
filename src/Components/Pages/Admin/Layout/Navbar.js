@@ -15,7 +15,7 @@ function Navbar() {
               src="/logo.png"
             ></img>
           </Link>
-          <div className="flex gap-[48px] font-Gilroy font-medium text-[1.4rem]">
+          <div className="flex gap-[48px] font-medium text-[1.4rem]">
             <Link to="/admin" className="text-Blue66">
               Modérateurs
             </Link>
@@ -25,11 +25,9 @@ function Navbar() {
           </div>
           <div className="flex gap-[16px] items-center ">
             <div>
-              <p className="font-Gilroy bg-Rose66 py-2 px-4 text-white rounded">
-                Admin
-              </p>
+              <p className="bg-Rose66 py-2 px-4 text-white rounded">Admin</p>
             </div>
-            <p className="font-Gilroy font-bold text-Rose66">{userName}</p>
+            <p className="font-bold text-Rose66">{userName}</p>
             <FaChevronDown className="text-Rose66" />
           </div>
         </div>

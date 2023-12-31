@@ -60,7 +60,7 @@ function FAQ() {
       <h1 className="font-regular text-Typo font-Natasha md:text-[4rem] text-[2rem] text-center">
         Questions fréquemment posées
       </h1>
-      <div className="w-[100%] flex flex-col gap-[4vh] font-Gilroy ">
+      <div className="w-[100%] flex flex-col gap-[4vh]">
         {faqs.map((faq) => (
           <FAQElement
             key={faq.id}

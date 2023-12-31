@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function LoginForm() {
   const navigate = useNavigate();
@@ -61,8 +61,10 @@ function LoginForm() {
 
   return (
     <div className="flex flex-col justify-center items-start w-[80vw] gap-[10px] md:gap-[40px] text-sm md:text-md text-Typo">
-      <p className=" text-2xl md:text-[30px] lg:text-4xl font-Natasha">Se connecter</p>
-      <p className="text-sm text-[#515151]">
+      <p className=" text-2xl md:text-4xl lg:text-6xl font-Natasha">
+        Se connecter
+      </p>
+      <p className="text-sm text-Typo">
         Connectez-vous a votre compte ci-dessous
       </p>
       <form
@@ -74,6 +76,7 @@ function LoginForm() {
           className="rounded-md w-full text-black p-3 md:p-4 bg-[#F2F3F6]"
           type="text"
           name="email"
+          placeholder="Mail Adresse"
           onChange={handleChange}
         />
         {isSubmitting && errors.email && (
@@ -89,17 +92,22 @@ function LoginForm() {
           className="rounded-md w-full text-black p-3 md:p-4 bg-[#F2F3F6]"
           type="password"
           name="password"
+          placeholder="Password"
           onChange={handleChange}
         />
         {isSubmitting && errors.password && (
           <div className="text-Rose100">{errors.password}</div>
         )}
-        <button className="w-full rounded-md text-white font-bold bg-[#8D92C9] p-3 md:p-4">
+
+        <Link
+          className="flex items-center justify-center w-full rounded-md text-white font-bold bg-[#8D92C9] p-3 md:p-4"
+          to="/user"
+        >
           Se connecter
-        </button>
+        </Link>
       </form>
       <button className="flex justify-center items-center gap-4 rounded-md bg-[#F2F3F6] w-full p-3 md:p-4">
-        <img src="devicon_google.svg" alt="" />
+        <img src="devicon_google.svg" alt="google" />
         Connexion avec Google
       </button>
       <p className="self-center">

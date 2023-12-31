@@ -1,5 +1,6 @@
+
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function RegisterForm() {
   const navigate = useNavigate();
@@ -73,8 +74,10 @@ function RegisterForm() {
     navigate("/login");
   }
   return (
-    <div className="flex flex-col text-sm md:text-md w-[80vw] md:w-[30vw]  gap-8">
-      <h2 className="text-2xl md:text-4xl font-Natasha">S'inscrire</h2>
+    <div className="flex flex-col text-sm md:text-md w-[80vw] md:w-[30vw]  gap-8 text-Typo">
+      <h2 className=" text-2xl md:text-4xl lg:text-6xl font-Natasha">
+        S'inscrire
+      </h2>
       <p className="text-[#515151]">Inscrivez-vous à votre compte ci-dessous</p>
       <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
         <div className="flex justify-between  gap-5 sm:gap-7">
@@ -83,6 +86,7 @@ function RegisterForm() {
             <input
               className=" rounded-md text-black  bg-[#F2F3F6] w-full p-3 md:p-4"
               type="text"
+              placeholder="Prénom"
               onChange={handleChange}
               name="firstName"
             />
@@ -92,6 +96,7 @@ function RegisterForm() {
             <input
               className="rounded-md text-black bg-[#F2F3F6] w-full  p-3 md:p-4"
               type="text"
+              placeholder="Nom"
               onChange={handleChange}
               name="lastName"
             />
@@ -108,6 +113,7 @@ function RegisterForm() {
           className="rounded-md text-black  bg-[#F2F3F6] p-3 md:p-4"
           type="text"
           onChange={handleChange}
+          placeholder="Mail Adress"
           name="email"
         />
         {isSubmitting && errors.email && (
@@ -118,17 +124,21 @@ function RegisterForm() {
           className="rounded-md text-black  bg-[#F2F3F6] p-3 md:p-4"
           type="password"
           onChange={handleChange}
+          placeholder="Password"
           name="password"
         />
         {isSubmitting && errors.password && (
           <div className="text-Rose100">{errors.password}</div>
         )}
-        <button className="rounded-md text-white font-bold bg-[#8D92C9] p-3 md:p-4">
+        <Link
+          className="flex items-center justify-center w-full rounded-md text-white font-bold bg-[#8D92C9] p-3 md:p-4"
+          to="/user"
+        >
           Se connecter
-        </button>
+        </Link>
       </form>
       <button className="flex justify-center items-center gap-4 rounded-md bg-[#F2F3F6] p-3 md:p-4">
-        <img src="devicon_google.svg" alt="" />
+        <img src="devicon_google.svg" alt="google" />
         Connexion avec Google
       </button>
       <p className="self-center">
