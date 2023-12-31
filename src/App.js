@@ -6,6 +6,9 @@ import Register from "./Components/Pages/Auth/Register";
 import ModLayout from "./Components/Pages/Mod/Layout/ModLayout";
 import Home from "./Components/Pages/Home/Home";
 import UserLayout from "./Components/Pages/User/Layout/UserLayout";
+import Search from "./Components/Pages/User/Pages/Search";
+import Results from "./Components/Pages/User/Pages/Results";
+import ArticleDetails from "./Components/Pages/User/Pages/ArticleDetails";
 
 export default function App() {
   const AdminContext = createContext(1);
@@ -39,6 +42,9 @@ export default function App() {
         {/* User routes */}
         {isUser && (
           <Route element={<UserLayout />} path="/user">
+            <Route index element={<Search />} />
+            <Route element={<Results />} path="results" />
+            <Route element={<ArticleDetails />} path="article" />
             {/* User routes */}
           </Route>
         )}
