@@ -12,6 +12,4 @@ function Register() {
       <RegisterForm />
     </div>
   );
-}
 
-export default Register;
