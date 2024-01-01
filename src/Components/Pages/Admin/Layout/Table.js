@@ -9,7 +9,7 @@ function Table (){
   const toggleDivVisibility = (index) => {
     setSelectedRowIndex(selectedRowIndex === index ? null : index);
   }
-
+ 
 
 
     const modData = [
