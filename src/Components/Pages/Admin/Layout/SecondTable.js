@@ -7,11 +7,7 @@ function SecondTable  () {
     const [selectedRowIndex, setSelectedRowIndex] = useState(null);
     const handleAction = (actionType, index) => {
         
-        if (actionType === 'activate') {
-          // Code to activate the user at the specified index
-        } else if (actionType === 'block') {
-          // Code to block the user at the specified index
-        }
+        
         
       };
       
