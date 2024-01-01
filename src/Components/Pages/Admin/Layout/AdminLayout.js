@@ -7,7 +7,7 @@ import Table from './Table'
 
 function AdminLayout() {
   return (
-    <div className='p-10'>
+    <div>
         <Navbar />
         <Outlet />
         <Table />
