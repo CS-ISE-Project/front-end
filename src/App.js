@@ -9,6 +9,7 @@ import UserLayout from "./Components/Pages/User/Layout/UserLayout";
 import Search from "./Components/Pages/User/Pages/Search";
 import Results from "./Components/Pages/User/Pages/Results";
 import ArticleDetails from "./Components/Pages/User/Pages/ArticleDetails";
+import UserProfile from "./Components/Pages/User/Pages/UserProfile";
 
 export default function App() {
   const AdminContext = createContext(1);
@@ -45,6 +46,7 @@ export default function App() {
             <Route index element={<Search />} />
             <Route element={<Results />} path="results" />
             <Route element={<ArticleDetails />} path="article" />
+            <Route element={<UserProfile />} path="profile" />
             {/* User routes */}
           </Route>
         )}
