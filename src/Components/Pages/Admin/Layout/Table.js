@@ -17,7 +17,6 @@ function Table (){
  
 
     useEffect(() => {       
-
         const fetchTableData = async ()=>{
             setIsLoading(true)
         try{

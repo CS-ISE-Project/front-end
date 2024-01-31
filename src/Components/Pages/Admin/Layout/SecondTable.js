@@ -9,9 +9,8 @@ function SecondTable  () {
     const [isLoading , setIsLoading] = useState(false)
     const [error , setError] = useState()
     const [page, setPage] = useState(0)
+    
     const handleAction = (actionType, index) => {
-        
-        
         
       };
       
@@ -38,43 +37,7 @@ function SecondTable  () {
     }, [page])
 
     
-    // const modData = [
-    //     {
-    //         ID:"123456",
-    //         Titre:"Nanoparticules ...",
-    //         Url:"https://google.dz",
-    //         Auteurs:"Maria Airth",
-    //         Institutions:"Google, Microsoft, Esi",
-    //         PublicationDate :"17-12-2023"
-    //     },
-    //     {
-    //         ID:"123456",
-    //         Titre:"Nanoparticules ...",
-    //         Url:"https://google.dz",
-    //         Auteurs:"Maria Airth",
-    //         Institutions:"Google, Microsoft, Esi",
-    //         PublicationDate :"17-12-2023"
-    //     },
-    //     {
-    //         ID:"123456",
-    //         Titre:"Nanoparticules ...",
-    //         Url:"https://google.dz",
-    //         Auteurs:"Maria Airth",
-    //         Institutions:"Google, Microsoft, Esi",
-    //         PublicationDate :"17-12-2023"
-    //     },
-    //     {
-    //         ID:"123456",
-    //         Titre:"Nanoparticules ...",
-    //         Url:"https://google.dz",
-    //         Auteurs:"Maria Airth",
-    //         Institutions:"Google, Microsoft, Esi",
-    //         PublicationDate :"17-12-2023"
-    //     },
-    // ]
-
-
-  
+   
     return (
 
 
