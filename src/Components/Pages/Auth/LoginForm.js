@@ -41,7 +41,7 @@ function LoginForm(props) {
         },
       });
       const data = response.json();
-      const accessToken = data.access_token;
+      // const accessToken = data.access_token;
       console.log(typeof(endpoint))
       console.log("the type");
       
@@ -70,7 +70,6 @@ function LoginForm(props) {
     e.preventDefault();
     setIsSubmitting(true);
     if (formIsValid) {
-      
       console.log(formData)
       login();
   
