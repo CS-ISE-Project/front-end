@@ -42,8 +42,9 @@ function LoginForm(props) {
       });
       const data = response.json();
       const accessToken = data.access_token;
-      console.log(data);
-      console.log(accessToken);
+      console.log(typeof(endpoint))
+      console.log("the type");
+      
       if (props.type === "/UserLogin") {
         if (response.status === 200) {
           navigate("/user");
@@ -58,19 +59,21 @@ function LoginForm(props) {
         }
       }
 
-      console.log(data);
+    
     } catch (e) {
       console.error("Login Failed :", e);
     }
+    console.log(endpoint)
   };
 
   function handleSubmit(e) {
     e.preventDefault();
     setIsSubmitting(true);
     if (formIsValid) {
-      console.log(formData);
+      
+      console.log(formData)
       login();
-      //loginUser(formData.email, formData.password);
+  
     }
   }
 

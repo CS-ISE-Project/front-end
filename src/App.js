@@ -12,12 +12,16 @@ import ArticleDetails from "./Components/Pages/User/Pages/ArticleDetails";
 import UserProfile from "./Components/Pages/User/Pages/UserProfile";
 
 export default function App() {
+
   const AdminContext = createContext(1);
   const ModContext = createContext(1);
   const UserContext = createContext(1);
+
   const isAdmin = useContext(AdminContext);
   const isMod = useContext(ModContext);
   const isUser = useContext(UserContext);
+
+  
   return (
     <BrowserRouter>
       <Routes>

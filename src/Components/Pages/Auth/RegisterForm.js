@@ -25,6 +25,7 @@ function RegisterForm(props) {
     validateField(name, value);
   }
 
+
   const signUp = async () => {
     let endpoint;
     if (props.type === "/UserRegister") {
@@ -43,18 +44,31 @@ function RegisterForm(props) {
         body: JSON.stringify(formData),
       });
       const data = response.json();
+
       console.log(data);
+
+
+
+
       const accessToken = data.access_token;
       localStorage.setItem('accessToken', accessToken);
       if (props.type === "/UserRegister") {
+    
         if (response.status === 200) {
           navigate("/user");
         }
-      } else if (props.type === "/ModRegister") {
+      } 
+
+      if (props.type === "/ModRegister") {
+        console.log("redirecting to admin")
         if (response.status === 200) {
           navigate("/mod");
         }
-      } else if (props.type === "/AdminRegister") {
+      } 
+      
+      if (props.type === "/AdminRegister") {
+
+        
         if (response.status === 200) {
           navigate("/admin");
         }
@@ -68,6 +82,7 @@ function RegisterForm(props) {
     e.preventDefault();
     setIsSubmitting(true);
     if (formIsValid) {
+      
       signUp();
     }
   }
@@ -129,7 +144,7 @@ function RegisterForm(props) {
               type="text"
               placeholder="Prénom"
               onChange={handleChange}
-              name="firstName"
+              name="first_name"
             />
           </div>
           <div className="flex flex-col w-1/2 gap-2">
@@ -139,15 +154,15 @@ function RegisterForm(props) {
               type="text"
               placeholder="Nom"
               onChange={handleChange}
-              name="lastName"
+              name="last_name"
             />
           </div>
         </div>
-        {isSubmitting && errors.lastName && (
-          <div className="text-Rose100">{errors.lastName}</div>
+        {isSubmitting && errors.last_name && (
+          <div className="text-Rose100">{errors.last_name}</div>
         )}
-        {isSubmitting && errors.firstName && (
-          <div className="text-Rose100">{errors.firstName}</div>
+        {isSubmitting && errors.first_name && (
+          <div className="text-Rose100">{errors.first_name}</div>
         )}
         <label>Email</label>
         <input
@@ -171,12 +186,12 @@ function RegisterForm(props) {
         {isSubmitting && errors.password && (
           <div className="text-Rose100">{errors.password}</div>
         )}
-        <Link
+        <button
           className="flex items-center justify-center w-full rounded-md text-white font-bold bg-[#8D92C9] p-3 md:p-4"
-          to="/user"
+          onClick={handleSubmit}
         >
           Se connecter
-        </Link>
+        </button>
       </form>
       <button className="flex justify-center items-center gap-4 rounded-md bg-[#F2F3F6] p-3 md:p-4">
         <img src="devicon_google.svg" alt="google" />
