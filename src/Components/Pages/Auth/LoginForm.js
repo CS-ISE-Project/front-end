@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-function LoginForm() {
+function LoginForm(props) {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
@@ -24,11 +24,53 @@ function LoginForm() {
     validateField(name, value);
   }
 
+  const login = async () => {
+    let endpoint;
+    if (props.type === "/UserLogin") {
+      endpoint = `https://ise-project-api-production.up.railway.app/auth/login?email=${formData.email}&password=${formData.password}`;
+    } else if (props.type === "/ModLogin") {
+      endpoint = `https://ise-project-api-production.up.railway.app/auth/admin/login?email=${formData.email}&password=${formData.password}`;
+    } else if (props.type === "/AdminLogin") {
+      endpoint = `https://ise-project-api-production.up.railway.app/auth/mod/login?email=${formData.email}&password=${formData.password}`;
+    }
+    try {
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = response.json();
+      const accessToken = data.access_token;
+      console.log(data);
+      console.log(accessToken);
+      if (props.type === "/UserLogin") {
+        if (response.status === 200) {
+          navigate("/user");
+        }
+      } else if (props.type === "/ModLogin") {
+        if (response.status === 200) {
+          navigate("/mod");
+        }
+      } else if (props.type === "/AdminLogin") {
+        if (response.status === 200) {
+          navigate("/admin");
+        }
+      }
+
+      console.log(data);
+    } catch (e) {
+      console.error("Login Failed :", e);
+    }
+  };
+
   function handleSubmit(e) {
     e.preventDefault();
     setIsSubmitting(true);
     if (formIsValid) {
       console.log(formData);
+      login();
+      //loginUser(formData.email, formData.password);
     }
   }
 
@@ -55,8 +97,14 @@ function LoginForm() {
     setFormIsValid(Object.values(formErrors).every((err) => err === ""));
   };
 
-  function handleRegister() {
-    navigate("/register");
+  function NavigateRegister() {
+    if (props.type === "/UserLogin") {
+      navigate("/UserRegister");
+    } else if (props.type === "/ModLogin") {
+      navigate("/ModRegister");
+    } else if (props.type === "/AdminLogin") {
+      navigate("/AdminRegister");
+    }
   }
 
   return (
@@ -99,12 +147,12 @@ function LoginForm() {
           <div className="text-Rose100">{errors.password}</div>
         )}
 
-        <Link
+        <button
           className="flex items-center justify-center w-full rounded-md text-white font-bold bg-[#8D92C9] p-3 md:p-4"
-          to="/user"
+          onClick={handleSubmit}
         >
           Se connecter
-        </Link>
+        </button>
       </form>
       <button className="flex justify-center items-center gap-4 rounded-md bg-[#F2F3F6] w-full p-3 md:p-4">
         <img src="devicon_google.svg" alt="google" />
@@ -112,7 +160,7 @@ function LoginForm() {
       </button>
       <p className="self-center">
         Vous n'avez pas de compte ?{" "}
-        <span className="cursor-pointer text-Blue66" onClick={handleRegister}>
+        <span className="cursor-pointer text-Blue66" onClick={NavigateRegister}>
           Register
         </span>
       </p>

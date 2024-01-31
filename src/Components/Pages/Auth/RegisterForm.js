@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-function RegisterForm() {
+function RegisterForm(props) {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
+    first_name: "",
+    last_name: "",
     email: "",
     password: "",
-    firstName: "",
-    lastName: "",
   });
 
   const [formIsValid, setFormIsValid] = React.useState({});
@@ -22,15 +22,53 @@ function RegisterForm() {
         [name]: value,
       };
     });
-
     validateField(name, value);
   }
+
+  const signUp = async () => {
+    let endpoint;
+    if (props.type === "/UserRegister") {
+      endpoint = `https://ise-project-api-production.up.railway.app/auth/signup`;
+    } else if (props.type === "/ModRegister") {
+      endpoint = `https://ise-project-api-production.up.railway.app/auth/mod/signup`;
+    } else if (props.type === "/AdminRegister") {
+      endpoint = `https://ise-project-api-production.up.railway.app/auth/admin/signup`;
+    }
+    try {
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = response.json();
+      console.log(data);
+      const accessToken = data.access_token;
+      localStorage.setItem('accessToken', accessToken);
+      if (props.type === "/UserRegister") {
+        if (response.status === 200) {
+          navigate("/user");
+        }
+      } else if (props.type === "/ModRegister") {
+        if (response.status === 200) {
+          navigate("/mod");
+        }
+      } else if (props.type === "/AdminRegister") {
+        if (response.status === 200) {
+          navigate("/admin");
+        }
+      }
+    } catch (e) {
+      console.error("error :", e);
+    }
+  };
 
   function handleSubmit(e) {
     e.preventDefault();
     setIsSubmitting(true);
     if (formIsValid) {
-      console.log(formData);
+      signUp();
     }
   }
 
@@ -50,14 +88,12 @@ function RegisterForm() {
             : "";
         break;
 
-      case "firstName":
-        formErrors.firstName =
-          !value || !/^[A-Z][^0-9]*$/.test(value)
-            ? "Veuillez entrer un prénom valide."
-            : "";
+      case "first_name":
+        formErrors.first_name =
+          !value || value.length < 4 ? "Veuillez entrer un prénom valide." : "";
         break;
-      case "lastName":
-        formErrors.lastName =
+      case "last_name":
+        formErrors.last_name =
           !value || !/^[A-Z][^0-9]*$/.test(value)
             ? "Veuillez entrer un nom valide."
             : "";
@@ -69,8 +105,14 @@ function RegisterForm() {
     setFormIsValid(Object.values(formErrors).every((err) => err === ""));
   };
 
-  function handleLogin() {
-    navigate("/login");
+  function navigateLogin() {
+    if (props.type === "/UserRegister") {
+      navigate("/UserLogin");
+    } else if (props.type === "/ModRegister") {
+      navigate("/ModLogin");
+    } else if (props.type === "/AdminRegister") {
+      navigate("/AdminLogin");
+    }
   }
   return (
     <div className="flex flex-col text-sm md:text-md w-[80vw] md:w-[30vw]  gap-8 text-Typo">
@@ -142,7 +184,7 @@ function RegisterForm() {
       </button>
       <p className="self-center">
         Avez vous deja un compte?{" "}
-        <span className="cursor-pointer text-Blue66" onClick={handleLogin}>
+        <span className="cursor-pointer text-Blue66" onClick={navigateLogin}>
           Se connecter
         </span>
       </p>

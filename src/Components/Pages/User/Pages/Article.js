@@ -2,10 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function Article(props) {
-  return props.carousel == 0 ? (
+  return props.carousel === 0 ? (
     <div className="w-[84vw] flex justify-between items-start">
       <div className="flex items-center justify-center bg-white px-4 py-4">
-        <img src="/Article.svg" />
+        <img src="/Article.svg" alt="article" />
       </div>
       <div className="flex flex-col w-[100%] px-8 gap-4">
         <h2 className="text-left lg:text-[2rem] md:text-[1.5rem] text-[1.3rem] font-extrabold text-Blue66">
@@ -45,7 +45,7 @@ function Article(props) {
         utilisée à titre provisoire pour calibrer une mise en page
       </p>
       <div className="flex items-center gap-4 px-8 w-[100%]">
-        <img src="/Author.svg" />
+        <img src="/Author.svg" alt="author" />
         <h3 className="text-[1.1rem] text-Typo font-semibold">
           Auteur : Abdelkarim
         </h3>
