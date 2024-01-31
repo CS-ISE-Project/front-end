@@ -4,10 +4,10 @@ import { useNavigate } from "react-router-dom";
 function RegisterForm() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
+    first_name: "",
+    last_name: "",
     email: "",
     password: "",
-    firstName: "",
-    lastName: "",
   });
 
   const [formIsValid, setFormIsValid] = React.useState({});
@@ -22,15 +22,32 @@ function RegisterForm() {
         [name]: value,
       };
     });
-
     validateField(name, value);
   }
 
+  const signUp = async ()=>{
+    try{
+      const response = await fetch(`https://ise-project-api-production.up.railway.app/auth/signup`,{
+        method : 'POST',
+        headers:{
+          'Content-Type' : 'application/json'
+        },
+        body:JSON.stringify(formData)
+      })
+      const data = response.json()
+      console.log(data)
+    }catch (e){
+      console.error('error :',e)
+    }
+    
+  }
+
+  
   function handleSubmit(e) {
     e.preventDefault();
     setIsSubmitting(true);
     if (formIsValid) {
-      console.log(formData);
+      signUp()
     }
   }
 
@@ -50,14 +67,14 @@ function RegisterForm() {
             : "";
         break;
 
-      case "firstName":
-        formErrors.firstName =
-          !value || !/^[A-Z][^0-9]*$/.test(value)
+      case "first_name":
+        formErrors.first_name =
+          !value || value.length < 4
             ? "Veuillez entrer un prénom valide."
             : "";
         break;
-      case "lastName":
-        formErrors.lastName =
+      case "last_name":
+        formErrors.last_name =
           !value || !/^[A-Z][^0-9]*$/.test(value)
             ? "Veuillez entrer un nom valide."
             : "";
@@ -69,7 +86,7 @@ function RegisterForm() {
     setFormIsValid(Object.values(formErrors).every((err) => err === ""));
   };
 
-  function handleLogin() {
+  function navigateLogin() {
     navigate("/login");
   }
   return (
@@ -84,7 +101,7 @@ function RegisterForm() {
               className=" rounded-md text-black  bg-[#F2F3F6] w-full p-3 md:p-4"
               type="text"
               onChange={handleChange}
-              name="firstName"
+              name="first_name"
             />
           </div>
           <div className="flex flex-col w-1/2 gap-2">
@@ -93,15 +110,15 @@ function RegisterForm() {
               className="rounded-md text-black bg-[#F2F3F6] w-full  p-3 md:p-4"
               type="text"
               onChange={handleChange}
-              name="lastName"
+              name="last_name"
             />
           </div>
         </div>
-        {isSubmitting && errors.lastName && (
-          <div className="text-Rose100">{errors.lastName}</div>
+        {isSubmitting && errors.last_name && (
+          <div className="text-Rose100">{errors.last_name}</div>
         )}
-        {isSubmitting && errors.firstName && (
-          <div className="text-Rose100">{errors.firstName}</div>
+        {isSubmitting && errors.first_name && (
+          <div className="text-Rose100">{errors.first_name}</div>
         )}
         <label>Email</label>
         <input
@@ -123,7 +140,7 @@ function RegisterForm() {
         {isSubmitting && errors.password && (
           <div className="text-Rose100">{errors.password}</div>
         )}
-        <button className="rounded-md text-white font-bold bg-[#8D92C9] p-3 md:p-4">
+        <button className="rounded-md text-white font-bold bg-[#8D92C9] p-3 md:p-4" onClick={handleSubmit}>
           Se connecter
         </button>
       </form>
@@ -133,7 +150,7 @@ function RegisterForm() {
       </button>
       <p className="self-center">
         Avez vous deja un compte?{" "}
-        <span className="cursor-pointer text-Blue66" onClick={handleLogin}>
+        <span className="cursor-pointer text-Blue66" onClick={navigateLogin}>
           Se connecter
         </span>
       </p>

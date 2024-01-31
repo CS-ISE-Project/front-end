@@ -20,15 +20,30 @@ function LoginForm() {
         [name]: value,
       };
     });
-
     validateField(name, value);
   }
 
+
+  const login = async () => {
+    try{
+      const response = await fetch(`https://ise-project-api-production.up.railway.app/auth/login?email=${formData.email}&password=${formData.password}`,{
+        method : 'POST',
+        headers:{
+          'Content-Type' : 'application/json'
+        },
+      })
+      const data = response.json()
+      console.log(data)
+    }catch (e){
+      console.error('error :',e)
+    }
+  }
   function handleSubmit(e) {
     e.preventDefault();
     setIsSubmitting(true);
-    if (formIsValid) {
-      console.log(formData);
+
+    if (formIsValid) {  
+      login()
     }
   }
 
@@ -60,14 +75,14 @@ function LoginForm() {
   }
 
   return (
-    <div className="flex flex-col justify-center items-start w-[80vw] gap-[10px] md:gap-[40px] text-sm md:text-md text-Typo">
+    <div className="flex flex-col justify-center items-start w-[80vw] gap-[20px] md:gap-[40px] text-sm md:text-md text-Typo">
       <p className=" text-2xl md:text-[30px] lg:text-4xl font-Natasha">Se connecter</p>
       <p className="text-sm text-[#515151]">
         Connectez-vous a votre compte ci-dessous
       </p>
       <form
         onSubmit={handleSubmit}
-        className="flex gap-[10px] md:gap-[20px] flex-col items-start w-full"
+        className="flex gap-[20px] md:gap-[20px] flex-col items-start w-full"
       >
         <label htmlFor="">Email</label>
         <input
