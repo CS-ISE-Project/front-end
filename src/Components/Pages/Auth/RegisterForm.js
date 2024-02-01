@@ -49,21 +49,21 @@ function RegisterForm(props) {
 
       const accessToken = data.access_token;
       localStorage.setItem("accessToken", accessToken);
-      if (props.type === "/userRegister") {
+      if (props.type === "/UserRegister") {
         if (response.status === 200) {
-          navigate("/userLogin");
+          navigate("/UserLogin");
         }
       }
 
-      if (props.type === "/modRegister") {
+      if (props.type === "/ModRegister") {
         if (response.status === 200) {
-          navigate("/modLogin");
+          navigate("/ModLogin");
         }
       }
 
       if (props.type === "/AdminRegister") {
         if (response.status === 200) {
-          navigate("/adminLogin");
+          navigate("/AdminLogin");
         }
       }
     } catch (e) {

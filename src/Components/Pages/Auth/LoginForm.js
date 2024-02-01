@@ -62,8 +62,8 @@ function LoginForm(props) {
       data.then((value) => {
         window.localStorage.setItem("token", value.access_token);
         const decodedToken = parseJwt(value.access_token);
-        window.localStorage.setItem("username", decodedToken.sub); 
-        window.localStorage.setItem("userid", decodedToken.id); 
+        window.localStorage.setItem("username", decodedToken.sub);
+        window.localStorage.setItem("userid", decodedToken.id);
       });
 
       if (props.type === "/UserLogin") {
