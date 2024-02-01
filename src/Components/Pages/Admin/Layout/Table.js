@@ -20,7 +20,7 @@ function Table (){
         const fetchTableData = async ()=>{
             setIsLoading(true)
         try{
-            const response = await fetch(`https://ise-project-api-production.up.railway.app/users?page=${page}`)
+            const response = await fetch(`https://ise-project-api-production.up.railway.app/moderators`)
             const data = await response.json()
             setModData(data)
         }catch (e){
@@ -30,7 +30,7 @@ function Table (){
         }   
         }
         fetchTableData()
-    }, [page])
+    },[])
 
 
     if(error){
@@ -42,15 +42,18 @@ function Table (){
     const tableIcon = ["Nom" , "Prenom" , "Status"]
 
 
+    console.log(modData)
     const handleAction = (actionType, index) => {
-        
+            
         if (actionType === 'activate') {
-          // Code to activate the user at the specified index
+          
         } else if (actionType === 'block') {
           // Code to block the user at the specified index
         }
         
       };
+
+    
 
   return (
     <div>

@@ -26,6 +26,17 @@ module.exports = {
       Gilroy: ["Gilroy-Regular", "sans-serif"],
       Natasha: ["Alchadera", "sans-serif"],
     },
+    dropShadow: {
+      special: [
+        "0 160px 100px rgba(0, 0, 0, 0.01)",
+        "0 70px 60px rgba(0, 0, 0, 0.05)",
+        "0 38px 30px rgba(0, 0, 0, 0.09)",
+        "0 13px 10px rgba(0, 0, 0, 0.1)",
+      ],
+    },
+    backgroundImage :{
+      'About-image' : "url('../public/image1.png')" ,
+    },
     extend: {},
   },
   plugins: [],
