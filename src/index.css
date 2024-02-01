@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.cdnfonts.com/css/gilroy-bold');
+@import url('https://fonts.cdnfonts.com/css/alchadera');
+
+
+*{
+    font-family: "Gilroy-Regular", "sans-serif";
+}
