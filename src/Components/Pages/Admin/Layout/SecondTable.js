@@ -12,7 +12,7 @@ function SecondTable  () {
     
     const handleAction = (actionType, index) => {
         
-      };
+    };
       
 
       const toggleDivVisibility = (index) => {
@@ -24,7 +24,13 @@ function SecondTable  () {
         const fetchTableData = async ()=>{
             setIsLoading(true)
         try{
-            const response = await fetch(`https://ise-project-api-production.up.railway.app/users?page=${page}`)
+            const response = await fetch(`https://ise-project-api-production.up.railway.app/articles`,{
+                method:"GET",
+                headers : {
+                    "Authorization": `${window.localStorage.getItem("token")}`,
+                    "Content-Type": "application/json"  
+                }
+            })
             const data = await response.json()
             setTableData(data)
         }catch (e){

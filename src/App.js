@@ -20,7 +20,7 @@ export default function App() {
   const {isMod,isAdmin,isUser} = auth
   
   
-  console.log(auth)
+  
   return (
     <BrowserRouter>
       <Context.Provider value={[auth,setAuth]}>

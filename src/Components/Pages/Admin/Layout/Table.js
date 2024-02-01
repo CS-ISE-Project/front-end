@@ -20,8 +20,15 @@ function Table (){
         const fetchTableData = async ()=>{
             setIsLoading(true)
         try{
-            const response = await fetch(`https://ise-project-api-production.up.railway.app/moderators`)
+            const response = await fetch(`https://ise-project-api-production.up.railway.app/moderators`,{
+                method:"GET",
+                headers : {
+                    "Authorization": `${window.localStorage.getItem("token")}`,
+                    "Content-Type": "application/json"  
+                }
+            })
             const data = await response.json()
+            console.log(data)
             setModData(data)
         }catch (e){
             setError(e)
@@ -30,6 +37,9 @@ function Table (){
         }   
         }
         fetchTableData()
+
+        console.log("token")
+        console.log(window.localStorage.getItem("token"))
     },[])
 
 
