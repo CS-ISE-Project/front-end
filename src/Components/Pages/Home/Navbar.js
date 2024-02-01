@@ -13,13 +13,13 @@ function Navbar() {
             ></img>
           </Link>
           <div className="flex gap-[10px]">
-            <Link to="/Register">
-              <button className="font-Gilroy hidden md:block text-[14px] md:text-[18px] px-[4vw] md:px-[2vw] py-[1.5vh] text-Purple100 border-2 border-Purple100 rounded-[8px]">
+            <Link to="/UserRegister">
+              <button className="hidden md:block text-[14px] md:text-[18px] px-[4vw] md:px-[2vw] py-[1.5vh] text-Purple100 border-2 border-Purple100 rounded-[8px]">
                 S’inscrire
               </button>
             </Link>
-            <Link to="/Login">
-              <button className="font-Gilroy hidden md:block bg-Purple100 text-[14px] md:text-[18px] px-[4vw] md:px-[2vw] py-[1.5vh] text-white rounded-[8px]">
+            <Link to="/UserLogin">
+              <button className="hidden md:block bg-Purple100 text-[14px] md:text-[18px] px-[4vw] md:px-[2vw] py-[1.5vh] text-white rounded-[8px]">
                 Connexion
               </button>
             </Link>

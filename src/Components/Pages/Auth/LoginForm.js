@@ -1,7 +1,15 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
-function LoginForm() {
+import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Context} from "../../../App";
+import { prettyDOM } from "@testing-library/react";
+
+
+function LoginForm(props) {
+
+  const [auth,setAuth] = useContext(Context)
+
+  
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
@@ -24,11 +32,69 @@ function LoginForm() {
     validateField(name, value);
   }
 
+  const login = async () => {
+    let endpoint;
+    if (props.type === "/UserLogin") {
+      endpoint = `https://ise-project-api-production.up.railway.app/auth/login?email=${formData.email}&password=${formData.password}`;
+    } else if (props.type === "/ModLogin") {
+      endpoint = `https://ise-project-api-production.up.railway.app/auth/mod/login?email=${formData.email}&password=${formData.password}`;
+    } else if (props.type === "/AdminLogin") {
+      endpoint = `https://ise-project-api-production.up.railway.app/auth/admin/login?email=${formData.email}&password=${formData.password}`;
+    }
+    try {
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = response.json();
+      data.then(value => {
+        window.localStorage.setItem("token",value.access_token)
+      }
+      )
+      
+      
+      if (props.type === "/UserLogin") {
+        if (response.status === 200) {
+          setAuth(prev =>({
+            ...prev,
+            isUser:1
+          }))
+        
+          navigate("/user");
+        }
+      } else if (props.type === "/ModLogin") {
+        if (response.status === 200) {
+          setAuth(prev =>({
+            ...prev,
+            isMod:1
+          }))
+          navigate("/mod");
+        }
+      } else if (props.type === "/AdminLogin") {
+        if (response.status === 200) {
+          setAuth(prev =>({
+            ...prev,
+            isAdmin:1
+          }))
+          navigate("/admin");
+        }
+      }
+
+    
+    } catch (e) {
+      console.error("Login Failed :", e);
+    }
+    
+  };
+
   function handleSubmit(e) {
     e.preventDefault();
     setIsSubmitting(true);
     if (formIsValid) {
-      console.log(formData);
+      login();
+  
     }
   }
 
@@ -55,14 +121,22 @@ function LoginForm() {
     setFormIsValid(Object.values(formErrors).every((err) => err === ""));
   };
 
-  function handleRegister() {
-    navigate("/register");
+  function NavigateRegister() {
+    if (props.type === "/UserLogin") {
+      navigate("/UserRegister");
+    } else if (props.type === "/ModLogin") {
+      navigate("/ModRegister");
+    } else if (props.type === "/AdminLogin") {
+      navigate("/AdminRegister");
+    }
   }
 
   return (
     <div className="flex flex-col justify-center items-start w-[80vw] gap-[10px] md:gap-[40px] text-sm md:text-md text-Typo">
-      <p className=" text-2xl md:text-[30px] lg:text-4xl font-Natasha">Se connecter</p>
-      <p className="text-sm text-[#515151]">
+      <p className=" text-2xl md:text-4xl lg:text-6xl font-Natasha">
+        Se connecter
+      </p>
+      <p className="text-sm text-Typo">
         Connectez-vous a votre compte ci-dessous
       </p>
       <form
@@ -74,6 +148,7 @@ function LoginForm() {
           className="rounded-md w-full text-black p-3 md:p-4 bg-[#F2F3F6]"
           type="text"
           name="email"
+          placeholder="Mail Adresse"
           onChange={handleChange}
         />
         {isSubmitting && errors.email && (
@@ -89,22 +164,27 @@ function LoginForm() {
           className="rounded-md w-full text-black p-3 md:p-4 bg-[#F2F3F6]"
           type="password"
           name="password"
+          placeholder="Password"
           onChange={handleChange}
         />
         {isSubmitting && errors.password && (
           <div className="text-Rose100">{errors.password}</div>
         )}
-        <button className="w-full rounded-md text-white font-bold bg-[#8D92C9] p-3 md:p-4">
+
+        <button
+          className="flex items-center justify-center w-full rounded-md text-white font-bold bg-[#8D92C9] p-3 md:p-4"
+          onClick={handleSubmit}
+        >
           Se connecter
         </button>
       </form>
       <button className="flex justify-center items-center gap-4 rounded-md bg-[#F2F3F6] w-full p-3 md:p-4">
-        <img src="devicon_google.svg" alt="" />
+        <img src="devicon_google.svg" alt="google" />
         Connexion avec Google
       </button>
       <p className="self-center">
         Vous n'avez pas de compte ?{" "}
-        <span className="cursor-pointer text-Blue66" onClick={handleRegister}>
+        <span className="cursor-pointer text-Blue66" onClick={NavigateRegister}>
           Register
         </span>
       </p>
@@ -113,3 +193,4 @@ function LoginForm() {
 }
 
 export default LoginForm;
+

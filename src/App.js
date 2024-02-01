@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import React, { createContext, useContext } from "react";
+import React, { createContext, useContext, useState } from "react";
 import AdminLayout from "./Components/Pages/Admin/Layout/AdminLayout";
 import Login from "./Components/Pages/Auth/Login";
 import Register from "./Components/Pages/Auth/Register";
@@ -7,46 +7,70 @@ import ModLayout from "./Components/Pages/Mod/Layout/ModLayout";
 import Home from "./Components/Pages/Home/Home";
 import UserLayout from "./Components/Pages/User/Layout/UserLayout";
 
+export const Context = createContext()
+
+
 export default function App() {
-  const AdminContext = createContext(1);
-  const ModContext = createContext(1);
-  const UserContext = createContext(1);
-  const isAdmin = useContext(AdminContext);
-  const isMod = useContext(ModContext);
-  const isUser = useContext(UserContext);
+
+  const [auth , setAuth] = useState({
+    isMod:0,
+    isAdmin:0,
+    isUser:0
+  })
+  const {isMod,isAdmin,isUser} = auth
+  
+  
+  console.log(auth)
   return (
     <BrowserRouter>
-      <Routes>
-        {/* Default routes */}
-        <Route>
-          <Route path="/" element={<Home />} />
-        </Route>
-
-        {/* Admin routes */}
-        {isAdmin && (
-          <Route element={<AdminLayout />} path="/admin">
-            {/* Admin routes */}
+      <Context.Provider value={[auth,setAuth]}>
+        <Routes>
+          {/* Default routes */}
+          <Route>
+            <Route path="/" element={<Home />} />
           </Route>
-        )}
 
-        {/* Moderator routes */}
-        {isMod && (
-          <Route element={<ModLayout />} path="/mod">
-            {/* Moderator routes */}
-          </Route>
-        )}
+          {/* Admin routes */}
+          {/* <AdminContext.Provider value={[isAdmin,setIsAdmin]}> */}
+            {isAdmin && (
+              
+              <Route element={<AdminLayout />} path="/admin">
+                {/* Admin routes */}
+              </Route>
+              
+            )} 
+          {/* </AdminContext.Provider> */}
 
-        {/* User routes */}
-        {isUser && (
-          <Route element={<UserLayout />} path="/user">
-            {/* User routes */}
-          </Route>
-        )}
+          {/* Moderator routes */}
+          {/* <ModContext.Provider value = {[isMod,setIsMod]}> */}
+            {isMod && (
+              <Route element={<ModLayout />} path="/mod">
+                {/* Moderator routes */}
+              </Route>
+            )}
+          {/* </ModContext.Provider> */}
 
-        {/* Auth routes, no layout */}
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-      </Routes>
+          {/* User routes */}
+          
+
+          {isUser && (
+            
+            <Route element={<UserLayout />} path="/user">
+              {/* User routes */}
+            </Route>
+             
+          )}
+          
+
+          {/* Auth routes, no layout */}
+          <Route exact path="/Userlogin" element={<Login />} />
+          <Route exact path="/UserRegister" element={<Register />} />
+          <Route exact path="/Adminlogin" element={<Login />} />
+          <Route exact path="/AdminRegister" element={<Register />} />
+          <Route exact path="/Modlogin" element={<Login />} />
+          <Route exact path="/ModRegister" element={<Register />} />
+        </Routes>
+      </Context.Provider>
     </BrowserRouter>
   );
 }
