@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import React, { createContext, useContext } from "react";
+import React, { createContext, useState } from "react";
 import AdminLayout from "./Components/Pages/Admin/Layout/AdminLayout";
 import Login from "./Components/Pages/Auth/Login";
 import Register from "./Components/Pages/Auth/Register";
@@ -12,12 +12,9 @@ import ArticleDetails from "./Components/Pages/User/Pages/ArticleDetails";
 import UserProfile from "./Components/Pages/User/Pages/UserProfile";
 
 export default function App() {
-  const AdminContext = createContext(1);
-  const ModContext = createContext(1);
-  const UserContext = createContext(1);
-  const isAdmin = useContext(AdminContext);
-  const isMod = useContext(ModContext);
-  const isUser = useContext(UserContext);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [isUser, setIsUser] = useState(false);
+  const [isMod, setIsMod] = useState(false);
   return (
     <BrowserRouter>
       <Routes>
@@ -27,18 +24,10 @@ export default function App() {
         </Route>
 
         {/* Admin routes */}
-        {isAdmin && (
-          <Route element={<AdminLayout />} path="/admin">
-            {/* Admin routes */}
-          </Route>
-        )}
+        {isAdmin && <Route element={<AdminLayout />} path="/admin"></Route>}
 
         {/* Moderator routes */}
-        {isMod && (
-          <Route element={<ModLayout />} path="/mod">
-            {/* Moderator routes */}
-          </Route>
-        )}
+        {isMod && <Route element={<ModLayout />} path="/mod"></Route>}
 
         {/* User routes */}
         {isUser && (
@@ -52,11 +41,23 @@ export default function App() {
         )}
 
         {/* Auth routes, no layout */}
-        <Route exact path="/Userlogin" element={<Login />} />
+        <Route
+          exact
+          path="/Userlogin"
+          element={<Login setters={[setIsUser, setIsAdmin, setIsMod]} />}
+        />
         <Route exact path="/UserRegister" element={<Register />} />
-        <Route exact path="/Adminlogin" element={<Login />} />
+        <Route
+          exact
+          path="/Adminlogin"
+          element={<Login setters={[setIsUser, setIsAdmin, setIsMod]} />}
+        />
         <Route exact path="/AdminRegister" element={<Register />} />
-        <Route exact path="/Modlogin" element={<Login />} />
+        <Route
+          exact
+          path="/Modlogin"
+          element={<Login setters={[setIsUser, setIsAdmin, setIsMod]} />}
+        />
         <Route exact path="/ModRegister" element={<Register />} />
       </Routes>
     </BrowserRouter>

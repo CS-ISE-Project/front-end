@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function RegisterForm(props) {
   const navigate = useNavigate();
@@ -44,19 +44,17 @@ function RegisterForm(props) {
       });
       const data = response.json();
       console.log(data);
-      const accessToken = data.access_token;
-      localStorage.setItem('accessToken', accessToken);
       if (props.type === "/UserRegister") {
         if (response.status === 200) {
-          navigate("/user");
+          navigate("/UserLogin");
         }
       } else if (props.type === "/ModRegister") {
         if (response.status === 200) {
-          navigate("/mod");
+          navigate("/ModLogin");
         }
       } else if (props.type === "/AdminRegister") {
         if (response.status === 200) {
-          navigate("/admin");
+          navigate("/AdminLogin");
         }
       }
     } catch (e) {
@@ -171,12 +169,12 @@ function RegisterForm(props) {
         {isSubmitting && errors.password && (
           <div className="text-Rose100">{errors.password}</div>
         )}
-        <Link
+        <button
           className="flex items-center justify-center w-full rounded-md text-white font-bold bg-[#8D92C9] p-3 md:p-4"
-          to="/user"
+          onClick={handleSubmit}
         >
           Se connecter
-        </Link>
+        </button>
       </form>
       <button className="flex justify-center items-center gap-4 rounded-md bg-[#F2F3F6] p-3 md:p-4">
         <img src="devicon_google.svg" alt="google" />

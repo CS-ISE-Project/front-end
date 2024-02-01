@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function LoginForm(props) {
@@ -29,9 +29,9 @@ function LoginForm(props) {
     if (props.type === "/UserLogin") {
       endpoint = `https://ise-project-api-production.up.railway.app/auth/login?email=${formData.email}&password=${formData.password}`;
     } else if (props.type === "/ModLogin") {
-      endpoint = `https://ise-project-api-production.up.railway.app/auth/admin/login?email=${formData.email}&password=${formData.password}`;
-    } else if (props.type === "/AdminLogin") {
       endpoint = `https://ise-project-api-production.up.railway.app/auth/mod/login?email=${formData.email}&password=${formData.password}`;
+    } else if (props.type === "/AdminLogin") {
+      endpoint = `https://ise-project-api-production.up.railway.app/auth/admin/login?email=${formData.email}&password=${formData.password}`;
     }
     try {
       const response = await fetch(endpoint, {
@@ -46,14 +46,17 @@ function LoginForm(props) {
       console.log(accessToken);
       if (props.type === "/UserLogin") {
         if (response.status === 200) {
+          props.setters[0](true);
           navigate("/user");
         }
       } else if (props.type === "/ModLogin") {
         if (response.status === 200) {
+          props.setters[2](true);
           navigate("/mod");
         }
       } else if (props.type === "/AdminLogin") {
         if (response.status === 200) {
+          props.setters[1](true);
           navigate("/admin");
         }
       }
