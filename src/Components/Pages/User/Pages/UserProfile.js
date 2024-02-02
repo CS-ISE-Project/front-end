@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 import { FaChevronDown, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import Article from "./Article";
+import { useLocation } from "react-router-dom";
 const UserProfile = () => {
-
-  const prenom ="Abdelkarim" ;
-  const nom ="Bengherbia" ;
-  const email ="la_bengherbia@smin.dz" ;
-  const password ="karim_smin" ;
+ const location = useLocation();
+  const userData = location.state;
+  console.log(userData) ;
+  const prenom = userData.user.first_name ;
+  const nom =userData.user.last_name  ;
+  const email =userData.user.email  ;
   const [carousel, setCarousel] = useState(1);
   const [Pagination, setPagination] = useState(1);
-  
+
+
+ 
   return (
     <div className="flex flex-col w-[84vw] lg:gap-[72px] md:my-[200px] my-[160px]">
 
@@ -36,8 +40,6 @@ const UserProfile = () => {
                   </div>
                   <label>Email</label>
                       <div className="rounded-md text-black  bg-[#F2F3F6]  p-3 md:p-4">{email}</div>
-                  <label>Mot de passe</label>
-                  <div className="rounded-md text-black  bg-[#F2F3F6] p-3 md:p-4">{password}</div>
               </div>
 
         </div>
