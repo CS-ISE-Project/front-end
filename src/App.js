@@ -15,9 +15,9 @@ export const Context = createContext();
 
 export default function App() {
   const [auth, setAuth] = useState({
-    isMod: 0,
-    isAdmin: 0,
-    isUser: 0,
+    isMod: 1,
+    isAdmin: 1,
+    isUser: 1,
   });
   const { isMod, isAdmin, isUser } = auth;
 
