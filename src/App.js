@@ -35,8 +35,8 @@ export default function App() {
           {/* Admin routes */}
           {isAdmin && (
             <Route element={<AdminLayout />} path="/admin">
-              <Route index element={<Table />} />
-              <Route element={<SecondTable />} path="/articles" />
+              {/* <Route index element={<Table />} />
+              <Route element={<SecondTable />} path="/articles" /> */}
             </Route>
           )}
 

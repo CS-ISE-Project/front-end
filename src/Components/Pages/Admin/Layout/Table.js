@@ -28,7 +28,6 @@ function Table (){
                 }
             })
             const data = await response.json()
-            console.log(data)
             setModData(data)
         }catch (e){
             setError(e)
@@ -38,7 +37,7 @@ function Table (){
         }
         fetchTableData()
 
-        console.log("data fetched")
+        
     },[page])
 
 
@@ -52,30 +51,23 @@ function Table (){
 
 
     
-    const handleAction = (actionType, modID) => {
-            
-        if (actionType === 'activate') {
-            const activateMod = async () =>{
-                try{
-                    const response = await fetch(`https://ise-project-api-production.up.railway.app/admins/modActivate/{${modID}}`,{
-                method:"PUT",
-                headers : {
-                    "Authorization": `Bearer ${window.localStorage.getItem("token")}`,
-                    "Content-Type": "application/json"  
-                }
-            })
-            const data = await response.json()
-            
-            
-                }catch(e){
-                    setError(e)
-                }
+    const handleAction = (isactive, modID , modFirstName, modLastName,modEmail) => {
+        const activateMod = async () =>{
+            try{
+                const response = await fetch(`https://ise-project-api-production.up.railway.app/admins/update_moderator_activation?mod_id=${modID}&first_name=${modFirstName}&last_name=${modLastName}&email=${modEmail}&is_active=${isactive}`,{
+                    method:"PUT",
+                    headers : {
+                        Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+                        "Content-Type": "application/json" 
+                    }
+                })
+                const data =await response.json()
+                console.log(data)
+            }catch(e){
+                setError(e)
             }
-          
-        } else if (actionType === 'block') {
-          // Code to block the user at the specified index
         }
-        setPage(prevPage => prevPage + 1)
+      activateMod()
       };
 
     
@@ -125,9 +117,9 @@ function Table (){
                             {selectedRowIndex === i && (
                                     <div className={` absolute top-[65%] left-[60%] bg-white flex justify-center items-center py-2 w-[100px] drop-shadow-special rounded-md `}>
                                         {data.Status === "actif" ? (
-                                            <button onClick={() => handleAction("block", data.id)}>Block</button>
+                                            <button className='bg-[red]' onClick={() => handleAction(false, data.id,data.first_name,data.last_name,data.email)}>Block</button>
                                             ) : (
-                                                <button onClick={() => handleAction("activate", data.id)}>Activate</button>
+                                                <button onClick={() => handleAction(true, data.id)}>Activate</button>
                                                 )}
                                     </div>
                             )} 

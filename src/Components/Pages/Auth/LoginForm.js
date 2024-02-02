@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../../../App";
-const jwt = require('jsonwebtoken');
+// const jwt = require('jsonwebtoken');
 
 function LoginForm(props) {
   const [auth, setAuth] = useContext(Context);
@@ -29,7 +29,7 @@ function LoginForm(props) {
   }
 
   function parseJwt(token) {
-    /* var base64Url = token.split(".")[1];
+    var base64Url = token?.split(".")[1];
     var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
     var jsonPayload = decodeURIComponent(
       window
@@ -40,23 +40,8 @@ function LoginForm(props) {
         })
         .join("")
     );
-    return JSON.parse(jsonPayload); */
-    // Your secret key and algorithm
-    const secretKey ="$2b$12$/MtvlOoZsugluEs7I62.LezXkjeAaITK4COdbxPLC48kVQm5CNtUy";
-    const algorithm = "HS256";
-    try {
-      // Decode the token and retrieve the payload
-      const decodedPayload = jwt.verify(token, secretKey, {
-        algorithms: [algorithm],
-      });
-      console.log("Decoded Payload:", decodedPayload);
-    } catch (error) {
-      if (error.name === "TokenExpiredError") {
-        console.log("Token has expired.");
-      } else {
-        console.log("Invalid token.");
-      }
-    }
+
+    return JSON.parse(jsonPayload);
   }
 
   const login = async () => {
@@ -82,8 +67,6 @@ function LoginForm(props) {
         window.localStorage.setItem("username", decodedToken.sub);
         window.localStorage.setItem("userid", decodedToken.id);
         window.localStorage.setItem("auth", auth);
-        console.log(value.access_token);
-        console.log(decodedToken.sub);
       });
 
       if (props.type === "/UserLogin") {

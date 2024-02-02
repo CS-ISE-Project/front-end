@@ -10,8 +10,27 @@ function SecondTable  () {
     const [error , setError] = useState()
     const [page, setPage] = useState(0)
     
-    const handleAction = (actionType, index) => {
+    const handleDelete= (articleID) => {
+        const deleteArtcle = async ()=>{
+            
+            const response = await fetch(`https://ise-project-api-production.up.railway.app/articles/${articleID}`,{
+                method:"DELETE",
+                headers : {
+                    Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+                    "Content-Type": "application/json"  
+                }
+            })
+
+            const data = await response.json()
+            console.log(data)
+
         
+            
+
+        } 
+
+
+        deleteArtcle()
     };
       
 
@@ -67,12 +86,12 @@ function SecondTable  () {
             <tbody className='text-Typo'>
             {tableData.map((data,i)=>(
                 <tr key={i} className='border-b-2 border-solid border-Typo border-opacity-20'>
-                        <td className='p-4'>{data.ID}</td>
+                        <td className='p-4'>{data.id}</td>
                         <td className='p-4'>{data.title}</td>
                         <td className='p-4'>{data.url}</td>
                         <td className='p-4'>{data.authors}</td>
                         <td className='p-4'>{data.institutes}</td>
-                        <td className='p-4'>{data.PublicationDate}</td>
+                        <td className='p-4'>{data.publication_date}</td>
                         <td className='relative'>
                             <div className='flex justify-center items-center  py-3 cursor-pointer'>
                             <button className='flex gap-1 py-3 px-2 ' onClick={() => toggleDivVisibility(i)}>
@@ -81,8 +100,8 @@ function SecondTable  () {
                                 <div className='h-[10px] w-[10px] rounded-full bg-Typo'></div>
                             </button>
                             {selectedRowIndex === i && (
-                                <div className={` absolute top-[60%] left-[60%] bg-white flex justify-center items-center py-2 w-[100px] shadow-2xl rounded-md `}>
-                                            <button onClick={() => handleAction("block", i)}>Delete</button>
+                                <div onClick={() => handleDelete(data.id)} className={` absolute top-[60%] left-[60%] bg-white flex justify-center items-center py-2 w-[100px] drop-shadow-special rounded-md `}>
+                                            <button >Delete</button>
                                     </div>
                             )} 
                             </div>
