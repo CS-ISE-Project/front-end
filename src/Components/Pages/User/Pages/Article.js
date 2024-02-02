@@ -1,7 +1,27 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Article(props) {
+  const navigate = useNavigate();
+
+  const handleArticleDetails = async () => {
+    try {
+      const response = await fetch(
+        `https://ise-project-api-production.up.railway.app/articles/${props.id}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      const data = await response.json();
+      navigate("/user/article", { state: data });
+    } catch (e) {
+      console.error("Failed getting article:", e);
+    }
+  };
+
   return props.carousel === 0 ? (
     <div className="w-[84vw] flex justify-between items-start">
       <div className="flex items-center justify-center bg-white px-4 py-4">
@@ -23,11 +43,14 @@ function Article(props) {
             {props.abstract}
           </span>
         </h3>
-        <Link className="py-4" to="/user/article">
-          <button className="bg-Purple100 text-white md:px-12 md:py-4 px-8 py-2 rounded-[8px] font-semibold lg:text-[1.2rem] text-[1rem]">
+        <div className="py-4">
+          <button
+            className="bg-Purple100 text-white md:px-12 md:py-4 px-8 py-2 rounded-[8px] font-semibold lg:text-[1.2rem] text-[1rem]"
+            onClick={handleArticleDetails}
+          >
             Voir
           </button>
-        </Link>
+        </div>
       </div>
     </div>
   ) : (
@@ -47,14 +70,14 @@ function Article(props) {
           Auteur : {props.author}
         </h3>
       </div>
-      <Link className="w-[100%] px-8 py-8" to="/user/article">
+      <div className="w-[100%] px-8 py-8">
         <button
           className="bg-Purple100 text-white w-[100%] py-4 rounded-[8px] font-semibold text-[1.2rem]"
-          to="/user/article"
+          onClick={handleArticleDetails}
         >
           Voir
         </button>
-      </Link>
+      </div>
     </div>
   );
 }

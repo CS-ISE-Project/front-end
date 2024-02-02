@@ -88,7 +88,6 @@ function Search() {
       const data = response.json();
 
       data.then((articles) => {
-        console.log(articles)
         navigate("/user/results", { state: articles });
       });
     } catch (e) {
