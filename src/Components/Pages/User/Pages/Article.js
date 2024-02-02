@@ -22,6 +22,7 @@ function Article(props) {
     }
   };
 
+
   return props.carousel === 0 ? (
     <div className="w-[84vw] flex justify-between items-start">
       <div className="flex items-center justify-center bg-white px-4 py-4">

@@ -70,7 +70,7 @@ function ArticleDetails() {
                 Keywords
               </h3>
               <div className="flex gap-4 flex-wrap">
-                {ArticleDetails.keywords.map((keyword) => (
+                {ArticleDetails.keywords?.map((keyword) => (
                   <div className="bg-[#E6EEFC] px-8 py-4 flex items-center justify-center rounded-[4px]">
                     <p className="text-Blue100 text-[1.3rem]">{keyword}</p>
                   </div>
@@ -83,9 +83,9 @@ function ArticleDetails() {
                 Institutions
               </h3>
               <div className="flex gap-4 flex-wrap">
-                {ArticleDetails.institutions.map((institution) => (
+                {ArticleDetails.institutes?.map((institute) => (
                   <div className="bg-[#FEF5F7] px-8 py-4 flex items-center justify-center rounded-[4px]">
-                    <p className="text-Rose100 text-[1.3rem]">{institution}</p>
+                    <p className="text-Rose100 text-[1.3rem]">{institute}</p>
                   </div>
                 ))}
               </div>
