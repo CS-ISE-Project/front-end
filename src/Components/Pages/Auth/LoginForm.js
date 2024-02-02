@@ -27,7 +27,7 @@ function LoginForm(props) {
   }
 
   function parseJwt(token) {
-    var base64Url = token.split(".")[1];
+    var base64Url = token?.split(".")[1];
     var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
     var jsonPayload = decodeURIComponent(
       window
@@ -64,6 +64,8 @@ function LoginForm(props) {
         const decodedToken = parseJwt(value.access_token);
         window.localStorage.setItem("username", decodedToken.sub);
         window.localStorage.setItem("userid", decodedToken.id);
+        window.localStorage.setItem("auth", auth);
+        
       });
 
       if (props.type === "/UserLogin") {

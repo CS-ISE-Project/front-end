@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 function SecondTable  () {
-    const headers = ["ID","Titre","Url","Auteurs","Institutions","Publication Date",""]
+    const headers = ["ID","Titre","Url","authors","Institutions","Publication Date",""]
     const tableImg = <img src='BiSort.svg'/>
     const tableIcon = ["Titre" , "Url" , "Publication Date"]
     const [selectedRowIndex, setSelectedRowIndex] = useState(null);
@@ -24,15 +24,16 @@ function SecondTable  () {
         const fetchTableData = async ()=>{
             setIsLoading(true)
         try{
-            const response = await fetch(`https://ise-project-api-production.up.railway.app/articles`,{
+            const response = await fetch(`https://ise-project-api-production.up.railway.app/articles/`,{
                 method:"GET",
                 headers : {
-                    "Authorization": `${window.localStorage.getItem("token")}`,
+                    "Authorization": `Bearer ${window.localStorage.getItem("token")}`,
                     "Content-Type": "application/json"  
                 }
             })
             const data = await response.json()
             setTableData(data)
+            console.log(data)
         }catch (e){
             setError(e)
         }finally{
@@ -67,10 +68,10 @@ function SecondTable  () {
             {tableData.map((data,i)=>(
                 <tr key={i} className='border-b-2 border-solid border-Typo border-opacity-20'>
                         <td className='p-4'>{data.ID}</td>
-                        <td className='p-4'>{data.Titre}</td>
-                        <td className='p-4'>{data.Url}</td>
-                        <td className='p-4'>{data.Auteurs}</td>
-                        <td className='p-4'>{data.Institutions}</td>
+                        <td className='p-4'>{data.title}</td>
+                        <td className='p-4'>{data.url}</td>
+                        <td className='p-4'>{data.authors}</td>
+                        <td className='p-4'>{data.institutes}</td>
                         <td className='p-4'>{data.PublicationDate}</td>
                         <td className='relative'>
                             <div className='flex justify-center items-center  py-3 cursor-pointer'>

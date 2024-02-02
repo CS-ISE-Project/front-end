@@ -14,7 +14,7 @@ import UserProfile from "./Components/Pages/User/Pages/UserProfile";
 export const Context = createContext();
 
 export default function App() {
-  const [auth, setAuth] = useState({
+  const [auth, setAuth] = useState((window.localStorage.getItem("token") === "" )&& {
     isMod: 0,
     isAdmin: 0,
     isUser: 0,
