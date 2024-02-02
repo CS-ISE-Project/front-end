@@ -20,10 +20,10 @@ function Table (){
         const fetchTableData = async ()=>{
             setIsLoading(true)
         try{
-            const response = await fetch(`https://ise-project-api-production.up.railway.app/moderators`,{
+            const response = await fetch(`https://ise-project-api-production.up.railway.app/moderators/`,{
                 method:"GET",
                 headers : {
-                    "Authorization": `${window.localStorage.getItem("token")}`,
+                    "Authorization": `Bearer ${window.localStorage.getItem("token")}`,
                     "Content-Type": "application/json"  
                 }
             })
@@ -38,9 +38,8 @@ function Table (){
         }
         fetchTableData()
 
-        console.log("token")
-        console.log(window.localStorage.getItem("token"))
-    },[])
+        console.log("data fetched")
+    },[page])
 
 
     if(error){
@@ -52,15 +51,31 @@ function Table (){
     const tableIcon = ["Nom" , "Prenom" , "Status"]
 
 
-    console.log(modData)
-    const handleAction = (actionType, index) => {
+    
+    const handleAction = (actionType, modID) => {
             
         if (actionType === 'activate') {
+            const activateMod = async () =>{
+                try{
+                    const response = await fetch(`https://ise-project-api-production.up.railway.app/admins/modActivate/{${modID}}`,{
+                method:"PUT",
+                headers : {
+                    "Authorization": `Bearer ${window.localStorage.getItem("token")}`,
+                    "Content-Type": "application/json"  
+                }
+            })
+            const data = await response.json()
+            
+            
+                }catch(e){
+                    setError(e)
+                }
+            }
           
         } else if (actionType === 'block') {
           // Code to block the user at the specified index
         }
-        
+        setPage(prevPage => prevPage + 1)
       };
 
     
@@ -110,9 +125,9 @@ function Table (){
                             {selectedRowIndex === i && (
                                     <div className={` absolute top-[65%] left-[60%] bg-white flex justify-center items-center py-2 w-[100px] drop-shadow-special rounded-md `}>
                                         {data.Status === "actif" ? (
-                                            <button onClick={() => handleAction("block", i)}>Block</button>
+                                            <button onClick={() => handleAction("block", data.id)}>Block</button>
                                             ) : (
-                                                <button onClick={() => handleAction("activate", i)}>Activate</button>
+                                                <button onClick={() => handleAction("activate", data.id)}>Activate</button>
                                                 )}
                                     </div>
                             )} 

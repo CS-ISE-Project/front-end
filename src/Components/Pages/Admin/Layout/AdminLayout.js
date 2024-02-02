@@ -10,9 +10,7 @@ function AdminLayout() {
     <div>
         <Navbar />
         <Outlet />
-        {/* <Table /> */}
-        <SecondTable />
-        {/* <Footer />     */}
+        <Footer />
       </div>
   )
 }

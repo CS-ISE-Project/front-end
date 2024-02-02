@@ -10,6 +10,8 @@ import Search from "./Components/Pages/User/Pages/Search";
 import Results from "./Components/Pages/User/Pages/Results";
 import ArticleDetails from "./Components/Pages/User/Pages/ArticleDetails";
 import UserProfile from "./Components/Pages/User/Pages/UserProfile";
+import Table from "./Components/Pages/Admin/Layout/Table";
+import SecondTable from "./Components/Pages/Admin/Layout/SecondTable";
 
 export const Context = createContext();
 
@@ -33,7 +35,8 @@ export default function App() {
           {/* Admin routes */}
           {isAdmin && (
             <Route element={<AdminLayout />} path="/admin">
-              {/* Admin routes */}
+              <Route index element={<Table />} />
+              <Route element={<SecondTable />} path="/articles" />
             </Route>
           )}
 
