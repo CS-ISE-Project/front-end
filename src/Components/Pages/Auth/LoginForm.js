@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../../../App";
+
 function LoginForm(props) {
   const [auth, setAuth] = useContext(Context);
 
@@ -28,7 +29,7 @@ function LoginForm(props) {
 
   function parseJwt(token) {
     var base64Url = token?.split(".")[1];
-    var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    var base64 = base64Url?.replace(/-/g, "+").replace(/_/g, "/");
     var jsonPayload = decodeURIComponent(
       window
         .atob(base64)
@@ -38,7 +39,6 @@ function LoginForm(props) {
         })
         .join("")
     );
-
     return JSON.parse(jsonPayload);
   }
 
@@ -58,13 +58,12 @@ function LoginForm(props) {
           "Content-Type": "application/json",
         },
       });
-      const data = response.json();
-      data.then((value) => {
-        window.localStorage.setItem("token", value.access_token);
-        const decodedToken = parseJwt(value.access_token);
-        window.localStorage.setItem("username", decodedToken.sub);
-        window.localStorage.setItem("userid", decodedToken.id);
-      });
+      const data = await response.json();
+      window.localStorage.setItem("token", data.access_token);
+      const decodedToken = parseJwt(data.access_token);
+      window.localStorage.setItem("username", decodedToken.sub);
+      window.localStorage.setItem("userid", decodedToken.id);
+      window.localStorage.setItem("auth", auth);
 
       if (props.type === "/UserLogin") {
         if (response.status === 200) {
@@ -81,7 +80,29 @@ function LoginForm(props) {
             ...prev,
             isMod: 1,
           }));
-          navigate("/mod");
+          try {
+            const mod = await fetch(
+              `https://ise-project-api-production.up.railway.app/moderators/${decodedToken.id}`,
+              {
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+              }
+            );
+            const modResult = await mod.json();
+            if (modResult.is_active === true) {
+              setAuth((prev) => ({
+                ...prev,
+                isMod: 1,
+              }));
+              navigate("/mod");
+            } else {
+              navigate("/inactive");
+            }
+          } catch (e) {
+            console.log(e);
+          }
         }
       } else if (props.type === "/AdminLogin") {
         if (response.status === 200) {

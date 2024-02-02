@@ -10,6 +10,10 @@ import Search from "./Components/Pages/User/Pages/Search";
 import Results from "./Components/Pages/User/Pages/Results";
 import ArticleDetails from "./Components/Pages/User/Pages/ArticleDetails";
 import UserProfile from "./Components/Pages/User/Pages/UserProfile";
+import Table from "./Components/Pages/Admin/Pages/Table";
+import SecondTable from "./Components/Pages/Admin/Pages/SecondTable";
+import Error from "./Components/Shared/Error";
+import Inactive from "./Components/Pages/Mod/Pages/Inactive";
 
 export const Context = createContext();
 
@@ -33,7 +37,8 @@ export default function App() {
           {/* Admin routes */}
           {isAdmin && (
             <Route element={<AdminLayout />} path="/admin">
-              {/* Admin routes */}
+              <Route index element={<Table />} />
+              <Route element={<SecondTable />} path="results" />
             </Route>
           )}
 
@@ -43,6 +48,7 @@ export default function App() {
               {/* Moderator routes */}
             </Route>
           )}
+          <Route element={<Inactive />} path="/inactive" />
 
           {/* User routes */}
           {isUser && (
@@ -61,6 +67,9 @@ export default function App() {
           <Route exact path="/AdminRegister" element={<Register />} />
           <Route exact path="/Modlogin" element={<Login />} />
           <Route exact path="/ModRegister" element={<Register />} />
+
+          {/*404*/}
+          <Route path="*" element={<Error />} />
         </Routes>
       </Context.Provider>
     </BrowserRouter>

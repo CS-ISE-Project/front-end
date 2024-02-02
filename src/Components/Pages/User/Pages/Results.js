@@ -69,6 +69,8 @@ function Results() {
             (article) => (
               <Article
                 carousel={carousel}
+                key={article.id}
+                id={article.id}
                 title={article.title}
                 author={article.authors.join(", ")}
                 abstract={article.abstract}
@@ -82,7 +84,9 @@ function Results() {
           {Results.slice((Pagination - 1) * 9, Pagination * 9).map(
             (article) => (
               <Article
+                key={article.id}
                 carousel={carousel}
+                id={article.id}
                 title={article.title}
                 author={article.authors.join(", ")}
                 abstract={article.abstract}
