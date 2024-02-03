@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { endpointUrl } from "../../../../App";
 
 function Table() {
   const headers = ["ID", "Nom", "Prenom", "Email", "Status", ""];
@@ -18,16 +19,13 @@ function Table() {
     const fetchTableData = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch(
-          `https://ise-project-api-production.up.railway.app/moderators/`,
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${window.localStorage.getItem("token")}`,
-              "Content-Type": "application/json",
-            },
-          }
-        );
+        const response = await fetch(`${endpointUrl}/moderators/`, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+            "Content-Type": "application/json",
+          },
+        });
         const data = await response.json();
         setModData(data);
       } catch (e) {
@@ -53,17 +51,14 @@ function Table() {
         is_active: isactive,
       };
       try {
-        const response = await fetch(
-          `https://ise-project-api-production.up.railway.app/moderation/activation`,
-          {
-            method: "PUT",
-            headers: {
-              Authorization: `Bearer ${window.localStorage.getItem("token")}`,
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(form),
-          }
-        );
+        const response = await fetch(`${endpointUrl}/moderation/activation`, {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(form),
+        });
         const data = await response.json();
         console.log(data);
       } catch (e) {
