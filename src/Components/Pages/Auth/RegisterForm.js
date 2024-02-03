@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { endpointUrl } from "../../../App";
 
 function RegisterForm(props) {
   const navigate = useNavigate();
@@ -27,12 +28,12 @@ function RegisterForm(props) {
 
   const signUp = async () => {
     let endpoint;
-    if (props.type === "/UserRegister") {
-      endpoint = `https://ise-project-api-production.up.railway.app/auth/signup`;
+    if (props.type === "/UserRegister" || props.type === "/userRegister") {
+      endpoint = `${endpointUrl}/auth/signup`;
     } else if (props.type === "/modLogin" || props.type === "/ModLogin") {
-      endpoint = `https://ise-project-api-production.up.railway.app/auth/mod/signup`;
-    } else if (props.type === "/AdminRegister") {
-      endpoint = `https://ise-project-api-production.up.railway.app/auth/admin/signup`;
+      endpoint = `${endpointUrl}/auth/mod/signup`;
+    } else if (props.type === "/AdminRegister" || props.type === "/adminRegister") {
+      endpoint = `${endpointUrl}/auth/admin/signup`;
     }
     try {
       const response = await fetch(endpoint, {
@@ -46,7 +47,7 @@ function RegisterForm(props) {
       const accessToken = data.access_token;
       localStorage.setItem("accessToken", accessToken);
 
-      if (props.type === "/UserRegister") {
+      if (props.type === "/UserRegister" || props.type === "/userRegister") {
         if (response.status === 200) {
           navigate("/UserLogin");
         }
@@ -58,7 +59,7 @@ function RegisterForm(props) {
         }
       }
 
-      if (props.type === "/AdminRegister") {
+      if (props.type === "/AdminRegister" || props.type === "/adminRegister") {
         if (response.status === 200) {
           navigate("/AdminLogin");
         }
@@ -110,11 +111,11 @@ function RegisterForm(props) {
   };
 
   function navigateLogin() {
-    if (props.type === "/UserRegister") {
+    if (props.type === "/UserRegister" || props.type==="/userRegister") {
       navigate("/UserLogin");
-    } else if (props.type === "/ModRegister") {
+    } else if (props.type === "/ModRegister" || props.type==="/modRegister") {
       navigate("/ModLogin");
-    } else if (props.type === "/AdminRegister") {
+    } else if (props.type === "/AdminRegister" || props.type==="/adminRegister") {
       navigate("/AdminLogin");
     }
   }

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FaEdit } from "react-icons/fa";
 import { FaDeleteLeft } from "react-icons/fa6";
 import { useLocation, useNavigate } from "react-router-dom";
+import { endpointUrl } from "../../../../App";
 
 export default function EditArticle() {
   const location = useLocation();
@@ -11,7 +12,7 @@ export default function EditArticle() {
   const handleDeleteArticle = async () => {
     try {
       const response = await fetch(
-        `https://ise-project-api-production.up.railway.app/articles/${ArticleDetails[0]}`,
+        `${endpointUrl}/articles/${ArticleDetails[0]}`,
 
         {
           method: "DELETE",
@@ -32,7 +33,7 @@ export default function EditArticle() {
   const handleUpdateArticle = async () => {
     try {
       const response = await fetch(
-        `https://ise-project-api-production.up.railway.app/articles/${ArticleDetails[0]}`,
+        `${endpointUrl}/articles/${ArticleDetails[0]}`,
 
         {
           method: "PUT",
