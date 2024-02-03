@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 function Table() {
-  const headers = ["ID", "Nom", "Prenom", "Email", "Status", ""];
+  const headers = ["ID", "Last Name", "First Name", "Email", "Status", ""];
 
   const [selectedRowIndex, setSelectedRowIndex] = useState(null);
 

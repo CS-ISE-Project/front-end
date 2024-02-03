@@ -132,13 +132,13 @@ function LoginForm(props) {
       case "email":
         formErrors.email =
           !value || !/\S+@\S+\.\S+/.test(value)
-            ? "Veuillez entrer un email valide."
+            ? "Please enter a valid email ."
             : "";
         break;
       case "password":
         formErrors.password =
           !value || value.length < 6
-            ? "Veuillez entrer un mot de passe valide."
+            ? "Please enter a valid password ."
             : "";
         break;
 
@@ -162,10 +162,10 @@ function LoginForm(props) {
   return (
     <div className="flex flex-col justify-center items-start w-[80vw] gap-[10px] md:gap-[40px] text-sm md:text-md text-Typo">
       <p className=" text-2xl md:text-4xl lg:text-6xl font-Natasha">
-        Se connecter
+        Login
       </p>
       <p className="text-sm text-Typo">
-        Connectez-vous a votre compte ci-dessous
+          Log in to your account below
       </p>
       <form
         onSubmit={handleSubmit}
@@ -184,9 +184,9 @@ function LoginForm(props) {
         )}
         <div className="flex justify-between w-full">
           <label htmlFor="" className="">
-            Mot de passe
+            Password
           </label>
-          <p className="text-Rose100 cursor-pointer">Mot de passe oublier ?</p>
+          <p className="text-Rose100 cursor-pointer">Forgot Password ?</p>
         </div>
         <input
           className="rounded-md w-full text-black p-3 md:p-4 bg-[#F2F3F6]"
@@ -203,15 +203,15 @@ function LoginForm(props) {
           className="flex items-center justify-center w-full rounded-md text-white font-bold bg-[#8D92C9] p-3 md:p-4"
           onClick={handleSubmit}
         >
-          Se connecter
+          Login
         </button>
       </form>
       <button className="flex justify-center items-center gap-4 rounded-md bg-[#F2F3F6] w-full p-3 md:p-4">
         <img src="devicon_google.svg" alt="google" />
-        Connexion avec Google
+        Login with Google
       </button>
       <p className="self-center">
-        Vous n'avez pas de compte ?{" "}
+        Don't you have an account?{" "}
         <span className="cursor-pointer text-Blue66" onClick={NavigateRegister}>
           Register
         </span>

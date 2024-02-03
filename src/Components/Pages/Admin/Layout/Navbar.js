@@ -37,7 +37,7 @@ function Navbar() {
                   : "text-Blue66 font-bold hover:cursor-pointer"
               }
             >
-              Modérateurs
+              Moderators
             </div>
             <div
               onClick={() => {
@@ -50,7 +50,7 @@ function Navbar() {
                   : "text-Blue66 font-bold hover:cursor-pointer"
               }
             >
-              Fichiers
+              Files
             </div>
           </div>
           <div className="flex flex-col">

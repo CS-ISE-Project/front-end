@@ -18,7 +18,7 @@ function Navbar() {
           <div className="flex gap-[16px] items-center ">
             <div>
               <p className="bg-Blue66 py-2 px-4 text-white rounded">
-                Modérateur
+                Moderator
               </p>
             </div>
             <p className="font-bold text-Blue66">{userName}</p>

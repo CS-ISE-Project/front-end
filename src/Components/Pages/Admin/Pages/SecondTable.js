@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 function SecondTable() {
   const headers = [
     "ID",
-    "Titre",
+    "Title",
     "Url",
     "authors",
     "Institutions",
@@ -11,7 +11,7 @@ function SecondTable() {
     "",
   ];
   const tableImg = <img src="BiSort.svg" />;
-  const tableIcon = ["Titre", "Url", "Publication Date"];
+  const tableIcon = ["Title", "Url", "Publication Date"];
   const [selectedRowIndex, setSelectedRowIndex] = useState(null);
   const [tableData, setTableData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);

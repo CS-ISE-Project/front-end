@@ -16,7 +16,7 @@ function ArticleDetails() {
           <div className="flex items-center gap-4 w-[100%]">
             <img src="/Author.svg" alt="author" />
             <h3 className="text-[1.5rem] text-Typo font-semibold">
-              Auteur : {ArticleDetails.authors.join(", ")}
+              Author : {ArticleDetails.authors.join(", ")}
             </h3>
           </div>
           <div className="flex items-center gap-4 w-[100%]">
@@ -93,7 +93,7 @@ function ArticleDetails() {
 
             <div className="flex flex-col gap-4 w-[100%]">
               <h3 className="text-[1.7rem] text-Typo font-extrabold">
-                Références
+                References
               </h3>
               <div className="flex flex-col gap-4 flex-wrap">
                 <div className="flex flex-col w-[100%]">

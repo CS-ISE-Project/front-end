@@ -120,7 +120,7 @@ function Search() {
                 : "lg:text-[1.5rem] md:text-[1.2rem] text-[1rem] font-semibold text-Blue66 transition ease-in delay-100"
             }`}
           >
-            Recherche standard
+            Standard search
           </p>
         </div>
         <div
@@ -140,7 +140,7 @@ function Search() {
                 : "lg:text-[1.5rem] md:text-[1.2rem] text-[0.9rem] font-semibold text-white transition ease-in delay-100"
             }`}
           >
-            Recherche avancée 🚀✨
+            Advanced search 🚀✨
           </p>
         </div>
       </div>
