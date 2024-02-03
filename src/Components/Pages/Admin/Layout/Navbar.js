@@ -1,9 +1,19 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { FaChevronDown } from "react-icons/fa";
+import { MdLogout } from "react-icons/md";
 
 function Navbar() {
   const userName = localStorage.getItem("username");
+  const userid = localStorage.getItem("userid");
+  const navigate = useNavigate();
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const [page, setPage] = useState(1);
+  const toggleDropdown = () => {
+    setDropdownOpen(!isDropdownOpen);
+  };
+
+  console.log(userid);
   return (
     <>
       <nav className="w-full md:h-[112px] h-[88px] bg-white fixed top-0 z-[100]">
@@ -16,24 +26,67 @@ function Navbar() {
             ></img>
           </Link>
           <div className="flex gap-[48px] font-medium text-[1.4rem]">
-            <Link to="/admin" className="text-Blue66">
+            <div
+              onClick={() => {
+                setPage(1);
+                navigate("/admin");
+              }}
+              className={
+                !page
+                  ? "text-Typo hover:cursor-pointer"
+                  : "text-Blue66 font-bold hover:cursor-pointer"
+              }
+            >
               Modérateurs
-            </Link>
-            <Link to="/admin/articles" className="text-Typo">
-              Fichiers
-            </Link>
-          </div>
-          <div className="flex gap-[16px] items-center ">
-            <div>
-              <p className="bg-Rose66 py-2 px-4 text-white rounded">Admin</p>
             </div>
-            <p className="font-bold text-Rose66">{userName}</p>
-            <FaChevronDown className="text-Rose66" />
+            <div
+              onClick={() => {
+                setPage(0);
+                navigate("/admin/article");
+              }}
+              className={
+                page
+                  ? "text-Typo hover:cursor-pointer"
+                  : "text-Blue66 font-bold hover:cursor-pointer"
+              }
+            >
+              Fichiers
+            </div>
+          </div>
+          <div className="flex flex-col">
+            <div
+              className={`flex gap-[16px]  items-center ${
+                isDropdownOpen ? "mt-24 " : ""
+              } `}
+            >
+              <div>
+                <p className="bg-Rose66 py-2 px-4 text-white rounded">Admin</p>
+              </div>
+              <p className="font-bold text-Rose66">{userName}</p>
+
+              <FaChevronDown
+                className={`text-Rose66 transition-transform duration-300 hover:cursor-pointer  ${
+                  isDropdownOpen ? "rotate-180 " : ""
+                }`}
+                onClick={toggleDropdown}
+              />
+            </div>
+            {isDropdownOpen && (
+              <div className="flex flex-col mt-4 bg-white items-center drop-shadow-special px-[4vh]">
+                <div
+                  className="flex flex-row items-center hover:cursor-pointer border-t border-[#E6E6E6]" /*onClick={handleLogoutClick}*/
+                >
+                  <MdLogout className="text-Rose100"></MdLogout>
+                  <div className="p-2 text-Rose100">Logout</div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </nav>
     </>
   );
 }
-
+/*
+ */
 export default Navbar;
