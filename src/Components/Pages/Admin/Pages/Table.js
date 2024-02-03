@@ -37,7 +37,7 @@ function Table() {
       }
     };
     fetchTableData();
-  }, [page]);
+  }, []);
 
   if (error) {
     return <div> Something went wrong ! please try again</div>;
@@ -46,7 +46,7 @@ function Table() {
   const tableImg = <img src="BiSort.svg" />;
   const tableIcon = ["Nom", "Prenom", "Status"];
 
-  const handleAction = (isactive, modID) => {
+  const handleAction = async (isactive, modID) => {
     const activateMod = async () => {
       const form = {
         id: modID,
@@ -70,7 +70,28 @@ function Table() {
         setError(e);
       }
     };
-    activateMod();
+    
+    const refreshData = async () => { 
+      try {
+        const response = await fetch(
+          `https://ise-project-api-production.up.railway.app/moderators/`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+              "Content-Type": "application/json",
+            },
+          }
+          );
+          const data = await response.json();
+          setModData(data);
+        } catch (e) {
+          setError(e);
+        }
+      };
+      
+      await activateMod();
+      await refreshData()
   };
 
   return (
@@ -115,12 +136,12 @@ function Table() {
                   {data.is_active === true ? (
                     <div className="flex items-center gap-4">
                       <div className="h-[10px] w-[10px] rounded-full bg-Spbtn self-center justify-center"></div>
-                      <p className="">Actif</p>
+                      <p className="">Active</p>
                     </div>
                   ) : (
                     <div className="flex items-center gap-4">
                       <div className="h-[10px] w-[10px] rounded-full bg-[#D4382B] self-center justify-center"></div>
-                      <p className="">Bloque</p>
+                      <p className="">Blocked</p>
                     </div>
                   )}
                 </td>

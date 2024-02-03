@@ -16,7 +16,6 @@ function Articles() {
   const [tableData, setTableData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
-  const [page, setPage] = useState(0);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
@@ -37,7 +36,6 @@ function Articles() {
         );
         const data = await response.json();
         setTableData(data);
-        console.log(data);
       } catch (e) {
         setError(e);
       } finally {
@@ -45,7 +43,7 @@ function Articles() {
       }
     };
     fetchTableData();
-  }, [page]);
+  }, []);
 
   const navigate = useNavigate();
 

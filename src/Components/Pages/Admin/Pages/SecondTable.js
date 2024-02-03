@@ -39,7 +39,6 @@ function SecondTable() {
         );
         const data = await response.json();
         setTableData(data);
-        console.log(data);
       } catch (e) {
         setError(e);
       } finally {
@@ -47,7 +46,7 @@ function SecondTable() {
       }
     };
     fetchTableData();
-  }, [page]);
+  }, []);
 
   const [file, setFile] = useState(null);
 

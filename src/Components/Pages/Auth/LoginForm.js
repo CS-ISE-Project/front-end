@@ -63,7 +63,6 @@ function LoginForm(props) {
       const decodedToken = parseJwt(data.access_token);
       window.localStorage.setItem("username", decodedToken.sub);
       window.localStorage.setItem("userid", decodedToken.id);
-      window.localStorage.setItem("auth", auth);
 
       if (props.type === "/UserLogin") {
         if (response.status === 200) {
