@@ -19,9 +19,9 @@ export const Context = createContext();
 
 export default function App() {
   const [auth, setAuth] = useState({
-    isMod: 1,
-    isAdmin: 1,
-    isUser: 1,
+    isMod: 0,
+    isAdmin: 0,
+    isUser: 0,
   });
   const { isMod, isAdmin, isUser } = auth;
 
@@ -37,8 +37,8 @@ export default function App() {
           {/* Admin routes */}
           {isAdmin && (
             <Route element={<AdminLayout />} path="/admin">
-              {/* <Route index element={<Table />} /> */}
-              {/* <Route element={<SecondTable />} path="article" /> */}
+              <Route index element={<Table />} />
+              <Route element={<SecondTable />} path="article" />
             </Route>
           )}
 
