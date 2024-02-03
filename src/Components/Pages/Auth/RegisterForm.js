@@ -29,12 +29,11 @@ function RegisterForm(props) {
     let endpoint;
     if (props.type === "/UserRegister") {
       endpoint = `https://ise-project-api-production.up.railway.app/auth/signup`;
-    } else if (props.type === "/ModRegister") {
+    } else if (props.type === "/modLogin" || props.type === "/ModLogin") {
       endpoint = `https://ise-project-api-production.up.railway.app/auth/mod/signup`;
     } else if (props.type === "/AdminRegister") {
       endpoint = `https://ise-project-api-production.up.railway.app/auth/admin/signup`;
     }
-    console.log(formData);
     try {
       const response = await fetch(endpoint, {
         method: "POST",
@@ -43,19 +42,17 @@ function RegisterForm(props) {
         },
         body: JSON.stringify(formData),
       });
-      const data = response.json();
-
-      console.log(data);
-
+      const data = await response.json();
       const accessToken = data.access_token;
       localStorage.setItem("accessToken", accessToken);
+
       if (props.type === "/UserRegister") {
         if (response.status === 200) {
           navigate("/UserLogin");
         }
       }
 
-      if (props.type === "/ModRegister") {
+      if (props.type === "/modLogin" || props.type === "/ModLogin") {
         if (response.status === 200) {
           navigate("/ModLogin");
         }
@@ -85,24 +82,24 @@ function RegisterForm(props) {
       case "email":
         formErrors.email =
           !value || !/\S+@\S+\.\S+/.test(value)
-            ? "Veuillez entrer un email valide."
+            ? "Please enter a valid email"
             : "";
         break;
       case "password":
         formErrors.password =
           !value || value.length < 6
-            ? "Veuillez entrer un mot de passe valide."
+            ? "Please enter a valid password."
             : "";
         break;
 
       case "first_name":
         formErrors.first_name =
-          !value || value.length < 4 ? "Veuillez entrer un prénom valide." : "";
+          !value || value.length < 4 ? "Please enter a valid first name ." : "";
         break;
       case "last_name":
         formErrors.last_name =
           !value || !/^[A-Z][^0-9]*$/.test(value)
-            ? "Veuillez entrer un nom valide."
+            ? "Please enter a valid last name ."
             : "";
         break;
       default:
@@ -124,13 +121,13 @@ function RegisterForm(props) {
   return (
     <div className="flex flex-col text-sm md:text-md w-[80vw] md:w-[30vw]  gap-8 text-Typo">
       <h2 className=" text-2xl md:text-4xl lg:text-6xl font-Natasha">
-        S'inscrire
+        Register
       </h2>
-      <p className="text-[#515151]">Inscrivez-vous à votre compte ci-dessous</p>
+      <p className="text-[#515151]">Register for your account below.</p>
       <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
         <div className="flex justify-between  gap-5 sm:gap-7">
           <div className="flex flex-col w-1/2 gap-2 ">
-            <label className="">Prenom</label>
+            <label className="">First Name</label>
             <input
               className=" rounded-md text-black  bg-[#F2F3F6] w-full p-3 md:p-4"
               type="text"
@@ -140,11 +137,11 @@ function RegisterForm(props) {
             />
           </div>
           <div className="flex flex-col w-1/2 gap-2">
-            <label className="">Nom</label>
+            <label className="">Last Name</label>
             <input
               className="rounded-md text-black bg-[#F2F3F6] w-full  p-3 md:p-4"
               type="text"
-              placeholder="Nom"
+              placeholder="Last Name"
               onChange={handleChange}
               name="last_name"
             />
@@ -161,13 +158,13 @@ function RegisterForm(props) {
           className="rounded-md text-black  bg-[#F2F3F6] p-3 md:p-4"
           type="text"
           onChange={handleChange}
-          placeholder="Mail Adress"
+          placeholder="Email Adress"
           name="email"
         />
         {isSubmitting && errors.email && (
           <div className="text-Rose100">{errors.email}</div>
         )}
-        <label>Mot de passe</label>
+        <label>Password</label>
         <input
           className="rounded-md text-black  bg-[#F2F3F6] p-3 md:p-4"
           type="password"
@@ -182,17 +179,17 @@ function RegisterForm(props) {
           className="flex items-center justify-center w-full rounded-md text-white font-bold bg-[#8D92C9] p-3 md:p-4"
           onClick={handleSubmit}
         >
-          Se connecter
+          Login
         </button>
       </form>
       <button className="flex justify-center items-center gap-4 rounded-md bg-[#F2F3F6] p-3 md:p-4">
         <img src="devicon_google.svg" alt="google" />
-        Connexion avec Google
+        Login with Google
       </button>
       <p className="self-center">
-        Avez vous deja un compte?{" "}
+        Do you already have an account?{" "}
         <span className="cursor-pointer text-Blue66" onClick={navigateLogin}>
-          Se connecter
+          Login
         </span>
       </p>
     </div>

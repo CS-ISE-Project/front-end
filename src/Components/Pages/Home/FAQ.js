@@ -30,27 +30,27 @@ function FAQElement(props) {
 const faqs = [
   {
     id: 1,
-    question: "Comment utiliser Banky?",
+    question: "Why 'Science'?",
     answer:
-      "Vous pouver simplement consulter offres des banques avec ses profiles ou bien comparer deux banques entre eux.",
+      "Science' offers a user-friendly interface for in-depth research on scientific articles. Explore high-quality content and conduct targeted searches.",
   },
   {
     id: 2,
-    question: "Pourquoi Banky?",
+    question: "Can I save an article?",
     answer:
-      "Puisque Banky offre une meilleur experience pour l'utilisateur et meme un systeme des annonces pour les banques et les partenaires.",
+      "Yes, you have the option to save your favorite article. Additionally, you can also download it for offline viewing.",
   },
   {
     id: 3,
-    question: "Les données de Banky sont réelles?",
+    question: "How to search for articles?",
     answer:
-      "Oui, effectivement les données stocekr dans le site Banky sont a jour et fiables.",
+      "Go to the search page and enter keywords in the search bar. You can refine the results by title, authors, institutions, and publication period.",
   },
   {
     id: 4,
-    question: "Comment ajouter des annonces?",
+    question: "Does 'Science' respect scientific credibility?",
     answer:
-      "Vous pouver envoyer vos annonces en utilsans le contact form dans la page 'Contactez-Nous' et attendre la validation de l'admin.",
+      "Absolutely, 'Science' is committed to maintaining the highest scientific credibility. We ensure that the articles featured on the platform come from reliable sources and adhere to academic standards. Additionally, moderators have the ability to correct any potential errors to ensure the quality and reliability of the content.",
   },
 ];
 
@@ -58,7 +58,7 @@ function FAQ() {
   return (
     <div className="flex px-[8vw] flex-col gap-[4vh] items-center">
       <h1 className="font-regular text-Typo font-Natasha md:text-[4rem] text-[2rem] text-center">
-        Questions fréquemment posées
+      Frequently Asked Questions
       </h1>
       <div className="w-[100%] flex flex-col gap-[4vh]">
         {faqs.map((faq) => (
