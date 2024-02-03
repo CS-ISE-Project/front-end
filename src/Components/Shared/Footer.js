@@ -9,7 +9,7 @@ function Footer() {
             <ul className="flex gap-[4vw] text-[1.5rem]">
               <li className="text-BlueDark text-[1.1rem]">
                 <Link to="/Condition" className="font-Gilroy">
-                  Condition d’utilisation
+                  Terms of use
                 </Link>
               </li>
               <li className="text-BlueDark text-[1.1rem]">

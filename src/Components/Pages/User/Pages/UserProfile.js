@@ -30,13 +30,13 @@ const UserProfile = () => {
           <div className="flex flex-col gap-3">
             <div className="flex justify-between  gap-5  sm:gap-7">
               <div className="flex flex-col w-1/2 gap-2 ">
-                <label className="">Prenom</label>
+                <label className="">First Name</label>
                 <div className=" rounded-md text-black  bg-[#F2F3F6] w-full p-3 md:p-4">
                   {prenom}
                 </div>
               </div>
               <div className="flex flex-col w-1/2 gap-2">
-                <label className="">Nom</label>
+                <label className="">Last Name</label>
                 <div className="rounded-md text-black bg-[#F2F3F6] w-full  p-3 md:p-4">
                   {nom}
                 </div>

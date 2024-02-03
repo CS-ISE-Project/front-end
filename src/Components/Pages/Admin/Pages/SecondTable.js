@@ -4,14 +4,17 @@ import { FaChevronDown } from "react-icons/fa";
 function SecondTable() {
   const headers = [
     "ID",
-    "Titre",
+    "Title",
     "Url",
     "authors",
     "Institutions",
     "Publication Date",
     "",
   ];
-  const tableIcon = ["Titre", "Url", "Publication Date"];
+
+  const tableImg = <img src="BiSort.svg" />;
+  const tableIcon = ["Title", "Url", "Publication Date"];
+  const [selectedRowIndex, setSelectedRowIndex] = useState(null);
   const [tableData, setTableData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
