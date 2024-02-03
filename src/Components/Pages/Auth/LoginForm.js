@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../../../App";
-import { endpointUrl } from "../../../App";
 
 function LoginForm(props) {
   const [auth, setAuth] = useContext(Context);
+
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
@@ -44,12 +44,12 @@ function LoginForm(props) {
 
   const login = async () => {
     let endpoint;
-    if (props.type === "/UserLogin" || props.type === "/userLogin") {
-      endpoint = `${endpointUrl}/auth/login?email=${formData.email}&password=${formData.password}`;
+    if (props.type === "/UserLogin") {
+      endpoint = `https://ise-project-api-production.up.railway.app/auth/login?email=${formData.email}&password=${formData.password}`;
     } else if (props.type === "/modLogin" || props.type === "/ModLogin") {
-      endpoint = `${endpointUrl}/auth/mod/login?email=${formData.email}&password=${formData.password}`;
-    } else if (props.type === "/AdminLogin" || props.type === "/adminLogin") {
-      endpoint = `${endpointUrl}/auth/admin/login?email=${formData.email}&password=${formData.password}`;
+      endpoint = `https://ise-project-api-production.up.railway.app/auth/mod/login?email=${formData.email}&password=${formData.password}`;
+    } else if (props.type === "/AdminLogin") {
+      endpoint = `https://ise-project-api-production.up.railway.app/auth/admin/login?email=${formData.email}&password=${formData.password}`;
     }
     try {
       const response = await fetch(endpoint, {
@@ -65,7 +65,7 @@ function LoginForm(props) {
       window.localStorage.setItem("userid", decodedToken.id);
       window.localStorage.setItem("auth", auth);
 
-      if (props.type === "/UserLogin" || props.type === "/userLogin") {
+      if (props.type === "/UserLogin") {
         if (response.status === 200) {
           setAuth((prev) => ({
             ...prev,
@@ -82,7 +82,7 @@ function LoginForm(props) {
           }));
           try {
             const mod = await fetch(
-              `${endpointUrl}/moderators/${decodedToken.id}`,
+              `https://ise-project-api-production.up.railway.app/moderators/${decodedToken.id}`,
               {
                 headers: {
                   "Content-Type": "application/json",
@@ -104,7 +104,7 @@ function LoginForm(props) {
             console.log(e);
           }
         }
-      } else if (props.type === "/AdminLogin" || props.type === "/adminLogin") {
+      } else if (props.type === "/AdminLogin") {
         if (response.status === 200) {
           setAuth((prev) => ({
             ...prev,
@@ -150,11 +150,11 @@ function LoginForm(props) {
   };
 
   function NavigateRegister() {
-    if (props.type === "/UserLogin" || props.type === "/userLogin") {
+    if (props.type === "/UserLogin") {
       navigate("/UserRegister");
-    } else if (props.type === "/ModLogin" || props.type === "/modLogin") {
+    } else if (props.type === "/ModLogin") {
       navigate("/ModRegister");
-    } else if (props.type === "/AdminLogin" || props.type === "/adminLogin") {
+    } else if (props.type === "/AdminLogin") {
       navigate("/AdminRegister");
     }
   }

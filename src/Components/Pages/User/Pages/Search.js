@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { endpointUrl } from "../../../../App";
 
 function Search() {
   const navigate = useNavigate();
@@ -53,14 +52,17 @@ function Search() {
 
   async function handleAdvancedSearch() {
     try {
-      const response = await fetch("${endpointUrl}/search/advanced", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        "https://ise-project-api-production.up.railway.app/search/advanced",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify(formData),
+        }
+      );
       const data = response.json();
       data.then((articles) => {
         console.log(articles);
@@ -74,7 +76,7 @@ function Search() {
   async function handleStandardSearch() {
     try {
       const response = await fetch(
-        `${endpointUrl}/search/simple?query=${queryStandard}`,
+        `https://ise-project-api-production.up.railway.app/search/simple?query=${queryStandard}`,
         {
           method: "POST",
           headers: {

@@ -1,24 +1,27 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { endpointUrl } from "../../../../App";
 
 function Article(props) {
   const navigate = useNavigate();
 
   const handleArticleDetails = async () => {
     try {
-      const response = await fetch(`${endpointUrl}/articles/${props.id}`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+      const response = await fetch(
+        `https://ise-project-api-production.up.railway.app/articles/${props.id}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
       const data = await response.json();
       navigate("/user/article", { state: data });
     } catch (e) {
       console.error("Failed getting article:", e);
     }
   };
+
 
   return props.carousel === 0 ? (
     <div className="w-[84vw] flex justify-between items-start">

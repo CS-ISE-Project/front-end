@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FaChevronDown } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { endpointUrl } from "../../../../App";
 
 function Articles() {
   const headers = [
@@ -26,13 +25,16 @@ function Articles() {
     const fetchTableData = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch(`${endpointUrl}/articles/`, {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${window.localStorage.getItem("token")}`,
-            "Content-Type": "application/json",
-          },
-        });
+        const response = await fetch(
+          `https://ise-project-api-production.up.railway.app/articles/`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
         const data = await response.json();
         setTableData(data);
         console.log(data);

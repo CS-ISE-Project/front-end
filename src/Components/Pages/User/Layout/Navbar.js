@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { FaChevronDown } from "react-icons/fa";
 import { MdLogout } from "react-icons/md";
 import { FaRegUser } from "react-icons/fa6";
-import { endpointUrl } from "../../../../App";
 
 function Navbar() {
   const userName = localStorage.getItem("username");
@@ -17,12 +16,15 @@ function Navbar() {
 
   const handleProfileUser = async () => {
     try {
-      const response = await fetch(`${endpointUrl}/users/${userid}`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+      const response = await fetch(
+        `https://ise-project-api-production.up.railway.app/users/${userid}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
       const data = await response.json();
       console.log(data);
       setDropdownOpen(false);

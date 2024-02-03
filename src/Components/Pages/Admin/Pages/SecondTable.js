@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { FaChevronDown } from "react-icons/fa";
-import { endpointUrl } from "../../../../App";
 
 function SecondTable() {
   const headers = [
@@ -25,13 +24,16 @@ function SecondTable() {
     const fetchTableData = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch(`${endpointUrl}/articles/`, {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${window.localStorage.getItem("token")}`,
-            "Content-Type": "application/json",
-          },
-        });
+        const response = await fetch(
+          `https://ise-project-api-production.up.railway.app/articles/`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
         const data = await response.json();
         setTableData(data);
         console.log(data);
@@ -59,13 +61,16 @@ function SecondTable() {
     const formData = new FormData();
     formData.append("file", file);
     try {
-      const response = await fetch(`${endpointUrl}/upload/local`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${window.localStorage.getItem("token")}`,
-        },
-        body: formData,
-      });
+      const response = await fetch(
+        `https://ise-project-api-production.up.railway.app/upload/local`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+          },
+          body: formData,
+        }
+      );
 
       const data = await response.json();
       const key = data.file_key;
@@ -73,7 +78,7 @@ function SecondTable() {
       console.log(key);
       try {
         const response = await fetch(
-          `${endpointUrl}/articles/uploaded?article_key=${key}
+          `https://ise-project-api-production.up.railway.app/articles/uploaded?article_key=${key}
           `,
           {
             method: "POST",
@@ -99,13 +104,16 @@ function SecondTable() {
   const handleUploadfromDrive = async () => {
     console.log(url);
     try {
-      const response = await fetch(`${endpointUrl}/upload/gdrive?link=${url}`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${window.localStorage.getItem("token")}`,
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        `https://ise-project-api-production.up.railway.app/upload/gdrive?link=${url}`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       const data = await response.json();
       const key = data.file_key;
@@ -113,7 +121,7 @@ function SecondTable() {
       console.log(key);
       try {
         const response = await fetch(
-          `${endpointUrl}/articles/uploaded?article_key=${key}
+          `https://ise-project-api-production.up.railway.app/articles/uploaded?article_key=${key}
           `,
           {
             method: "POST",

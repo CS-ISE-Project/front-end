@@ -16,8 +16,6 @@ import Error from "./Components/Shared/Error";
 import Inactive from "./Components/Pages/Mod/Pages/Inactive";
 import Articles from "./Components/Pages/Mod/Pages/Articles";
 import EditArticle from "./Components/Pages/Mod/Pages/EditArticle";
-require('dotenv').config();
-export const endpointUrl = process.env.ENDPOINT_URL;
 
 export const Context = createContext();
 
