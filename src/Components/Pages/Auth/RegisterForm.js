@@ -33,8 +33,7 @@ function RegisterForm(props) {
       endpoint = `https://ise-project-api-production.up.railway.app/auth/mod/signup`;
     } else if (props.type === "/AdminRegister") {
       endpoint = `https://ise-project-api-production.up.railway.app/auth/admin/signup`;
-    }
-    console.log(formData);
+    }    
     try {
       const response = await fetch(endpoint, {
         method: "POST",
@@ -43,12 +42,10 @@ function RegisterForm(props) {
         },
         body: JSON.stringify(formData),
       });
-      const data = response.json();
-
-      console.log(data);
-
+      const data = await response.json();
       const accessToken = data.access_token;
       localStorage.setItem("accessToken", accessToken);
+
       if (props.type === "/UserRegister") {
         if (response.status === 200) {
           navigate("/UserLogin");

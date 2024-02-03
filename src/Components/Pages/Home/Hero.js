@@ -21,12 +21,12 @@ function Hero() {
           </p>
         </div>
         <div className="flex gap-[10px]">
-          <Link to="/Login">
+          <Link to="/UserLogin">
             <button className="font-Gilroy bg-Purple100 text-[18px] md:text-[24px] px-[4vw] md:px-[2vw] py-[1.5vh] text-white border-2 border-Purple100 rounded-[4px]">
               Connexion
             </button>
           </Link>
-          <Link to="/Register">
+          <Link to="/UserRegister">
             <button className="font-Gilroy text-[18px] md:text-[24px] px-[4vw] md:px-[2vw] py-[1.5vh] text-Purple100 border-2 border-Purple100 rounded-[4px]">
               S’inscrire
             </button>
