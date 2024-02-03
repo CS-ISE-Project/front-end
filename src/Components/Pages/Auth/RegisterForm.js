@@ -184,10 +184,10 @@ function RegisterForm(props) {
           Login
         </button>
       </form>
-      <button className="flex justify-center items-center gap-4 rounded-md bg-[#F2F3F6] p-3 md:p-4">
+      {/* <button className="flex justify-center items-center gap-4 rounded-md bg-[#F2F3F6] p-3 md:p-4">
         <img src="devicon_google.svg" alt="google" />
         Login with Google
-      </button>
+      </button> */}
       <p className="self-center">
         Do you already have an account?{" "}
         <span className="cursor-pointer text-Blue66" onClick={navigateLogin}>

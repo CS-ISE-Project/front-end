@@ -5,7 +5,6 @@ function ArticleDetails() {
   const [fav, setFav] = useState(0);
   const location = useLocation();
   const ArticleDetails = location.state;
-  console.log(ArticleDetails);
   return (
     <div className="flex flex-col items-center w-[84vw] lg:gap-[72px] md:my-[200px] my-[160px]">
       <div className="flex flex-col lg:flex-row lg:justify-between gap-[72px] w-[100%] items-start">

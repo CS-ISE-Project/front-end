@@ -366,7 +366,7 @@ function Search() {
                 <div className="lg:h-[100px] md:h-[88px] h-[72px] flex justify-center items-center w-[100%]">
                   <input
                     className="text-Typo font-bold placeholder:text-[#8B8B8B] placeholder:font-light lg:text-[1.5rem] md:text-[1.3rem] text-[1.1rem] h-[100%] w-[100%] outline-none pl-8 placeholder:lg:text-[1.3rem] placeholder:md:text-[1.1rem] placeholder:text-[0.9rem]"
-                    placeholder="Recherche : Titre"
+                    placeholder="Search : Title"
                     required={true}
                     value={queryTitleAdvanced}
                     onChange={handleQueryTitleAdvancedChange}
@@ -392,7 +392,7 @@ function Search() {
                 <div className="lg:h-[100px] md:h-[88px] h-[72px] flex justify-center items-center w-[100%]">
                   <input
                     className="text-Typo font-bold placeholder:text-[#8B8B8B] placeholder:font-light lg:text-[1.5rem] md:text-[1.3rem] text-[1.1rem] h-[100%] w-[100%] outline-none pl-8 placeholder:lg:text-[1.3rem] placeholder:md:text-[1.1rem] placeholder:text-[0.9rem]"
-                    placeholder="Recherche : keywords"
+                    placeholder="Search : keywords"
                     required={true}
                     value={queryKeywordsAdvanced}
                     onChange={handleQueryKeywordsAdvancedChange}
@@ -418,7 +418,7 @@ function Search() {
                 <div className="lg:h-[100px] md:h-[88px] h-[72px] flex justify-center items-center w-[100%]">
                   <input
                     className="text-Typo font-bold placeholder:text-[#8B8B8B] placeholder:font-light lg:text-[1.5rem] md:text-[1.3rem] text-[1.1rem] h-[100%] w-[100%] outline-none pl-8 placeholder:lg:text-[1.3rem] placeholder:md:text-[1.1rem] placeholder:text-[0.9rem]"
-                    placeholder="Recherche : Auteur"
+                    placeholder="Search : Author"
                     required={true}
                     value={queryAuthorsAdvanced}
                     onChange={handleQueryAuthorsAdvancedChange}
@@ -444,7 +444,7 @@ function Search() {
                 <div className="lg:h-[100px] md:h-[88px] h-[72px] flex justify-center items-center w-[100%]">
                   <input
                     className="text-Typo font-bold placeholder:text-[#8B8B8B] placeholder:font-light lg:text-[1.5rem] md:text-[1.3rem] text-[1.1rem] h-[100%] w-[100%] outline-none pl-8 placeholder:lg:text-[1.3rem] placeholder:md:text-[1.1rem] placeholder:text-[0.9rem]"
-                    placeholder="Recherche : Contenu"
+                    placeholder="Search : Content"
                     required={true}
                     value={queryContentAdvanced}
                     onChange={handleQueryContentAdvancedChange}
@@ -470,7 +470,7 @@ function Search() {
                 <div className="lg:h-[100px] md:h-[88px] h-[72px] flex justify-center items-center w-[100%]">
                   <input
                     className="text-Typo font-bold placeholder:text-[#8B8B8B] placeholder:font-light lg:text-[1.5rem] md:text-[1.3rem] text-[1.1rem] h-[100%] w-[100%] outline-none pl-8 placeholder:lg:text-[1.3rem] placeholder:md:text-[1.1rem] placeholder:text-[0.9rem]"
-                    placeholder="Recherche : Instituts"
+                    placeholder="Search : Instituts"
                     required={true}
                     value={queryInstitutsAdvanced}
                     onChange={handleQueryInstitutsAdvancedChange}
@@ -496,7 +496,7 @@ function Search() {
             <div className="lg:h-[100px] md:h-[88px] h-[72px] flex justify-center items-center w-[100%]">
               <input
                 className="text-Typo font-bold placeholder:text-[#8B8B8B] placeholder:font-light lg:text-[1.5rem] md:text-[1.3rem] text-[1.1rem] h-[100%] w-[100%] outline-none pl-8 placeholder:lg:text-[1.3rem] placeholder:md:text-[1.1rem] placeholder:text-[0.9rem]"
-                placeholder="Recherche : Titre, Auteur, Contenu...."
+                placeholder="Search : Title, Author, Content...."
                 required={true}
                 value={queryStandard}
                 onChange={handleStandardQueryChange}

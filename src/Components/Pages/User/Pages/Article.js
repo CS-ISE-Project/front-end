@@ -49,7 +49,7 @@ function Article(props) {
             className="bg-Purple100 text-white md:px-12 md:py-4 px-8 py-2 rounded-[8px] font-semibold lg:text-[1.2rem] text-[1rem]"
             onClick={handleArticleDetails}
           >
-            Voir
+            See
           </button>
         </div>
       </div>
@@ -76,7 +76,7 @@ function Article(props) {
           className="bg-Purple100 text-white w-[100%] py-4 rounded-[8px] font-semibold text-[1.2rem]"
           onClick={handleArticleDetails}
         >
-          Voir
+          See
         </button>
       </div>
     </div>

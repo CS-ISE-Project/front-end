@@ -26,14 +26,14 @@ function Navbar() {
         }
       );
       const data = await response.json();
-      console.log(data);
+      
       setDropdownOpen(false);
       navigate("/user/profile", { state: data });
     } catch (e) {
       console.error("Failed getting user:", e);
     }
   };
-  console.log(userid);
+  
   return (
     <>
       <nav className="w-full md:h-[112px] h-[88px] bg-white fixed top-0 z-[100]">
