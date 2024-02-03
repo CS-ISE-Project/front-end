@@ -8,7 +8,7 @@ function Navbar() {
           <Link to="/">
             <img
               alt="Logo"
-              className="sm:w-[25vw] md:w-[15vw] lg:w-[10vw]"
+              className="sm:w-[9vw] md:w-[5vw] lg:w-[4vw]"
               src="/logo.png"
             ></img>
           </Link>

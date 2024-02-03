@@ -29,11 +29,11 @@ function RegisterForm(props) {
     let endpoint;
     if (props.type === "/UserRegister") {
       endpoint = `https://ise-project-api-production.up.railway.app/auth/signup`;
-    } else if (props.type === "/ModRegister") {
+    } else if (props.type === "/modLogin" || props.type === "/ModLogin") {
       endpoint = `https://ise-project-api-production.up.railway.app/auth/mod/signup`;
     } else if (props.type === "/AdminRegister") {
       endpoint = `https://ise-project-api-production.up.railway.app/auth/admin/signup`;
-    }    
+    }
     try {
       const response = await fetch(endpoint, {
         method: "POST",
@@ -52,7 +52,7 @@ function RegisterForm(props) {
         }
       }
 
-      if (props.type === "/ModRegister") {
+      if (props.type === "/modLogin" || props.type === "/ModLogin") {
         if (response.status === 200) {
           navigate("/ModLogin");
         }

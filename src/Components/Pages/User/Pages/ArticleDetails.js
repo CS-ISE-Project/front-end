@@ -136,14 +136,14 @@ function ArticleDetails() {
         </div>
       </div>
 
-      <div className="flex flex-col gap-4 w-[100%]">
+      {/* <div className="flex flex-col gap-4 w-[100%]">
         <h3 className="text-[1.7rem] text-Typo font-extrabold text-center">
           Content
         </h3>
         <h3 className="text-[1.1rem] text-Typo font-medium text-justify">
           {ArticleDetails.content}
         </h3>
-      </div>
+      </div> */}
     </div>
   );
 }

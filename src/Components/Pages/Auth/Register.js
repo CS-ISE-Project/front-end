@@ -10,7 +10,7 @@ function Register() {
         src="illustrationRegister.png"
         alt=""
       />
-      <RegisterForm type={path}/>
+      <RegisterForm type={path} />
     </div>
   );
 }
