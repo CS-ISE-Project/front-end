@@ -46,7 +46,7 @@ function LoginForm(props) {
     let endpoint;
     if (props.type === "/UserLogin") {
       endpoint = `https://ise-project-api-production.up.railway.app/auth/login?email=${formData.email}&password=${formData.password}`;
-    } else if (props.type === "/ModLogin") {
+    } else if (props.type === "/modLogin" || props.type === "/ModLogin") {
       endpoint = `https://ise-project-api-production.up.railway.app/auth/mod/login?email=${formData.email}&password=${formData.password}`;
     } else if (props.type === "/AdminLogin") {
       endpoint = `https://ise-project-api-production.up.railway.app/auth/admin/login?email=${formData.email}&password=${formData.password}`;
@@ -74,7 +74,7 @@ function LoginForm(props) {
 
           navigate("/user");
         }
-      } else if (props.type === "/ModLogin") {
+      } else if (props.type === "/modLogin" || props.type === "/ModLogin") {
         if (response.status === 200) {
           setAuth((prev) => ({
             ...prev,

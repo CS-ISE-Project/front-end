@@ -14,14 +14,16 @@ import Table from "./Components/Pages/Admin/Pages/Table";
 import SecondTable from "./Components/Pages/Admin/Pages/SecondTable";
 import Error from "./Components/Shared/Error";
 import Inactive from "./Components/Pages/Mod/Pages/Inactive";
+import Articles from "./Components/Pages/Mod/Pages/Articles";
+import EditArticle from "./Components/Pages/Mod/Pages/EditArticle";
 
 export const Context = createContext();
 
 export default function App() {
   const [auth, setAuth] = useState({
-    isMod: 0,
+    isMod: 1,
     isAdmin: 1,
-    isUser: 0,
+    isUser: 1,
   });
   const { isMod, isAdmin, isUser } = auth;
 
@@ -45,7 +47,8 @@ export default function App() {
           {/* Moderator routes */}
           {isMod && (
             <Route element={<ModLayout />} path="/mod">
-              {/* Moderator routes */}
+              <Route element={<Articles />} index />
+              <Route element={<EditArticle />} path="EditArticle" />
             </Route>
           )}
           <Route element={<Inactive />} path="/inactive" />
