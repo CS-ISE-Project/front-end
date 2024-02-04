@@ -35,7 +35,7 @@ function RegisterForm(props) {
       endpoint = `https://ise-project-api-production.up.railway.app/auth/admin/signup`;
     }
 
-    console.log(endpoint)
+    console.log(endpoint);
     try {
       const response = await fetch(endpoint, {
         method: "POST",
@@ -50,18 +50,21 @@ function RegisterForm(props) {
 
       if (props.type === "/UserRegister") {
         if (response.status === 200) {
+          alert("user created successfully");
           navigate("/UserLogin");
         }
       }
 
       if (props.type === "/modRegister" || props.type === "/ModLogin") {
         if (response.status === 200) {
+          alert("mod created successfully");
           navigate("/ModLogin");
         }
       }
 
       if (props.type === "/AdminRegister") {
         if (response.status === 200) {
+          alert("Admin created successfully");
           navigate("/AdminLogin");
         }
       }
@@ -89,9 +92,7 @@ function RegisterForm(props) {
         break;
       case "password":
         formErrors.password =
-          !value || value.length < 6
-            ? "Please enter a valid password."
-            : "";
+          !value || value.length < 6 ? "Please enter a valid password." : "";
         break;
 
       case "first_name":
@@ -126,10 +127,13 @@ function RegisterForm(props) {
         Register
       </h2>
       <p className="text-[#515151]">Register for your account below.</p>
-      <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
+      <form
+        className="flex flex-col gap-[16px] md:gap-[26px]"
+        onSubmit={handleSubmit}
+      >
         <div className="flex justify-between  gap-5 sm:gap-7">
           <div className="flex flex-col w-1/2 gap-2 ">
-            <label className="">First Name</label>
+            <label className="text-[1.4rem]">First Name</label>
             <input
               className=" rounded-md text-black  bg-[#F2F3F6] w-full p-3 md:p-4"
               type="text"
@@ -139,7 +143,7 @@ function RegisterForm(props) {
             />
           </div>
           <div className="flex flex-col w-1/2 gap-2">
-            <label className="">Last Name</label>
+            <label className="text-[1.4rem]">Last Name</label>
             <input
               className="rounded-md text-black bg-[#F2F3F6] w-full  p-3 md:p-4"
               type="text"
@@ -155,7 +159,7 @@ function RegisterForm(props) {
         {isSubmitting && errors.first_name && (
           <div className="text-Rose100">{errors.first_name}</div>
         )}
-        <label>Email</label>
+        <label className="text-[1.4rem]">Email</label>
         <input
           className="rounded-md text-black  bg-[#F2F3F6] p-3 md:p-4"
           type="text"
@@ -166,7 +170,7 @@ function RegisterForm(props) {
         {isSubmitting && errors.email && (
           <div className="text-Rose100">{errors.email}</div>
         )}
-        <label>Password</label>
+        <label className="text-[1.4rem]">Password</label>
         <input
           className="rounded-md text-black  bg-[#F2F3F6] p-3 md:p-4"
           type="password"
@@ -178,17 +182,17 @@ function RegisterForm(props) {
           <div className="text-Rose100">{errors.password}</div>
         )}
         <button
-          className="flex items-center justify-center w-full rounded-md text-white font-bold bg-[#8D92C9] p-3 md:p-4"
+          className="flex items-center justify-center w-full rounded-md text-white font-bold bg-[#8D92C9] p-3 md:p-4 text-[1.4rem]"
           onClick={handleSubmit}
         >
-          Login
+          Register
         </button>
       </form>
       {/* <button className="flex justify-center items-center gap-4 rounded-md bg-[#F2F3F6] p-3 md:p-4">
         <img src="devicon_google.svg" alt="google" />
         Login with Google
       </button> */}
-      <p className="self-center">
+      <p className="self-center text-[1.2rem]">
         Do you already have an account?{" "}
         <span className="cursor-pointer text-Blue66" onClick={navigateLogin}>
           Login

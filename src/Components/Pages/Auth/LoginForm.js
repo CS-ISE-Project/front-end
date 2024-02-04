@@ -70,7 +70,8 @@ function LoginForm(props) {
             ...prev,
             isUser: 1,
           }));
-
+          alert("Login successful");
+          localStorage.setItem("auth",JSON.stringify({isMod:0,isAdmin:0,isUser:1}))
           navigate("/user");
         }
       } else if (props.type === "/modLogin" || props.type === "/ModLogin") {
@@ -79,6 +80,7 @@ function LoginForm(props) {
             ...prev,
             isMod: 1,
           }));
+          alert("Login successful");
           try {
             const mod = await fetch(
               `https://ise-project-api-production.up.railway.app/moderators/${decodedToken.id}`,
@@ -95,6 +97,7 @@ function LoginForm(props) {
                 ...prev,
                 isMod: 1,
               }));
+              localStorage.setItem("auth",JSON.stringify({isMod:1,isAdmin:0,isUser:0}))
               navigate("/mod");
             } else {
               navigate("/inactive");
@@ -109,10 +112,13 @@ function LoginForm(props) {
             ...prev,
             isAdmin: 1,
           }));
+          alert("Login successful");
+          localStorage.setItem("auth",JSON.stringify({isMod:0,isAdmin:1,isUser:0}))
           navigate("/admin");
         }
       }
     } catch (e) {
+      alert("Login failed")
       console.error("Login Failed :", e);
     }
   };
@@ -136,9 +142,7 @@ function LoginForm(props) {
         break;
       case "password":
         formErrors.password =
-          !value || value.length < 6
-            ? "Please enter a valid password ."
-            : "";
+          !value || value.length < 6 ? "Please enter a valid password ." : "";
         break;
 
       default:
@@ -160,19 +164,15 @@ function LoginForm(props) {
 
   return (
     <div className="flex flex-col justify-center items-start w-[80vw] gap-[10px] md:gap-[40px] text-sm md:text-md text-Typo">
-      <p className=" text-2xl md:text-4xl lg:text-6xl font-Natasha">
-        Login
-      </p>
-      <p className="text-sm text-Typo">
-          Log in to your account below
-      </p>
+      <p className=" text-2xl md:text-4xl lg:text-6xl font-Natasha">Login</p>
+      <p className="text-sm text-Typo">Log in to your account below</p>
       <form
         onSubmit={handleSubmit}
-        className="flex gap-[10px] md:gap-[20px] flex-col items-start w-full"
+        className="flex gap-[16px] md:gap-[26px] flex-col items-start w-full"
       >
-        <label htmlFor="">Email</label>
+        <label className="text-[1.4rem]">Email</label>
         <input
-          className="rounded-md w-full text-black p-3 md:p-4 bg-[#F2F3F6]"
+          className="rounded-md w-full text-black p-3 md:p-4 bg-[#F2F3F6] text-[1rem]"
           type="text"
           name="email"
           placeholder="Mail Adresse"
@@ -182,13 +182,12 @@ function LoginForm(props) {
           <div className="text-Rose100">{errors.email}</div>
         )}
         <div className="flex justify-between w-full">
-          <label htmlFor="" className="">
-            Password
-          </label>
-          <p className="text-Rose100 cursor-pointer">Forgot Password ?</p>
+          <label className="text-[1.4rem]">Password</label>
+          {/*           <p className="text-Rose100 cursor-pointer">Forgot Password ?</p>
+           */}{" "}
         </div>
         <input
-          className="rounded-md w-full text-black p-3 md:p-4 bg-[#F2F3F6]"
+          className="rounded-md w-full text-black p-3 md:p-4 bg-[#F2F3F6] text-[1rem]"
           type="password"
           name="password"
           placeholder="Password"
@@ -199,7 +198,7 @@ function LoginForm(props) {
         )}
 
         <button
-          className="flex items-center justify-center w-full rounded-md text-white font-bold bg-[#8D92C9] p-3 md:p-4"
+          className="flex items-center justify-center w-full rounded-md text-white font-bold bg-[#8D92C9] p-3 md:p-4 text-[1.4rem]"
           onClick={handleSubmit}
         >
           Login
@@ -209,7 +208,7 @@ function LoginForm(props) {
         <img src="devicon_google.svg" alt="google" />
         Login with Google
       </button> */}
-      <p className="self-center">
+      <p className="self-center text-[1.2rem]">
         Don't you have an account?{" "}
         <span className="cursor-pointer text-Blue66" onClick={NavigateRegister}>
           Register

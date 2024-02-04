@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaChevronDown } from "react-icons/fa";
 import { MdLogout } from "react-icons/md";
+import { Context } from "../../../../App";
 
 function Navbar() {
   const userName = localStorage.getItem("username");
@@ -12,12 +13,25 @@ function Navbar() {
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
   };
+  const [auth, setAuth] = useContext(Context);
+
+  const handleLogout = () => {
+    setAuth({
+      isMod: 0,
+      isAdmin: 0,
+      isUser: 0,
+    });
+    localStorage.removeItem("token");
+    localStorage.removeItem("auth");
+    alert("logout successful");
+    navigate("/AdminLogin");
+  };
   return (
     <>
       <nav className="w-full md:h-[112px] h-[88px] bg-white fixed top-0 z-[100]">
         <div className="flex items-center px-[8vw] h-full justify-between">
           <Link>
-          <img
+            <img
               alt="Logo"
               className="sm:w-[9vw] md:w-[5vw] lg:w-[4vw]"
               src="/logo.png"
@@ -72,7 +86,8 @@ function Navbar() {
             {isDropdownOpen && (
               <div className="flex flex-col mt-4 bg-white items-center drop-shadow-special px-[4vh]">
                 <div
-                  className="flex flex-row items-center hover:cursor-pointer border-t border-[#E6E6E6]" /*onClick={handleLogoutClick}*/
+                  className="flex flex-row items-center hover:cursor-pointer border-t border-[#E6E6E6]"
+                  onClick={handleLogout}
                 >
                   <MdLogout className="text-Rose100"></MdLogout>
                   <div className="p-2 text-Rose100">Logout</div>

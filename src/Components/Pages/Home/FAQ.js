@@ -30,7 +30,7 @@ function FAQElement(props) {
 const faqs = [
   {
     id: 1,
-    question: "Why 'Science'?",
+    question: "Why 'Article Harbor'?",
     answer:
       "Science' offers a user-friendly interface for in-depth research on scientific articles. Explore high-quality content and conduct targeted searches.",
   },
@@ -58,7 +58,7 @@ function FAQ() {
   return (
     <div className="flex px-[8vw] flex-col gap-[4vh] items-center">
       <h1 className="font-regular text-Typo font-Natasha md:text-[4rem] text-[2rem] text-center">
-      Frequently Asked Questions
+        Frequently Asked Questions
       </h1>
       <div className="w-[100%] flex flex-col gap-[4vh]">
         {faqs.map((faq) => (
