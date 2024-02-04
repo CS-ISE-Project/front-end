@@ -32,7 +32,7 @@ const faqs = [
     id: 1,
     question: "Why 'Article Harbor'?",
     answer:
-      "Science' offers a user-friendly interface for in-depth research on scientific articles. Explore high-quality content and conduct targeted searches.",
+      "Article Harbor' offers a user-friendly interface for in-depth research on scientific articles. Explore high-quality content and conduct targeted searches.",
   },
   {
     id: 2,
@@ -48,9 +48,9 @@ const faqs = [
   },
   {
     id: 4,
-    question: "Does 'Science' respect scientific credibility?",
+    question: "Does 'Article Harbor' respect scientific credibility?",
     answer:
-      "Absolutely, 'Science' is committed to maintaining the highest scientific credibility. We ensure that the articles featured on the platform come from reliable sources and adhere to academic standards. Additionally, moderators have the ability to correct any potential errors to ensure the quality and reliability of the content.",
+      "Absolutely, 'Article Harbor' is committed to maintaining the highest scientific credibility. We ensure that the articles featured on the platform come from reliable sources and adhere to academic standards. Additionally, moderators have the ability to correct any potential errors to ensure the quality and reliability of the content.",
   },
 ];
 
