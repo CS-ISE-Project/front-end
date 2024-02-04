@@ -42,7 +42,7 @@ function Search() {
   };
 
   const formData = {
-    restricted: true,
+    restricted: false,
     title: queryTitleAdvanced,
     keywords: queryKeywordsAdvanced,
     content: queryContentAdvanced,
@@ -66,7 +66,7 @@ function Search() {
       const data = response.json();
       data.then((articles) => {
         console.log(articles);
-        navigate("/user/results", { state: articles });
+        navigate("/user/results", { state: [articles, formData] });
       });
     } catch (e) {
       console.error("Standard Search Failed :", e);
@@ -88,7 +88,7 @@ function Search() {
       const data = response.json();
 
       data.then((articles) => {
-        navigate("/user/results", { state: articles });
+        navigate("/user/results", { state: [articles, queryStandard] });
       });
     } catch (e) {
       console.error("Standard Search Failed :", e);
@@ -151,11 +151,11 @@ function Search() {
       />
 
       {option ? (
-        <div className="w-[84vw] md:mb-[200px] mb-[160px] flex flex-col gap-4 justify-center items-center">
-          <div className="w-[100%] lg:bg-white lg:h-[120px] drop-shadow-special rounded-[8px] flex items-center justify-center z-100">
-            <div className="lg:flex w-[99%] h-[100px] hidden items-center justify-between">
+        <div className="w-[84vw]  bg-white md:mb-[200px] flex flex-col gap-4 justify-center items-center mb-[100px] lg:mb-[160px]">
+          <div className="w-[100%] bg-white px-2 lg:h-[120px] drop-shadow-special rounded-[8px] flex items-center justify-center z-100 gap-[2rem]">
+            <div className="flex flex-col gap-[1rem] lg:gap-0 lg:flex-row w-[100%] mb-[20px] lg:mb-0 lg:h-[100px] items-center justify-between">
               <div
-                className="h-[100px] w-[13vw] flex justify-center items-center hover:bg-[#FAFAFA] rounded-[8px] transition cursor-pointer"
+                className="h-[100px] w-[80vw] lf:w-[13vw] flex justify-center items-center hover:bg-[#FAFAFA] rounded-[8px] transition cursor-pointer"
                 onClick={() => {
                   setTitle(!title);
                   setContent(false);
@@ -164,7 +164,7 @@ function Search() {
                   setAuthors(false);
                 }}
               >
-                <div className="flex flex-col gap-[8px]">
+                <div className="flex flex-col justify-center items-center gap-[8px]">
                   <h3 className="font-black lg:text-[1.5rem] md:text-[1.3rem] text-[1rem] text-Typo">
                     Title
                   </h3>
@@ -179,9 +179,9 @@ function Search() {
                   )}
                 </div>
               </div>
-              <div className="h-[40px] w-[1px] bg-[#DDDDDD]"></div>
+              <div className="hidden lg:block h-[40px] w-[1px] bg-[#DDDDDD]"></div>
               <div
-                className="h-[100px] w-[15vw] flex justify-center items-center hover:bg-[#FAFAFA] rounded-[8px] transition cursor-pointer"
+                className="h-[100px] w-[80vw] lf:w-[13vw] flex justify-center items-center hover:bg-[#FAFAFA] rounded-[8px] transition cursor-pointer"
                 onClick={() => {
                   setKeywords(!keywords);
                   setContent(false);
@@ -190,7 +190,7 @@ function Search() {
                   setAuthors(false);
                 }}
               >
-                <div className="flex flex-col gap-[8px]">
+                <div className="flex flex-col justify-center items-center gap-[8px]">
                   <h3 className="font-black lg:text-[1.5rem] md:text-[1.3rem] text-[1rem] text-Typo">
                     Keywords
                   </h3>
@@ -205,9 +205,9 @@ function Search() {
                   )}
                 </div>
               </div>
-              <div className="h-[40px] w-[1px] bg-[#DDDDDD]"></div>
+              <div className="hidden lg:block h-[40px] w-[1px] bg-[#DDDDDD]"></div>
               <div
-                className="h-[100px] w-[13vw] flex justify-center items-center hover:bg-[#FAFAFA] rounded-[8px] transition cursor-pointer"
+                className="h-[100px] w-[80vw] lf:w-[13vw] flex justify-center items-center hover:bg-[#FAFAFA] rounded-[8px] transition cursor-pointer"
                 onClick={() => {
                   setAuthors(!authors);
                   setContent(false);
@@ -216,7 +216,7 @@ function Search() {
                   setTitle(false);
                 }}
               >
-                <div className="flex flex-col gap-[8px]">
+                <div className="flex flex-col justify-center items-center gap-[8px]">
                   <h3 className="font-black lg:text-[1.5rem] md:text-[1.3rem] text-[1rem] text-Typo">
                     Authors
                   </h3>
@@ -231,9 +231,9 @@ function Search() {
                   )}
                 </div>
               </div>
-              <div className="h-[40px] w-[1px] bg-[#DDDDDD]"></div>
+              <div className="hidden lg:block h-[40px] w-[1px] bg-[#DDDDDD]"></div>
               <div
-                className="h-[100px] w-[13vw] flex justify-center items-center hover:bg-[#FAFAFA] rounded-[8px] transition cursor-pointer"
+                className="h-[100px] w-[80vw] lf:w-[13vw] flex justify-center items-center hover:bg-[#FAFAFA] rounded-[8px] transition cursor-pointer"
                 onClick={() => {
                   setContent(!content);
                   setTitle(false);
@@ -242,7 +242,7 @@ function Search() {
                   setAuthors(false);
                 }}
               >
-                <div className="flex flex-col gap-[8px] ">
+                <div className="flex flex-col justify-center items-center gap-[8px] ">
                   <h3 className="font-black lg:text-[1.5rem] md:text-[1.3rem] text-[1rem] text-Typo">
                     Content
                   </h3>
@@ -257,9 +257,9 @@ function Search() {
                   )}
                 </div>
               </div>
-              <div className="h-[40px] w-[1px] bg-[#DDDDDD]"></div>
+              <div className="hidden lg:block h-[40px] w-[1px] bg-[#DDDDDD]"></div>
               <div
-                className="h-[100px] w-[13vw] flex justify-center items-center hover:bg-[#FAFAFA] rounded-[8px] transition cursor-pointer"
+                className="h-[100px] w-[80vw] lf:w-[13vw] flex justify-center items-center hover:bg-[#FAFAFA] rounded-[8px] transition cursor-pointer"
                 onClick={() => {
                   setInstitut(!institut);
                   setContent(false);
@@ -268,7 +268,7 @@ function Search() {
                   setAuthors(false);
                 }}
               >
-                <div className="flex flex-col gap-[8px] ">
+                <div className="flex flex-col justify-center items-center gap-[8px] ">
                   <h3 className="font-black lg:text-[1.5rem] md:text-[1.3rem] text-[1rem] text-Typo">
                     Institut
                   </h3>
@@ -284,7 +284,7 @@ function Search() {
                 </div>
               </div>
               <button
-                className="bg-Blue66 lg:h-[90px] md:h-[80px] h-[64px] px-8 rounded-l-[120px] rounded-r-[8px] flex items-center justify-center gap-[1vw] hover:bg-Blue100 transition"
+                className="bg-Blue66 lg:h-[90px] md:h-[80px] h-[64px] px-8 rounded-l-[120px] lg:rounded-r-[8px] rounded-r-[120px] flex items-center justify-center gap-[1vw] hover:bg-Blue100 transition"
                 onClick={handleAdvancedSearch}
               >
                 <img src="/search_icon.svg" alt="search" />
@@ -293,77 +293,12 @@ function Search() {
                 </p>{" "}
               </button>
             </div>
-
-            <div className="flex flex-col lg:hidden md:w-[50vw] w-[84vw] py-4 gap-8">
-              <div className="h-[80px] flex justify-center items-center bg-white hover:bg-[#FAFAFA] rounded-full transition cursor-pointer">
-                <div className="flex flex-col items-center gap-[8px]">
-                  <h3 className="font-black text-[1.2rem] text-Typo">Title</h3>
-                  <p className="text-[#8B8B8B] text-[1rem]">
-                    Search using Title
-                  </p>
-                </div>
-              </div>
-
-              <div className="h-[80px] flex justify-center items-center bg-white hover:bg-[#FAFAFA] rounded-full transition cursor-pointer">
-                <div className="flex flex-col items-center gap-[8px]">
-                  <h3 className="font-black text-[1.2rem] text-Typo">
-                    Keywords
-                  </h3>
-                  <p className="text-[#8B8B8B] text-[1rem]">
-                    Search using Keywords
-                  </p>
-                </div>
-              </div>
-
-              <div className="h-[80px] flex justify-center items-center bg-white hover:bg-[#FAFAFA] rounded-full transition cursor-pointer">
-                <div className="flex flex-col items-center gap-[8px]">
-                  <h3 className="font-black text-[1.2rem] text-Typo">
-                    Authors
-                  </h3>
-                  <p className="text-[#8B8B8B] text-[1rem]">
-                    Search using Authors
-                  </p>
-                </div>
-              </div>
-
-              <div className="h-[80px] flex justify-center items-center bg-white hover:bg-[#FAFAFA] rounded-full transition cursor-pointer">
-                <div className="flex flex-col items-center gap-[8px]">
-                  <h3 className="font-black text-[1.2rem] text-Typo">
-                    Content
-                  </h3>
-                  <p className="text-[#8B8B8B] text-[1rem]">
-                    Search using Content
-                  </p>
-                </div>
-              </div>
-
-              <div className="h-[80px] flex justify-center items-center bg-white hover:bg-[#FAFAFA] rounded-full transition cursor-pointer">
-                <div className="flex flex-col items-center gap-[8px]">
-                  <h3 className="font-black text-[1.2rem] text-Typo">
-                    Institut
-                  </h3>
-                  <p className="text-[#8B8B8B] text-[1rem]">
-                    Search using Institut
-                  </p>
-                </div>
-              </div>
-
-              <Link
-                className="bg-Blue66 lg:h-[90px] md:h-[80px] h-[64px] px-8 rounded-[120px] flex items-center justify-center gap-[1vw] hover:bg-Blue100 transition"
-                to="/user/results"
-              >
-                <img src="/search_icon.svg" alt="search" />
-                <p className="text-[1.5rem] text-white font-bold">
-                  Search
-                </p>{" "}
-              </Link>
-            </div>
           </div>
 
           {title && (
             <div className="lg:w-[60vw] w-[84vw] bg-white lg:h-[120px] md:h-[104px] h-[88px] drop-shadow-special rounded-[8px] flex items-center justify-center z-100">
               <div className="w-[97%] lg:h-[100px] md:h-[88px] h-[72px] flex items-center justify-between">
-                <div className="lg:h-[100px] md:h-[88px] h-[72px] flex justify-center items-center w-[100%]">
+                <div className="lg:h-[100px] md:h-[88px] h-[72px] flex justify-center items-center w-[100%] ">
                   <input
                     className="text-Typo font-bold placeholder:text-[#8B8B8B] placeholder:font-light lg:text-[1.5rem] md:text-[1.3rem] text-[1.1rem] h-[100%] w-[100%] outline-none pl-8 placeholder:lg:text-[1.3rem] placeholder:md:text-[1.1rem] placeholder:text-[0.9rem]"
                     placeholder="Search : Title"

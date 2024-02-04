@@ -20,11 +20,13 @@ import EditArticle from "./Components/Pages/Mod/Pages/EditArticle";
 export const Context = createContext();
 
 export default function App() {
-  const [auth, setAuth] = useState({
-    isMod: 0,
-    isAdmin: 0,
-    isUser: 0,
-  });
+  const [auth, setAuth] = useState(
+    JSON.parse(localStorage.getItem("auth")) || {
+      isMod: 0,
+      isAdmin: 0,
+      isUser: 0,
+    }
+  );
   const { isMod, isAdmin, isUser } = auth;
 
   return (

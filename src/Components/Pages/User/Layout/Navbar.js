@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaChevronDown } from "react-icons/fa";
 import { MdLogout } from "react-icons/md";
 import { FaRegUser } from "react-icons/fa6";
+import { Context } from "../../../../App";
 
 function Navbar() {
   const userName = localStorage.getItem("username");
@@ -26,14 +27,27 @@ function Navbar() {
         }
       );
       const data = await response.json();
-      
+
       setDropdownOpen(false);
       navigate("/user/profile", { state: data });
     } catch (e) {
       console.error("Failed getting user:", e);
     }
   };
-  
+  const [auth, setAuth] = useContext(Context);
+
+  const handleLogout = () => {
+    setAuth({
+      isMod: 0,
+      isAdmin: 0,
+      isUser: 0,
+    });
+    localStorage.removeItem("token");
+    localStorage.removeItem("auth");
+    alert("logout successful");
+    navigate("/UserLogin");
+  };
+
   return (
     <>
       <nav className="w-full md:h-[112px] h-[88px] bg-white fixed top-0 z-[100]">
@@ -77,7 +91,8 @@ function Navbar() {
                 </div>
 
                 <div
-                  className="flex flex-row items-center hover:cursor-pointer border-t border-[#E6E6E6]" /*onClick={handleLogoutClick}*/
+                  className="flex flex-row items-center hover:cursor-pointer border-t border-[#E6E6E6]"
+                  onClick={handleLogout} /*onClick={handleLogoutClick}*/
                 >
                   <MdLogout className="text-Rose100"></MdLogout>
                   <div className="p-2 text-Rose100">Logout</div>

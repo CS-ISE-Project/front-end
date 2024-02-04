@@ -44,6 +44,7 @@ export default function EditArticle() {
         }
       );
       const data = await response.json();
+      console.log(JSON.stringify(formData));
       alert("Article Updated Succesfully!");
       navigate("/mod");
     } catch (e) {
@@ -65,12 +66,25 @@ export default function EditArticle() {
 
   function handleChange(e) {
     const { name, value } = e.target;
-    setFormData((formData) => {
-      return {
-        ...formData,
-        [name]: value,
-      };
-    });
+
+    const arr = ["institues", "references", "keywords"];
+    console.log("name : ");
+    console.log(name);
+    if (arr.indexOf(name) != -1) {
+      setFormData((formData) => {
+        return {
+          ...formData,
+          [name]: [value],
+        };
+      });
+    } else {
+      setFormData((formData) => {
+        return {
+          ...formData,
+          [name]: value,
+        };
+      });
+    }
   }
 
   return (
@@ -86,7 +100,7 @@ export default function EditArticle() {
           <div className="flex items-center gap-4 w-[100%]">
             <img src="/Author.svg" alt="author" />
             <h3 className="text-[1.5rem] text-Typo font-semibold">
-              Auteur :{" "}
+              Author :{" "}
               <input
                 value={formData.authors}
                 onChange={handleChange}
@@ -162,7 +176,7 @@ export default function EditArticle() {
                   value={formData.keywords}
                   onChange={handleChange}
                   name="keywords"
-                  className="truncate bg-[#E6EEFC] px-8 py-4 flex items-center justify-center rounded-[4px]"
+                  className="truncate overflow-x-scroll w-[100%] bg-[#E6EEFC] px-8 py-4 flex items-center justify-center rounded-[4px]"
                 />
               </div>
             </div>
@@ -176,49 +190,22 @@ export default function EditArticle() {
                   value={formData.institutes}
                   onChange={handleChange}
                   name="institutes"
-                  className="truncate bg-[#FEF5F7] px-8 py-4 flex items-center justify-center rounded-[4px]"
+                  className="truncate overflow-x-scroll w-[100%] bg-[#FEF5F7] px-8 py-4 flex items-center justify-center rounded-[4px]"
                 />
               </div>
             </div>
 
             <div className="flex flex-col gap-4 w-[100%]">
               <h3 className="text-[1.7rem] text-Typo font-extrabold">
-                Références
+                References
               </h3>
-              <div className="flex flex-col gap-4 flex-wrap">
-                <div className="flex flex-col w-[100%]">
-                  <h3 className="text-[1.5rem] text-Typo font-medium">
-                    J. Benes et al.
-                  </h3>
-                  <h3 className="text-[1.5rem] text-Purple100 font-bold">
-                    The future of oil: geology versus technology
-                  </h3>
-                  <h3 className="text-[1.5rem] text-Typo font-medium">
-                    Int. J. Forecast. (2015)
-                  </h3>
-                </div>
-                <div className="flex flex-col w-[100%]">
-                  <h3 className="text-[1.5rem] text-Typo font-medium">
-                    J. Benes et al.
-                  </h3>
-                  <h3 className="text-[1.5rem] text-Purple100 font-bold">
-                    The future of oil: geology versus technology
-                  </h3>
-                  <h3 className="text-[1.5rem] text-Typo font-medium">
-                    Int. J. Forecast. (2015)
-                  </h3>
-                </div>
-                <div className="flex flex-col w-[100%]">
-                  <h3 className="text-[1.5rem] text-Typo font-medium">
-                    J. Benes et al.
-                  </h3>
-                  <h3 className="text-[1.5rem] text-Purple100 font-bold">
-                    The future of oil: geology versus technology
-                  </h3>
-                  <h3 className="text-[1.5rem] text-Typo font-medium">
-                    Int. J. Forecast. (2015)
-                  </h3>
-                </div>
+              <div className="flex gap-4 flex-wrap">
+                <textarea
+                  value={formData.references}
+                  onChange={handleChange}
+                  name="references"
+                  className="text-wrap bg-[#FEF5F7] px-8 py-4 flex items-center justify-center rounded-[4px] w-[100%]"
+                />
               </div>
             </div>
           </div>
