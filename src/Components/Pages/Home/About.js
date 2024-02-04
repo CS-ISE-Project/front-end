@@ -2,13 +2,13 @@ function About() {
   return (
     <div>
       <h1 className="font-regular text-Typo font-Natasha md:text-[4rem] text-[2rem] text-center mb-[5vw]">
-        A propos
+      About
       </h1>
       <div className="flex w-full px-[8vw] flex-col gap-8 max-md:text-center lg:text-[1.6rem] md:text-[1.4rem] text-[1.1rem] font-Gilroy text-[Typo] md:bg-About-image  lg:bg-[length:50vh_50vh] md:bg-[length:38vh_38vh] bg-no-repeat md:bg-center">
         <div>
           <p className="text-center">
-          Welcome to 'Science,' your platform dedicated to cutting-edge scientific research.
-           We created 'Science' with the aim of providing a welcoming and intuitive environment,
+          Welcome to 'Article Harbor' your platform dedicated to cutting-edge scientific research.
+           We created 'Article Harbor' with the aim of providing a welcoming and intuitive environment,
             allowing researchers from around the world to discover, explore, and save high-quality scientific articles.
           </p>
         </div>
@@ -16,7 +16,7 @@ function About() {
         <div className="flex flex-col md:flex-row md:gap-[12vw]">
           <div className="flex flex-col md:gap-[25vh] lg:gap-[9vw] xl:gap-[8vw] text-center md:text-left">
             <p className="lg:pr-[12vw]">
-            At 'Science,' we place scientific credibility at the heart of our mission. Our editorial processes are 
+            At 'Article Harbor' we place scientific credibility at the heart of our mission. Our editorial processes are 
             rigorous, ensuring the accuracy of information.
             </p>
             <p>
@@ -32,7 +32,7 @@ function About() {
             community by fostering dynamic knowledge exchange.
             </p>
             <p className="xl:pl-[5vw] lg:pl-[7vw] md:pl-[10vw]">
-            Science' also strives to ensure transparent access to a diverse database, 
+            'Article Harbor' also strives to ensure transparent access to a diverse database, 
             covering a wide range of scientific fields.
             </p>
           </div>
