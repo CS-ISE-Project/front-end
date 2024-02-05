@@ -9,7 +9,6 @@ function SecondTable() {
     "authors",
     "Institutions",
     "Publication Date",
-    "",
   ];
 
   const tableImg = <img src="BiSort.svg" />;
