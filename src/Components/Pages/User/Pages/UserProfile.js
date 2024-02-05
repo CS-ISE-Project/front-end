@@ -74,7 +74,7 @@ const UserProfile = () => {
       <div className="lg:text-[2rem] text-[1.7rem] mb-[3vh] text-Typo font-extrabold text-center mt-[3vh] lg:mt-0">
         Saved
       </div>
-      <div className="w-[84vw] flex justify-center lg:justify-start items-center lg:items-start gap-8 flex-col">
+      <div className="w-[84vw] flex justify-center lg:justify-start items-center   gap-8 flex-col">
         <div className="w-[100%] flex items-center justify-between gap-8">
           <div className="flex gap-4">
             <button
@@ -155,8 +155,8 @@ const UserProfile = () => {
             })}
           </div>
         )}
-
-        <div className="lg:scale-1 md:scale-[0.9] scale-[0.8] flex gap-[0.7vw] gap-[2vw] justify-center items-center desktop15:mt-[-400px] cursor-pointer">
+  
+        <div className="lg:scale-1 md:scale-[0.9] scale-[0.8] flex  gap-[2vw] justify-center items-center desktop15:mt-[-400px] cursor-pointer">
           <div
             className="flex items-center justify-center border-2 border-[#DDDDDD] rounded-full w-20 h-20 text-[#6F6F6F] text-[2rem]"
             onClick={() => {
