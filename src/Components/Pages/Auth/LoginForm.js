@@ -44,11 +44,11 @@ function LoginForm(props) {
 
   const login = async () => {
     let endpoint;
-    if (props.type === "/UserLogin") {
+    if (props.type === "/UserLogin" || props.type === "/userLogin") {
       endpoint = `https://ise-project-api-production.up.railway.app/auth/login?email=${formData.email}&password=${formData.password}`;
     } else if (props.type === "/modLogin" || props.type === "/ModLogin") {
       endpoint = `https://ise-project-api-production.up.railway.app/auth/mod/login?email=${formData.email}&password=${formData.password}`;
-    } else if (props.type === "/AdminLogin") {
+    } else if (props.type === "/AdminLogin" || props.type === "/adminLogin") {
       endpoint = `https://ise-project-api-production.up.railway.app/auth/admin/login?email=${formData.email}&password=${formData.password}`;
     }
     try {
@@ -64,14 +64,17 @@ function LoginForm(props) {
       window.localStorage.setItem("username", decodedToken.sub);
       window.localStorage.setItem("userid", decodedToken.id);
 
-      if (props.type === "/UserLogin") {
+      if (props.type === "/UserLogin" || props.type === "/userLogin") {
         if (response.status === 200) {
           setAuth((prev) => ({
             ...prev,
             isUser: 1,
           }));
           alert("Login successful");
-          localStorage.setItem("auth",JSON.stringify({isMod:0,isAdmin:0,isUser:1}))
+          localStorage.setItem(
+            "auth",
+            JSON.stringify({ isMod: 0, isAdmin: 0, isUser: 1 })
+          );
           navigate("/user");
         }
       } else if (props.type === "/modLogin" || props.type === "/ModLogin") {
@@ -97,7 +100,10 @@ function LoginForm(props) {
                 ...prev,
                 isMod: 1,
               }));
-              localStorage.setItem("auth",JSON.stringify({isMod:1,isAdmin:0,isUser:0}))
+              localStorage.setItem(
+                "auth",
+                JSON.stringify({ isMod: 1, isAdmin: 0, isUser: 0 })
+              );
               navigate("/mod");
             } else {
               navigate("/inactive");
@@ -106,19 +112,22 @@ function LoginForm(props) {
             console.log(e);
           }
         }
-      } else if (props.type === "/AdminLogin") {
+      } else if (props.type === "/AdminLogin" || props.type === "/adminLogin") {
         if (response.status === 200) {
           setAuth((prev) => ({
             ...prev,
             isAdmin: 1,
           }));
           alert("Login successful");
-          localStorage.setItem("auth",JSON.stringify({isMod:0,isAdmin:1,isUser:0}))
+          localStorage.setItem(
+            "auth",
+            JSON.stringify({ isMod: 0, isAdmin: 1, isUser: 0 })
+          );
           navigate("/admin");
         }
       }
     } catch (e) {
-      alert("Login failed")
+      alert("Login failed");
       console.error("Login Failed :", e);
     }
   };
@@ -153,11 +162,11 @@ function LoginForm(props) {
   };
 
   function NavigateRegister() {
-    if (props.type === "/UserLogin") {
+    if (props.type === "/UserLogin" || props.type === "/userLogin") {
       navigate("/UserRegister");
-    } else if (props.type === "/ModLogin") {
+    } else if (props.type === "/ModLogin" || props.type === "/modLogin") {
       navigate("/ModRegister");
-    } else if (props.type === "/AdminLogin") {
+    } else if (props.type === "/AdminLogin" || props.type === "/adminLogin") {
       navigate("/AdminRegister");
     }
   }

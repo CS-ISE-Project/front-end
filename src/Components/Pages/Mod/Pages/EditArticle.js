@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaEdit } from "react-icons/fa";
+import { FaEdit, FaLink } from "react-icons/fa";
 import { FaDeleteLeft } from "react-icons/fa6";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -110,6 +110,18 @@ export default function EditArticle() {
             </h3>
           </div>
           <div className="flex items-center gap-4 w-[100%]">
+            <FaLink />
+            <h3 className="text-[1.5rem] text-Typo font-semibold">
+              URL :{" "}
+              <input
+                value={formData.url}
+                onChange={handleChange}
+                name="url"
+                className="truncate"
+              />
+            </h3>
+          </div>
+          <div className="flex items-center gap-4 w-[100%]">
             <img src="/Date.svg" alt="data" />
             <h3 className="text-[1.5rem] text-Typo font-semibold">
               <input
@@ -120,6 +132,7 @@ export default function EditArticle() {
               />
             </h3>
           </div>
+
           <div className="flex lg:hidden justify-end items-end w-[100%] gap-8">
             <button
               className="bg-Spbtn text-white flex gap-6 items-center py-6 px-16  rounded-[8px] font-semibold text-[1.2rem]"
@@ -143,7 +156,7 @@ export default function EditArticle() {
                 value={formData.abstract}
                 onChange={handleChange}
                 name="abstract"
-                className="w-[100%] h-96"
+                className="w-[100%] h-[550px]"
               />
             </h3>
           </div>
@@ -204,7 +217,7 @@ export default function EditArticle() {
                   value={formData.references}
                   onChange={handleChange}
                   name="references"
-                  className="text-wrap bg-[#FEF5F7] px-8 py-4 flex items-center justify-center rounded-[4px] w-[100%]"
+                  className="text-wrap bg-[#FEF5F7] px-8 py-4 flex items-center justify-center rounded-[4px] w-[100%] h-[200px]"
                 />
               </div>
             </div>

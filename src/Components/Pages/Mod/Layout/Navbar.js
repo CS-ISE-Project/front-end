@@ -31,13 +31,18 @@ function Navbar() {
     <>
       <nav className="w-full md:h-[112px] h-[88px] bg-white fixed top-0 z-[100]">
         <div className="flex items-center px-[8vw] h-full justify-between">
-          <Link>
+          <div
+            onClick={() => {
+              setPage(1);
+              navigate("/mod");
+            }}
+          >
             <img
               alt="Logo"
-              className="sm:w-[9vw] md:w-[5vw] lg:w-[4vw]"
+              className="sm:w-[9vw] md:w-[5vw] lg:w-[4vw] hover:cursor-pointer"
               src="/logo.png"
             ></img>
-          </Link>
+          </div>
           <div className="flex flex-col">
             <div
               className={`flex gap-[16px]  items-center ${

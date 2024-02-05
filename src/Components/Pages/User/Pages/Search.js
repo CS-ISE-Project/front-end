@@ -10,7 +10,6 @@ function Search() {
   const [authors, setAuthors] = useState(false);
   const [content, setContent] = useState(false);
   const [institut, setInstitut] = useState(false);
-
   const [queryTitleAdvanced, setQueryTitleAdvanced] = useState("");
   const [queryKeywordsAdvanced, setQueryKeywordsAdvanced] = useState("");
   const [queryAuthorsAdvanced, setQueryAuthorsAdvanced] = useState("");
@@ -152,7 +151,7 @@ function Search() {
 
       {option ? (
         <div className="w-[84vw]  bg-white md:mb-[200px] flex flex-col gap-4 justify-center items-center mb-[100px] lg:mb-[160px]">
-          <div className="w-[100%] bg-white px-2 lg:h-[120px] drop-shadow-special rounded-[8px] flex items-center justify-center z-100 gap-[2rem]">
+          <div className="w-[100%] bg-white px-3 lg:h-[120px] drop-shadow-special rounded-[8px] flex items-center justify-center z-100 gap-[2rem]">
             <div className="flex flex-col gap-[1rem] lg:gap-0 lg:flex-row w-[100%] mb-[20px] lg:mb-0 lg:h-[100px] items-center justify-between">
               <div
                 className="h-[100px] w-[80vw] lf:w-[13vw] flex justify-center items-center hover:bg-[#FAFAFA] rounded-[8px] transition cursor-pointer"

@@ -30,17 +30,23 @@ function Navbar() {
     <>
       <nav className="w-full md:h-[112px] h-[88px] bg-white fixed top-0 z-[100]">
         <div className="flex items-center px-[8vw] h-full justify-between">
-          <Link>
+          <div
+            onClick={() => {
+              setPage(1);
+              navigate("/admin");
+            }}
+          >
             <img
               alt="Logo"
-              className="sm:w-[9vw] md:w-[5vw] lg:w-[4vw]"
+              className="sm:w-[9vw] md:w-[5vw] lg:w-[4vw] hover:cursor-pointer"
               src="/logo.png"
             ></img>
-          </Link>
+          </div>
           <div className="flex gap-[48px] font-medium text-[1.4rem]">
             <div
               onClick={() => {
                 setPage(1);
+                setDropdownOpen(false);
                 navigate("/admin");
               }}
               className={
@@ -54,6 +60,7 @@ function Navbar() {
             <div
               onClick={() => {
                 setPage(0);
+                setDropdownOpen(false);
                 navigate("/admin/article");
               }}
               className={
@@ -86,7 +93,7 @@ function Navbar() {
             {isDropdownOpen && (
               <div className="flex flex-col mt-4 bg-white items-center drop-shadow-special px-[4vh]">
                 <div
-                  className="flex flex-row items-center hover:cursor-pointer border-t border-[#E6E6E6]"
+                  className="flex flex-row items-center hover:cursor-pointer"
                   onClick={handleLogout}
                 >
                   <MdLogout className="text-Rose100"></MdLogout>

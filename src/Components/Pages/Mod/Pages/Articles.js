@@ -93,7 +93,7 @@ function Articles() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen flex flex-col mt-[88px] md:mt-[200px] w-[84vw] m-auto gap-16">
+    <div className="min-h-screen flex flex-col mt-[88px] md:mt-[200px] w-[84vw] m-auto gap-16 mb-[50vh]">
       <div className="flex justify-between items-start">
         <h1 className="text-[1rem] md:text-[2rem] font-bold">Articles</h1>
       </div>
@@ -103,15 +103,15 @@ function Articles() {
       {!isLoading && (
         <table className=" w-[84vw] mx-auto text-left">
           <thead className="bg-Blue66 text-white">
-            <tr className="">
+            <tr>
               {headers.map((header, i) => (
                 <th
                   key={i}
                   className={`${
                     i === 0
-                      ? "rounded-tl-lg"
+                      ? "rounded-l-[16px]"
                       : i === headers.length - 1
-                      ? "rounded-tr-lg "
+                      ? "rounded-r-[16px]"
                       : ""
                   } p-4`}
                 >
@@ -123,11 +123,11 @@ function Articles() {
               ))}
             </tr>
           </thead>
-          <tbody className="text-Typo">
+          <tbody className="text-Typo p-4">
             {tableData.map((data, i) => (
               <tr
                 key={i}
-                className="border-b-2 border-solid border-Typo border-opacity-20 hover:bg-[#E2E2FA] hover:cursor-pointer"
+                className="border-b-2 p-4 border-solid border-Typo border-opacity-20 hover:bg-[#BED7FB] hover:cursor-pointer font-semibold max-h-[100px]"
                 onClick={() => {
                   navigate("/mod/EditArticle", {
                     state: [
@@ -145,12 +145,25 @@ function Articles() {
                   });
                 }}
               >
-                <td className="p-4">{data.id}</td>
-                <td className="p-4">{data.title}</td>
-                <td className="p-4">{data.url}</td>
-                <td className="p-4">{data.authors}</td>
-                <td className="p-4">{data.institutes}</td>
-                <td className="p-4">{data.publication_date}</td>
+                <td className="p-4 max-w-[20%] max-h-[100px]">{data.id}</td>
+                <td className="p-4 max-w-[20%] max-h-[100px]">{data.title}</td>
+                <td
+                  className="p-4 max-w-[20%] max-h-[100px] hover:text-Blue66 hover:cursor-pointer underline"
+                  onClick={() => {
+                    window.open(data.url, "_blank");
+                  }}
+                >
+                  Article:{data.id}
+                </td>
+                <td className="p-4 max-w-[20%] max-h-[100px]">
+                  {data.authors}
+                </td>
+                <td className="p-4 max-w-[20%] max-h-[100px]">
+                  {data.institutes}
+                </td>
+                <td className="p-4 max-w-[20%] max-h-[100px]">
+                  {data.publication_date}
+                </td>
               </tr>
             ))}
           </tbody>

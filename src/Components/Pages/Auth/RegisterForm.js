@@ -27,15 +27,16 @@ function RegisterForm(props) {
 
   const signUp = async () => {
     let endpoint;
-    if (props.type === "/UserRegister") {
+    if (props.type === "/UserRegister" || props.type === "/userRegister") {
       endpoint = `https://ise-project-api-production.up.railway.app/auth/signup`;
-    } else if (props.type === "/ModRegister" || props.type === "/ModLogin") {
+    } else if (props.type === "/ModRegister" || props.type === "/modRegister") {
       endpoint = `https://ise-project-api-production.up.railway.app/auth/mod/signup`;
-    } else if (props.type === "/AdminRegister") {
+    } else if (
+      props.type === "/AdminRegister" ||
+      props.type === "/adminRegister"
+    ) {
       endpoint = `https://ise-project-api-production.up.railway.app/auth/admin/signup`;
     }
-
-    console.log(endpoint);
     try {
       const response = await fetch(endpoint, {
         method: "POST",
@@ -48,21 +49,21 @@ function RegisterForm(props) {
       const accessToken = data.access_token;
       localStorage.setItem("accessToken", accessToken);
 
-      if (props.type === "/UserRegister") {
+      if (props.type === "/UserRegister" || props.type === "/userRegister") {
         if (response.status === 200) {
           alert("user created successfully");
           navigate("/UserLogin");
         }
       }
 
-      if (props.type === "/modRegister" || props.type === "/ModLogin") {
+      if (props.type === "/modRegister" || props.type === "/ModRegister") {
         if (response.status === 200) {
           alert("mod created successfully");
           navigate("/ModLogin");
         }
       }
 
-      if (props.type === "/AdminRegister") {
+      if (props.type === "/AdminRegister" || props.type === "/adminRegister") {
         if (response.status === 200) {
           alert("Admin created successfully");
           navigate("/AdminLogin");
@@ -97,7 +98,7 @@ function RegisterForm(props) {
 
       case "first_name":
         formErrors.first_name =
-          !value || value.length < 4 ? "Please enter a valid first name ." : "";
+          !value || value.length < 2 ? "Please enter a valid first name ." : "";
         break;
       case "last_name":
         formErrors.last_name =
@@ -113,11 +114,14 @@ function RegisterForm(props) {
   };
 
   function navigateLogin() {
-    if (props.type === "/UserRegister") {
+    if (props.type === "/UserRegister" || props.type === "/userRegister") {
       navigate("/UserLogin");
-    } else if (props.type === "/ModRegister") {
+    } else if (props.type === "/modRegister" || props.type === "/ModRegister") {
       navigate("/ModLogin");
-    } else if (props.type === "/AdminRegister") {
+    } else if (
+      props.type === "/AdminRegister" ||
+      props.type === "/adminRegister"
+    ) {
       navigate("/AdminLogin");
     }
   }

@@ -2,6 +2,13 @@ import React from "react";
 import { useFormik } from "formik";
 
 const FilterForm = ({ onSubmit, Queryofsearch }) => {
+  function removeEmptyStringsFromProperties(obj, properties) {
+    properties.forEach((property) => {
+      if (Array.isArray(obj[property])) {
+        obj[property] = obj[property].filter((item) => item !== "");
+      }
+    });
+  }
   const formik = useFormik({
     initialValues: {
       query: Queryofsearch,
@@ -37,6 +44,12 @@ const FilterForm = ({ onSubmit, Queryofsearch }) => {
             date_interval: [values.startDate, values.endDate],
           },
         };
+        removeEmptyStringsFromProperties(formData.filter, [
+          "authors",
+          "institutes",
+          "keywords",
+        ]);
+
         const response = await fetch(
           `https://ise-project-api-production.up.railway.app/search/simple/filter`,
           {
@@ -65,8 +78,8 @@ const FilterForm = ({ onSubmit, Queryofsearch }) => {
           name="authors"
           value={formik.values.authors}
           onChange={formik.handleChange}
-          className="w-[100%] border-2 py-2 px-2 rounded-[4px] border-Purple100"
-          placeholder="Authors"
+          className="w-[100%] border-2 py-2 px-2 rounded-[8px] border-Purple100"
+          placeholder="Author1,Author2,..."
         />
       </label>
 
@@ -77,8 +90,8 @@ const FilterForm = ({ onSubmit, Queryofsearch }) => {
           name="institutes"
           value={formik.values.institutes}
           onChange={formik.handleChange}
-          className="w-[100%] border-2 py-2 px-2 rounded-[4px] border-Purple100"
-          placeholder="Institutes"
+          className="w-[100%] border-2 py-2 px-2 rounded-[8px] border-Purple100"
+          placeholder="Institute1,Institute2,..."
         />
       </label>
 
@@ -89,8 +102,8 @@ const FilterForm = ({ onSubmit, Queryofsearch }) => {
           name="keywords"
           value={formik.values.keywords}
           onChange={formik.handleChange}
-          className="w-[100%] border-2 py-2 px-2 rounded-[4px] border-Purple100"
-          placeholder="Keywords"
+          className="w-[100%] border-2 py-2 px-2 rounded-[8px] border-Purple100"
+          placeholder="Keyword1,Keyword2,..."
         />
       </label>
 
@@ -101,7 +114,7 @@ const FilterForm = ({ onSubmit, Queryofsearch }) => {
           name="startDate"
           value={formik.values.startDate}
           onChange={formik.handleChange}
-          className="w-[100%] border-2 py-2 px-2 rounded-[4px] border-Purple100"
+          className="w-[100%] border-2 py-2 px-2 rounded-[8px] border-Purple100"
           placeholder="Start Date"
         />
       </label>
@@ -113,7 +126,7 @@ const FilterForm = ({ onSubmit, Queryofsearch }) => {
           name="endDate"
           value={formik.values.endDate}
           onChange={formik.handleChange}
-          className="w-[100%] border-2 py-2 px-2 rounded-[4px] border-Purple100"
+          className="w-[100%] border-2 py-2 px-2 rounded-[8px] border-Purple100"
           placeholder="End Date"
         />
       </label>

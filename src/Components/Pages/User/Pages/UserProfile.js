@@ -5,13 +5,33 @@ import Article from "./Article";
 const UserProfile = () => {
   const location = useLocation();
   const userData = location.state;
-  console.log(userData);
   const prenom = userData.user.first_name;
   const nom = userData.user.last_name;
   const email = userData.user.email;
   const [carousel, setCarousel] = useState(1);
   const [Pagination, setPagination] = useState(1);
+  const length = Object.keys(userData.favorites).length;
+  const lengthofPagination =
+    length % 6 === 0 ? Math.floor(length / 6) : Math.floor(length / 6) + 1;
 
+  const items = [];
+  for (let i = 1; i <= lengthofPagination; i++) {
+    items.push(
+      <div
+        key={i}
+        className={`${
+          Pagination === i
+            ? "flex items-center justify-center border-2 border-Blue66 rounded-full w-20 h-20 text-white bg-Blue66 text-[2rem] font-bold "
+            : "flex items-center justify-center border-2 border-[#DDDDDD] rounded-full w-20 h-20 text-[#6F6F6F] text-[2rem] font-bold cursor-pointer"
+        }`}
+        onClick={() => {
+          setPagination(i);
+        }}
+      >
+        {i}
+      </div>
+    );
+  }
   return (
     <div className="flex flex-col w-[84vw] lg:gap-[72px] md:my-[200px] my-[160px]">
       <div className="flex flex-col lg:flex-row justify-between md:gap-20">
@@ -92,17 +112,6 @@ const UserProfile = () => {
             )}
           </button>
         </div>
-        <div className="flex items-center lg:gap-8 gap-4">
-          <p className="text-Typo lg:text-[1.5rem] md:text-[1.3rem] text-[1rem]">
-            Apply Filter:
-          </p>
-          <div className="text-Typo border-2 rounded-[8px] border-[#DEE2E6] flex items-center py-4 px-8 gap-4">
-            <p className="lg:text-[1.5rem] md:text-[1.3rem] text-[1rem]">
-              Select Filter
-            </p>
-            <FaChevronDown />
-          </div>
-        </div>
       </div>
 
       {carousel ? (
@@ -152,47 +161,12 @@ const UserProfile = () => {
         >
           <FaChevronLeft />
         </div>
-        <div
-          className={`${
-            Pagination === 1
-              ? "flex items-center justify-center border-2 border-Blue66 rounded-full w-20 h-20 text-white bg-Blue66 text-[2rem] font-bold "
-              : "flex items-center justify-center border-2 border-[#DDDDDD] rounded-full w-20 h-20 text-[#6F6F6F] text-[2rem] font-bold cursor-pointer"
-          }`}
-          onClick={() => {
-            setPagination(1);
-          }}
-        >
-          1
-        </div>
-        <div
-          className={`${
-            Pagination === 2
-              ? "flex items-center justify-center border-2 border-Blue66 rounded-full w-20 h-20 text-white bg-Blue66 text-[2rem] font-bold"
-              : "flex items-center justify-center border-2 border-[#DDDDDD] rounded-full w-20 h-20 text-[#6F6F6F] text-[2rem] font-bold cursor-pointer"
-          }`}
-          onClick={() => {
-            setPagination(2);
-          }}
-        >
-          2
-        </div>
-        <div
-          className={`${
-            Pagination === 3
-              ? "flex items-center justify-center border-2 border-Blue66 rounded-full w-20 h-20 text-white bg-Blue66 text-[2rem] font-bold"
-              : "flex items-center justify-center border-2 border-[#DDDDDD] rounded-full w-20 h-20 text-[#6F6F6F] text-[2rem] font-bold cursor-pointer"
-          }`}
-          onClick={() => {
-            setPagination(3);
-          }}
-        >
-          3
-        </div>
 
+        {items}
         <div
           className="flex items-center justify-center border-2 border-[#DDDDDD] rounded-full w-20 h-20 text-[#6F6F6F] text-[2rem]"
           onClick={() => {
-            if (Pagination !== 3) {
+            if (Pagination !== lengthofPagination) {
               setPagination(Pagination + 1);
             }
           }}
