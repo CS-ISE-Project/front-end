@@ -95,7 +95,7 @@ function Table() {
 
   return (
     <div className="flex flex-col mt-[88px] md:mt-[200px] w-[84vw] p-4 lg:p-0 m-auto gap-16 mb-[50vh]">
-      <div className="flex justify-between items-start">
+      <div className="flex lg:justify-between items-start justify-center">
         <h1 className="text-[1rem] md:text-[2rem] font-bold">Moderators</h1>
       </div>
       {isLoading && (
@@ -127,7 +127,7 @@ function Table() {
                   : i === headers.length - 1
                   ? "rounded-r-[20px]"
                   : ""
-                } p-3 lg:p-5 text-[12px] lg:text-[20px]`}
+                } px-3 py-4 lg:p-5 text-[12px] lg:text-[20px]`}
                 >
                   <div className="flex items-center gap-2">{header}</div>
                 </th>
@@ -182,7 +182,7 @@ function Table() {
                           </button>
                         ) : (
                           <button onClick={() => handleAction(true, data.id)}>
-                            Activate
+                            <p className="text-[12px] lg:text-[20px]">Activate</p>
                           </button>
                         )}
                       </div>
