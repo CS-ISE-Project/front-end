@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { FaChevronDown } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 function Articles() {
@@ -15,17 +14,7 @@ function Articles() {
   const tableIcon = ["Title", "Url", "Publication Date"];
   const [tableData, setTableData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [selectedRowIndex, setSelectedRowIndex] = useState(null);
   const [error, setError] = useState();
-  const [isDropdownOpen, setDropdownOpen] = useState(false);
-
-  const toggleDropdown = () => {
-    setDropdownOpen(!isDropdownOpen);
-  };
-
-  const toggleDivVisibility = (index) => {
-    setSelectedRowIndex(selectedRowIndex === index ? null : index);
-  };
 
   useEffect(() => {
     const fetchTableData = async () => {
@@ -45,50 +34,13 @@ function Articles() {
         setTableData(data);
       } catch (e) {
         setError(e);
+        console.log(error);
       } finally {
         setIsLoading(false);
       }
     };
     fetchTableData();
   }, []);
-
-  const handleDelete = async (articleID) => {
-    const deleteArticle = async () => {
-      const response = await fetch(
-        `https://ise-project-api-production.up.railway.app/articles/${articleID}`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${window.localStorage.getItem("token")}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      const data = await response.json();
-    };
-
-    const refreshTableData = async () => {
-      try {
-        const response = await fetch(
-          `https://ise-project-api-production.up.railway.app/articles/`,
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${window.localStorage.getItem("token")}`,
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        const data = await response.json();
-        setTableData(data);
-      } catch (e) {
-        setError(e);
-      }
-    };
-
-    await deleteArticle();
-    await refreshTableData();
-  };
 
   const navigate = useNavigate();
 
@@ -98,7 +50,16 @@ function Articles() {
         <h1 className="text-[1rem] md:text-[2rem] font-bold">Articles</h1>
       </div>
       {isLoading && (
-        <div className="mx-auto w-full text-center">Loading....</div>
+        <div className="h-[70vh] w-full flex flex-col justify-center items-center gap-[10vh]">
+          <h1 className="max-w-[82vw] font-bold text-BlueDark text-[2.5rem] text-center text-Blue66">
+            Loading....
+          </h1>
+          <img
+            alt="wait"
+            className="animate-spin-slow"
+            src="/settings.png"
+          ></img>{" "}
+        </div>
       )}
       {!isLoading && (
         <table className=" w-[84vw] mx-auto text-left">

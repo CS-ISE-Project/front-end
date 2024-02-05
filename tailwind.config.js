@@ -34,10 +34,14 @@ module.exports = {
         "0 13px 10px rgba(0, 0, 0, 0.1)",
       ],
     },
-    backgroundImage :{
-      'About-image' : "url('../public/image1.png')" ,
+    backgroundImage: {
+      "About-image": "url('../public/image1.png')",
     },
-    extend: {},
+    extend: {
+      animation: {
+        "spin-slow": "spin 5s linear infinite",
+      },
+    },
   },
   plugins: [],
 };

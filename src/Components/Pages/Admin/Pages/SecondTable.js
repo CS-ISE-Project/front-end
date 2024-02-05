@@ -9,7 +9,6 @@ function SecondTable() {
     "authors",
     "Institutions",
     "Publication Date",
-    "",
   ];
 
   const tableImg = <img src="BiSort.svg" />;
@@ -202,7 +201,16 @@ function SecondTable() {
         </div>
       </div>
       {isLoading && (
-        <div className="mx-auto w-full text-center">Loading....</div>
+        <div className="h-[70vh] w-full flex flex-col justify-center items-center gap-[10vh]">
+        <h1 className="max-w-[82vw] font-bold text-BlueDark text-[2.5rem] text-center text-Blue66">
+          Loading....
+        </h1>
+        <img
+          alt="wait"
+          className="animate-spin-slow"
+          src="/settings.png"
+        ></img>{" "}
+      </div>
       )}
       {!isLoading && (
 

@@ -22,8 +22,10 @@ export default function EditArticle() {
         }
       );
       const data = await response.json();
-      alert("Article Deleted Succesfully!");
-      navigate("/mod");
+      if (data) {
+        alert("Article Deleted Succesfully!");
+        navigate("/mod");
+      }
     } catch (e) {
       console.error("Failed getting article:", e);
     }
@@ -44,9 +46,10 @@ export default function EditArticle() {
         }
       );
       const data = await response.json();
-      console.log(JSON.stringify(formData));
-      alert("Article Updated Succesfully!");
-      navigate("/mod");
+      if (data) {
+        alert("Article Updated Succesfully!");
+        navigate("/mod");
+      }
     } catch (e) {
       console.error("Failed getting article:", e);
     }
@@ -67,10 +70,10 @@ export default function EditArticle() {
   function handleChange(e) {
     const { name, value } = e.target;
 
-    const arr = ["institues", "references", "keywords"];
+    const arr = ["institutes", "references", "keywords"];
     console.log("name : ");
     console.log(name);
-    if (arr.indexOf(name) != -1) {
+    if (arr.indexOf(name) !== -1) {
       setFormData((formData) => {
         return {
           ...formData,
