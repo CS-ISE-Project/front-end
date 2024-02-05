@@ -64,10 +64,8 @@ function Search() {
         }
       );
       const data = await response.json();
-      data.then((articles) => {
-        setSearching(0);
-        navigate("/user/results", { state: [articles, formData] });
-      });
+      setSearching(0);
+      navigate("/user/results", { state: [data, formData] });
     } catch (e) {
       setSearching(0);
       console.error("Standard Search Failed :", e);

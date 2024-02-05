@@ -4,20 +4,12 @@ import { useLocation } from "react-router-dom";
 function ArticleDetails() {
   const location = useLocation();
   const ArticleDetails = location.state;
-  console.log(ArticleDetails.url);
-
-  function isIdInObject(obj, targetId) {
-    return Object.values(obj).some((item) => item.id === targetId);
-  }
 
   const [fav, setFav] = useState(0);
-
-  const handleProfileUser = async () => {
+  const favStatus = async () => {
     try {
       const response = await fetch(
-        `https://ise-project-api-production.up.railway.app/users/${localStorage.getItem(
-          "userid"
-        )}`,
+        `https://ise-project-api-production.up.railway.app/favorites/`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -25,16 +17,16 @@ function ArticleDetails() {
           },
         }
       );
-      const user = await response.json();
-      return isIdInObject(user.favorites, ArticleDetails.id);
+      const favsArray = await response.json();
+      return favsArray.includes(ArticleDetails.id);
     } catch (e) {
-      console.error("Failed getting user:", e);
+      console.error("Failed getting fav status:", e);
     }
   };
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await handleProfileUser();
+      const result = await favStatus();
       setFav(result ? 1 : 0);
     };
     fetchData();
@@ -65,11 +57,36 @@ function ArticleDetails() {
   const handleRedirectArticle = () => {
     window.open(ArticleDetails.url, "_blank");
   };
+
   const handleRemoveFavorite = async () => {
     setFav(0);
     try {
       const response = await fetch(
-        `https://ise-project-api-production.up.railway.app/favorites/${ArticleDetails.id}`,
+        `https://ise-project-api-production.up.railway.app/users/${localStorage.getItem(
+          "userid"
+        )}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      const user = await response.json();
+      const favoriteID = Object.keys(user.favorites).find(
+        (key) => user.favorites[key].id === ArticleDetails.id
+      );
+      console.log(favoriteID);
+      RemoveFav(favoriteID);
+    } catch (e) {
+      console.error("Failed getting user:", e);
+    }
+  };
+
+  const RemoveFav = async (favoriteID) => {
+    try {
+      const response = await fetch(
+        `https://ise-project-api-production.up.railway.app/favorites/${favoriteID}`,
         {
           method: "DELETE",
           headers: {
@@ -78,12 +95,11 @@ function ArticleDetails() {
           },
         }
       );
-      const data = response.json();
-      if (data) {
+      if (response.status === 204 || response.status === 200) {
         alert("Remove from favorite!");
       }
     } catch (e) {
-      console.error("Standard Search Failed :", e);
+      console.error("Removed Failed :", e);
     }
   };
 
