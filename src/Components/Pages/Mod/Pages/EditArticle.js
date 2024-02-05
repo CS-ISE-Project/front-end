@@ -218,7 +218,7 @@ if (formData.references !== undefined && formData.references !== null) {
               value={formData.abstract}
               onChange={handleChange}
               name="abstract"
-              className="w-[100%] min-h-[100px] p-4 max-h-[550px]"
+              className="w-[100%] min-h-[100px] md:min-h-[400px] p-4 max-h-[550px]"
               readOnly
             /> 
               :
