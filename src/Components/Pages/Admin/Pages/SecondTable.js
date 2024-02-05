@@ -214,7 +214,7 @@ function SecondTable() {
       )}
       {!isLoading && (
 
-        <div className="overflow-auto">
+        <div className="overflow-auto lg:overflow-visible">
 
         <table className=" w-full mx-auto text-left">
           <thead className="bg-Blue66 text-white">
