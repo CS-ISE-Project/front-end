@@ -22,7 +22,6 @@ function Article(props) {
     }
   };
 
-
   return props.carousel === 0 ? (
     <div className="w-[84vw] flex justify-between items-start">
       <div className="flex items-center justify-center bg-white px-4 py-4">
@@ -38,12 +37,14 @@ function Article(props) {
             {props.author}
           </span>
         </h3>
-        <h3 className="text-Typo lg:text-[1.7rem] md:text-[1.3rem] text-[1.1rem] font-semibold">
-          Abstract:{" "}
-          <span className="lg:text-[1.2rem] text-[0.9rem] md:text-[1rem] text-[#A8A8A8]">
-            {props.abstract}
-          </span>
-        </h3>
+        <div>
+          <h3 className="text-Typo lg:text-[1.7rem] md:text-[1.3rem] text-[1.1rem] font-semibold">
+            Abstract:{" "}
+            <div className="lg:text-[1.4rem] text-[0.9rem] md:text-[1.2rem] text-[#A8A8A8] max-h-[300px] overflow-y-scroll lg:max-h-[1000px] lg:overflow-y-visible">
+              {props.abstract}
+            </div>
+          </h3>
+        </div>
         <div className="py-4">
           <button
             className="bg-Purple100 text-white md:px-12 md:py-4 px-8 py-2 rounded-[8px] font-semibold lg:text-[1.2rem] text-[1rem]"

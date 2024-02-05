@@ -9,6 +9,7 @@ function Results() {
   const [Pagination, setPagination] = useState(1);
   const location = useLocation();
   const [filteredData, setFilteredData] = useState(location.state[0]);
+  const [filterShow, setFilterShow] = useState(0);
   const query = location.state[1];
   const length = Object.keys(filteredData).length;
   const lengthofPagination =
@@ -17,6 +18,10 @@ function Results() {
   const handleSubmit = (data) => {
     console.log("Filtered Data:", data);
     setFilteredData(data);
+  };
+
+  const toggleDropdown = () => {
+    setFilterShow(!filterShow);
   };
 
   const items = [];
@@ -40,8 +45,8 @@ function Results() {
 
   return (
     <div className="flex flex-col items-center w-[84vw] gap-[72px] md:my-[200px] my-[160px]">
-      <div className="w-[100%] flex items-center justify-between">
-        <div className="flex gap-4">
+      <div className="w-[100%] flex items-center lg:items-start lg:justify-between gap-16 lg:flex-row flex-col">
+        <div className="flex gap-4 lg:order-first order-last">
           <button
             className={`${
               carousel
@@ -79,18 +84,33 @@ function Results() {
             )}
           </button>
         </div>
-        {/* <div className="flex items-center lg:gap-8 gap-4">
-          <p className="text-Typo lg:text-[1.5rem] md:text-[1.3rem] text-[1rem]">
-            Apply Filter:
-          </p>
-          <div className="text-Typo border-2 rounded-[8px] border-[#DEE2E6] flex items-center py-4 px-8 gap-4">
-            <p className="lg:text-[1.5rem] md:text-[1.3rem] text-[1rem]">
-              Select Filter
-            </p>
-            <FaChevronDown />
+        <div className="flex flex-col items-end">
+          <div className="flex gap-[16px]  items-center">
+            <div className="flex items-center lg:gap-8 gap-4">
+              <p className="text-Typo lg:text-[1.5rem] md:text-[1.3rem] text-[1rem]">
+                Apply Filter:
+              </p>
+              <div
+                className="text-Typo border-2 rounded-[8px] border-[#DEE2E6] flex items-center py-4 px-8 gap-4 hover:cursor-pointer"
+                onClick={toggleDropdown}
+              >
+                <p className="lg:text-[1.5rem] md:text-[1.3rem] text-[1rem]">
+                  Select Filter
+                </p>
+                <FaChevronDown
+                  className={`text-Blue66 transition-transform duration-300  ${
+                    filterShow ? "rotate-180 " : ""
+                  }`}
+                />
+              </div>
+            </div>
           </div>
-        </div> */}
-        <FilterForm onSubmit={handleSubmit} Queryofsearch={query}/>
+          {filterShow ? (
+            <FilterForm onSubmit={handleSubmit} Queryofsearch={query} />
+          ) : (
+            <></>
+          )}
+        </div>
       </div>
 
       {carousel ? (

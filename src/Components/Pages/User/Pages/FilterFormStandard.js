@@ -74,7 +74,10 @@ const FilterForm = ({ onSubmit, Queryofsearch }) => {
   });
 
   return (
-    <form onSubmit={formik.handleSubmit} className="flex gap-4">
+    <form
+      onSubmit={formik.handleSubmit}
+      className="flex gap-4 flex-col bg-white absolute mt-24 py-4 px-4 drop-shadow-special"
+    >
       <label className="flex flex-col justify-start">
         Authors:
         <input
@@ -82,7 +85,7 @@ const FilterForm = ({ onSubmit, Queryofsearch }) => {
           name="authors"
           value={formik.values.authors}
           onChange={formik.handleChange}
-          className="w-[100%] border-2 py-2 px-2 rounded-[8px] border-Purple100"
+          className="border-2 py-2 px-2 rounded-[8px] border-Purple100"
           placeholder="Author1,Author2,..."
         />
       </label>
@@ -94,7 +97,7 @@ const FilterForm = ({ onSubmit, Queryofsearch }) => {
           name="institutes"
           value={formik.values.institutes}
           onChange={formik.handleChange}
-          className="w-[100%] border-2 py-2 px-2 rounded-[8px] border-Purple100"
+          className="border-2 py-2 px-2 rounded-[8px] border-Purple100"
           placeholder="Institute1,Institute2,..."
         />
       </label>
@@ -106,7 +109,7 @@ const FilterForm = ({ onSubmit, Queryofsearch }) => {
           name="keywords"
           value={formik.values.keywords}
           onChange={formik.handleChange}
-          className="w-[100%] border-2 py-2 px-2 rounded-[8px] border-Purple100"
+          className="border-2 py-2 px-2 rounded-[8px] border-Purple100"
           placeholder="Keyword1,Keyword2,..."
         />
       </label>
@@ -118,7 +121,7 @@ const FilterForm = ({ onSubmit, Queryofsearch }) => {
           name="startDate"
           value={formik.values.startDate}
           onChange={formik.handleChange}
-          className="w-[100%] border-2 py-2 px-2 rounded-[8px] border-Purple100"
+          className="border-2 py-2 px-2 rounded-[8px] border-Purple100"
           placeholder="Start Date"
         />
       </label>
@@ -130,14 +133,14 @@ const FilterForm = ({ onSubmit, Queryofsearch }) => {
           name="endDate"
           value={formik.values.endDate}
           onChange={formik.handleChange}
-          className="w-[100%] border-2 py-2 px-2 rounded-[8px] border-Purple100"
+          className="border-2 py-2 px-2 rounded-[8px] border-Purple100"
           placeholder="End Date"
         />
       </label>
 
       <button
         type="submit"
-        className="bg-Spbtn text-white flex gap-6 items-center py-4 px-8  rounded-[8px] font-semibold text-[1.2rem]"
+        className="bg-Spbtn text-white flex items-center py-4 px-8 rounded-[8px] font-semibold text-[1.2rem] text-center justify-center"
       >
         Apply Filter
       </button>

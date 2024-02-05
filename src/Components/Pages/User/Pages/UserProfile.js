@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaChevronDown, FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useLocation } from "react-router-dom";
 import Article from "./Article";
 const UserProfile = () => {
@@ -74,105 +74,111 @@ const UserProfile = () => {
       <div className="lg:text-[2rem] text-[1.7rem] mb-[3vh] text-Typo font-extrabold text-center mt-[3vh] lg:mt-0">
         Saved
       </div>
-      <div className="w-[100%] flex items-center justify-between">
-        <div className="flex gap-4">
-          <button
-            className={`${
-              carousel
-                ? "rounded-[4px] md:h-[56px] h-[40px] md:w-[56px] w-[40px] flex items-center justify-center bg-Blue66"
-                : "rounded-[4px] md:h-[56px] h-[40px] md:w-[56px] w-[40px] flex items-center justify-center bg-[#F2F2F2]"
-            }`}
+      <div className="w-[84vw] flex justify-center lg:justify-start items-center lg:items-start gap-8 flex-col">
+        <div className="w-[100%] flex items-center justify-between gap-8">
+          <div className="flex gap-4">
+            <button
+              className={`${
+                carousel
+                  ? "rounded-[4px] md:h-[56px] h-[40px] md:w-[56px] w-[40px] flex items-center justify-center bg-Blue66"
+                  : "rounded-[4px] md:h-[56px] h-[40px] md:w-[56px] w-[40px] flex items-center justify-center bg-[#F2F2F2]"
+              }`}
+              onClick={() => {
+                setCarousel(1);
+              }}
+            >
+              {carousel ? (
+                <img
+                  src="/carouselw.svg"
+                  alt="carousel"
+                  className="max-w-[70%]"
+                />
+              ) : (
+                <img
+                  src="/carousel.svg"
+                  alt="carousel"
+                  className="max-w-[70%]"
+                />
+              )}
+            </button>
+            <button
+              className={`${
+                !carousel
+                  ? "rounded-[4px] md:h-[56px] h-[40px] md:w-[56px] w-[40px] flex items-center justify-center bg-Blue66 "
+                  : "rounded-[4px] md:h-[56px] h-[40px] md:w-[56px] w-[40px] flex items-center justify-center bg-[#F2F2F2]"
+              }`}
+              onClick={() => {
+                setCarousel(0);
+              }}
+            >
+              {!carousel ? (
+                <img src="/listw.svg" alt="carousel" className="max-w-[70%]" />
+              ) : (
+                <img src="/list.svg" alt="carousel" className="max-w-[70%]" />
+              )}
+            </button>
+          </div>
+        </div>
+
+        {carousel ? (
+          <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-[3vw]">
+            {Object.keys(userData.favorites).map((favoriteId) => {
+              const article = userData.favorites[favoriteId];
+              return (
+                <Article
+                  carousel={carousel}
+                  key={article.id}
+                  id={article.id}
+                  title={article.title}
+                  author={article.authors.join(", ")}
+                  abstract={article.abstract}
+                  references={article.references}
+                />
+              );
+            })}
+          </div>
+        ) : (
+          <div className="flex flex-col gap-[3vw]">
+            {Object.keys(userData.favorites).map((favoriteId) => {
+              const article = userData.favorites[favoriteId];
+              return (
+                <Article
+                  carousel={carousel}
+                  key={article.id}
+                  id={article.id}
+                  title={article.title}
+                  author={article.authors.join(", ")}
+                  abstract={article.abstract}
+                  references={article.references}
+                />
+              );
+            })}
+          </div>
+        )}
+
+        <div className="lg:scale-1 md:scale-[0.9] scale-[0.8] flex gap-[0.7vw] gap-[2vw] justify-center items-center desktop15:mt-[-400px] cursor-pointer">
+          <div
+            className="flex items-center justify-center border-2 border-[#DDDDDD] rounded-full w-20 h-20 text-[#6F6F6F] text-[2rem]"
             onClick={() => {
-              setCarousel(1);
+              if (Pagination !== 1) {
+                setPagination(Pagination - 1);
+              }
             }}
           >
-            {carousel ? (
-              <img
-                src="/carouselw.svg"
-                alt="carousel"
-                className="max-w-[70%]"
-              />
-            ) : (
-              <img src="/carousel.svg" alt="carousel" className="max-w-[70%]" />
-            )}
-          </button>
-          <button
-            className={`${
-              !carousel
-                ? "rounded-[4px] md:h-[56px] h-[40px] md:w-[56px] w-[40px] flex items-center justify-center bg-Blue66 "
-                : "rounded-[4px] md:h-[56px] h-[40px] md:w-[56px] w-[40px] flex items-center justify-center bg-[#F2F2F2]"
-            }`}
+            <FaChevronLeft />
+          </div>
+
+          {items}
+          <div
+            className="flex items-center justify-center border-2 border-[#DDDDDD] rounded-full w-20 h-20 text-[#6F6F6F] text-[2rem]"
             onClick={() => {
-              setCarousel(0);
+              if (Pagination !== lengthofPagination) {
+                setPagination(Pagination + 1);
+              }
             }}
           >
-            {!carousel ? (
-              <img src="/listw.svg" alt="carousel" className="max-w-[70%]" />
-            ) : (
-              <img src="/list.svg" alt="carousel" className="max-w-[70%]" />
-            )}
-          </button>
-        </div>
-      </div>
-
-      {carousel ? (
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-[3vw]">
-          {Object.keys(userData.favorites).map((favoriteId) => {
-            const article = userData.favorites[favoriteId];
-            return (
-              <Article
-                carousel={carousel}
-                key={article.id}
-                id={article.id}
-                title={article.title}
-                author={article.authors.join(", ")}
-                abstract={article.abstract}
-                references={article.references}
-              />
-            );
-          })}
-        </div>
-      ) : (
-        <div className="flex flex-col gap-[3vw]">
-          {Object.keys(userData.favorites).map((favoriteId) => {
-            const article = userData.favorites[favoriteId];
-            return (
-              <Article
-                carousel={carousel}
-                key={article.id}
-                id={article.id}
-                title={article.title}
-                author={article.authors.join(", ")}
-                abstract={article.abstract}
-                references={article.references}
-              />
-            );
-          })}
-        </div>
-      )}
-
-      <div className="lg:scale-1 md:scale-[0.9] scale-[0.8] flex gap-[0.7vw] gap-[2vw] justify-center items-center desktop15:mt-[-400px] cursor-pointer">
-        <div
-          className="flex items-center justify-center border-2 border-[#DDDDDD] rounded-full w-20 h-20 text-[#6F6F6F] text-[2rem]"
-          onClick={() => {
-            if (Pagination !== 1) {
-              setPagination(Pagination - 1);
-            }
-          }}
-        >
-          <FaChevronLeft />
-        </div>
-
-        {items}
-        <div
-          className="flex items-center justify-center border-2 border-[#DDDDDD] rounded-full w-20 h-20 text-[#6F6F6F] text-[2rem]"
-          onClick={() => {
-            if (Pagination !== lengthofPagination) {
-              setPagination(Pagination + 1);
-            }
-          }}
-        >
-          <FaChevronRight />
+            <FaChevronRight />
+          </div>
         </div>
       </div>
     </div>

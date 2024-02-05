@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import {useNavigate } from "react-router-dom";
 
 function Search() {
   const navigate = useNavigate();
@@ -178,6 +178,33 @@ function Search() {
                   )}
                 </div>
               </div>
+
+              {title && (
+                <div className="flex lg:hidden lg:w-[60vw] w-[84vw] bg-white lg:h-[120px] md:h-[104px] h-[88px] drop-shadow-special rounded-[8px] items-center justify-center z-100">
+                  <div className="w-[97%] lg:h-[100px] md:h-[88px] h-[72px] flex items-center justify-between">
+                    <div className="lg:h-[100px] md:h-[88px] h-[72px] flex justify-center items-center w-[100%] ">
+                      <input
+                        className="text-Typo font-bold placeholder:text-[#8B8B8B] placeholder:font-light lg:text-[1.5rem] md:text-[1.3rem] text-[1.1rem] h-[100%] w-[100%] outline-none pl-8 placeholder:lg:text-[1.3rem] placeholder:md:text-[1.1rem] placeholder:text-[0.9rem]"
+                        placeholder="Search : Title"
+                        required={true}
+                        value={queryTitleAdvanced}
+                        onChange={handleQueryTitleAdvancedChange}
+                      />
+                    </div>
+                    <button
+                      className="bg-Blue66 lg:h-[90px] md:h-[80px] h-[64px] px-8 rounded-[8px] flex items-center justify-center gap-[1vw] hover:bg-Blue100 transition"
+                      onClick={() => {
+                        setTitle(false);
+                      }}
+                    >
+                      <p className="lg:text-[1.5rem] md:text-[1.3rem] text-[1.1rem] text-white font-bold">
+                        +
+                      </p>
+                    </button>
+                  </div>
+                </div>
+              )}
+
               <div className="hidden lg:block h-[40px] w-[1px] bg-[#DDDDDD]"></div>
               <div
                 className="h-[100px] w-[80vw] lf:w-[13vw] flex justify-center items-center hover:bg-[#FAFAFA] rounded-[8px] transition cursor-pointer"
@@ -204,6 +231,32 @@ function Search() {
                   )}
                 </div>
               </div>
+
+              {keywords && (
+                <div className="flex lg:hidden lg:w-[60vw] w-[84vw] bg-white lg:h-[120px] md:h-[104px] h-[88px] drop-shadow-special rounded-[8px] items-center justify-center z-100">
+                  <div className="w-[97%] lg:h-[100px] md:h-[88px] h-[72px] flex items-center justify-between">
+                    <div className="lg:h-[100px] md:h-[88px] h-[72px] flex justify-center items-center w-[100%]">
+                      <input
+                        className="text-Typo font-bold placeholder:text-[#8B8B8B] placeholder:font-light lg:text-[1.5rem] md:text-[1.3rem] text-[1.1rem] h-[100%] w-[100%] outline-none pl-8 placeholder:lg:text-[1.3rem] placeholder:md:text-[1.1rem] placeholder:text-[0.9rem]"
+                        placeholder="Search : keywords"
+                        required={true}
+                        value={queryKeywordsAdvanced}
+                        onChange={handleQueryKeywordsAdvancedChange}
+                      />
+                    </div>
+                    <button
+                      className="bg-Blue66 lg:h-[90px] md:h-[80px] h-[64px] px-8 rounded-[8px] flex items-center justify-center gap-[1vw] hover:bg-Blue100 transition"
+                      onClick={() => {
+                        setKeywords(false);
+                      }}
+                    >
+                      <p className="lg:text-[1.5rem] md:text-[1.3rem] text-[1.1rem] text-white font-bold">
+                        +
+                      </p>
+                    </button>
+                  </div>
+                </div>
+              )}
               <div className="hidden lg:block h-[40px] w-[1px] bg-[#DDDDDD]"></div>
               <div
                 className="h-[100px] w-[80vw] lf:w-[13vw] flex justify-center items-center hover:bg-[#FAFAFA] rounded-[8px] transition cursor-pointer"
@@ -230,6 +283,31 @@ function Search() {
                   )}
                 </div>
               </div>
+              {authors && (
+                <div className="flex lg:hidden lg:w-[60vw] w-[84vw] bg-white lg:h-[120px] md:h-[104px] h-[88px] drop-shadow-special rounded-[8px] items-center justify-center z-100">
+                  <div className="w-[97%] lg:h-[100px] md:h-[88px] h-[72px] flex items-center justify-between">
+                    <div className="lg:h-[100px] md:h-[88px] h-[72px] flex justify-center items-center w-[100%]">
+                      <input
+                        className="text-Typo font-bold placeholder:text-[#8B8B8B] placeholder:font-light lg:text-[1.5rem] md:text-[1.3rem] text-[1.1rem] h-[100%] w-[100%] outline-none pl-8 placeholder:lg:text-[1.3rem] placeholder:md:text-[1.1rem] placeholder:text-[0.9rem]"
+                        placeholder="Search : Author"
+                        required={true}
+                        value={queryAuthorsAdvanced}
+                        onChange={handleQueryAuthorsAdvancedChange}
+                      />
+                    </div>
+                    <button
+                      className="bg-Blue66 lg:h-[90px] md:h-[80px] h-[64px] px-8 rounded-[8px] flex items-center justify-center gap-[1vw] hover:bg-Blue100 transition"
+                      onClick={() => {
+                        setAuthors(false);
+                      }}
+                    >
+                      <p className="lg:text-[1.5rem] md:text-[1.3rem] text-[1.1rem] text-white font-bold">
+                        +
+                      </p>
+                    </button>
+                  </div>
+                </div>
+              )}
               <div className="hidden lg:block h-[40px] w-[1px] bg-[#DDDDDD]"></div>
               <div
                 className="h-[100px] w-[80vw] lf:w-[13vw] flex justify-center items-center hover:bg-[#FAFAFA] rounded-[8px] transition cursor-pointer"
@@ -256,6 +334,31 @@ function Search() {
                   )}
                 </div>
               </div>
+              {content && (
+                <div className="flex lg:hidden lg:w-[60vw] w-[84vw] bg-white lg:h-[120px] md:h-[104px] h-[88px] drop-shadow-special rounded-[8px] items-center justify-center z-100">
+                  <div className="w-[97%] lg:h-[100px] md:h-[88px] h-[72px] flex items-center justify-between">
+                    <div className="lg:h-[100px] md:h-[88px] h-[72px] flex justify-center items-center w-[100%]">
+                      <input
+                        className="text-Typo font-bold placeholder:text-[#8B8B8B] placeholder:font-light lg:text-[1.5rem] md:text-[1.3rem] text-[1.1rem] h-[100%] w-[100%] outline-none pl-8 placeholder:lg:text-[1.3rem] placeholder:md:text-[1.1rem] placeholder:text-[0.9rem]"
+                        placeholder="Search : Content"
+                        required={true}
+                        value={queryContentAdvanced}
+                        onChange={handleQueryContentAdvancedChange}
+                      />
+                    </div>
+                    <button
+                      className="bg-Blue66 lg:h-[90px] md:h-[80px] h-[64px] px-8 rounded-[8px] flex items-center justify-center gap-[1vw] hover:bg-Blue100 transition"
+                      onClick={() => {
+                        setContent(false);
+                      }}
+                    >
+                      <p className="lg:text-[1.5rem] md:text-[1.3rem] text-[1.1rem] text-white font-bold">
+                        +
+                      </p>
+                    </button>
+                  </div>
+                </div>
+              )}
               <div className="hidden lg:block h-[40px] w-[1px] bg-[#DDDDDD]"></div>
               <div
                 className="h-[100px] w-[80vw] lf:w-[13vw] flex justify-center items-center hover:bg-[#FAFAFA] rounded-[8px] transition cursor-pointer"
@@ -282,6 +385,31 @@ function Search() {
                   )}
                 </div>
               </div>
+              {institut && (
+                <div className="flex lg:hidden lg:w-[60vw] w-[84vw] bg-white lg:h-[120px] md:h-[104px] h-[88px] drop-shadow-special rounded-[8px] items-center justify-center z-100">
+                  <div className="w-[97%] lg:h-[100px] md:h-[88px] h-[72px] flex items-center justify-between">
+                    <div className="lg:h-[100px] md:h-[88px] h-[72px] flex justify-center items-center w-[100%]">
+                      <input
+                        className="text-Typo font-bold placeholder:text-[#8B8B8B] placeholder:font-light lg:text-[1.5rem] md:text-[1.3rem] text-[1.1rem] h-[100%] w-[100%] outline-none pl-8 placeholder:lg:text-[1.3rem] placeholder:md:text-[1.1rem] placeholder:text-[0.9rem]"
+                        placeholder="Search : Instituts"
+                        required={true}
+                        value={queryInstitutsAdvanced}
+                        onChange={handleQueryInstitutsAdvancedChange}
+                      />
+                    </div>
+                    <button
+                      className="bg-Blue66 lg:h-[90px] md:h-[80px] h-[64px] px-8 rounded-[8px] flex items-center justify-center gap-[1vw] hover:bg-Blue100 transition"
+                      onClick={() => {
+                        setInstitut(false);
+                      }}
+                    >
+                      <p className="lg:text-[1.5rem] md:text-[1.3rem] text-[1.1rem] text-white font-bold">
+                        +
+                      </p>
+                    </button>
+                  </div>
+                </div>
+              )}
               <button
                 className="bg-Blue66 lg:h-[90px] md:h-[80px] h-[64px] px-8 rounded-l-[120px] lg:rounded-r-[8px] rounded-r-[120px] flex items-center justify-center gap-[1vw] hover:bg-Blue100 transition"
                 onClick={handleAdvancedSearch}
@@ -295,7 +423,7 @@ function Search() {
           </div>
 
           {title && (
-            <div className="lg:w-[60vw] w-[84vw] bg-white lg:h-[120px] md:h-[104px] h-[88px] drop-shadow-special rounded-[8px] flex items-center justify-center z-100">
+            <div className="hidden lg:flex lg:w-[60vw] w-[84vw] bg-white lg:h-[120px] md:h-[104px] h-[88px] drop-shadow-special rounded-[8px] flex items-center justify-center z-100">
               <div className="w-[97%] lg:h-[100px] md:h-[88px] h-[72px] flex items-center justify-between">
                 <div className="lg:h-[100px] md:h-[88px] h-[72px] flex justify-center items-center w-[100%] ">
                   <input
@@ -321,7 +449,7 @@ function Search() {
           )}
 
           {keywords && (
-            <div className="lg:w-[60vw] w-[84vw] bg-white lg:h-[120px] md:h-[104px] h-[88px] drop-shadow-special rounded-[8px] flex items-center justify-center z-100">
+            <div className="hidden lg:flex lg:w-[60vw] w-[84vw] bg-white lg:h-[120px] md:h-[104px] h-[88px] drop-shadow-special rounded-[8px] flex items-center justify-center z-100">
               <div className="w-[97%] lg:h-[100px] md:h-[88px] h-[72px] flex items-center justify-between">
                 <div className="lg:h-[100px] md:h-[88px] h-[72px] flex justify-center items-center w-[100%]">
                   <input
@@ -347,7 +475,7 @@ function Search() {
           )}
 
           {authors && (
-            <div className="lg:w-[60vw] w-[84vw] bg-white lg:h-[120px] md:h-[104px] h-[88px] drop-shadow-special rounded-[8px] flex items-center justify-center z-100">
+            <div className="hidden lg:flex lg:w-[60vw] w-[84vw] bg-white lg:h-[120px] md:h-[104px] h-[88px] drop-shadow-special rounded-[8px] flex items-center justify-center z-100">
               <div className="w-[97%] lg:h-[100px] md:h-[88px] h-[72px] flex items-center justify-between">
                 <div className="lg:h-[100px] md:h-[88px] h-[72px] flex justify-center items-center w-[100%]">
                   <input
@@ -373,7 +501,7 @@ function Search() {
           )}
 
           {content && (
-            <div className="lg:w-[60vw] w-[84vw] bg-white lg:h-[120px] md:h-[104px] h-[88px] drop-shadow-special rounded-[8px] flex items-center justify-center z-100">
+            <div className="hidden lg:flex lg:w-[60vw] w-[84vw] bg-white lg:h-[120px] md:h-[104px] h-[88px] drop-shadow-special rounded-[8px] flex items-center justify-center z-100">
               <div className="w-[97%] lg:h-[100px] md:h-[88px] h-[72px] flex items-center justify-between">
                 <div className="lg:h-[100px] md:h-[88px] h-[72px] flex justify-center items-center w-[100%]">
                   <input
@@ -399,7 +527,7 @@ function Search() {
           )}
 
           {institut && (
-            <div className="lg:w-[60vw] w-[84vw] bg-white lg:h-[120px] md:h-[104px] h-[88px] drop-shadow-special rounded-[8px] flex items-center justify-center z-100">
+            <div className="hidden lg:flex lg:w-[60vw] w-[84vw] bg-white lg:h-[120px] md:h-[104px] h-[88px] drop-shadow-special rounded-[8px] flex items-center justify-center z-100">
               <div className="w-[97%] lg:h-[100px] md:h-[88px] h-[72px] flex items-center justify-between">
                 <div className="lg:h-[100px] md:h-[88px] h-[72px] flex justify-center items-center w-[100%]">
                   <input
