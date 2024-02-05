@@ -61,7 +61,7 @@ function Articles() {
         </div>
       )}
       {!isLoading && (
-      <div className="overflow-auto">
+      <div className="overflow-auto lg:overflow-visible">
         <table className=" w-[84vw] mx-auto text-left">
           <thead className="bg-Blue66 text-white">
             <tr>
