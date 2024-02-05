@@ -10,6 +10,7 @@ const UserProfile = () => {
   const email = userData.user.email;
   const [carousel, setCarousel] = useState(1);
   const [Pagination, setPagination] = useState(1);
+
   const length = Object.keys(userData.favorites).length;
   const lengthofPagination =
     length % 6 === 0 ? Math.floor(length / 6) : Math.floor(length / 6) + 1;
