@@ -96,7 +96,7 @@ function Table() {
   return (
     <div className="flex flex-col mt-[88px] md:mt-[200px] w-[84vw] p-4 lg:p-0 m-auto gap-16 mb-[50vh]">
       <div className="flex lg:justify-between items-start justify-center">
-        <h1 className="text-[1rem] md:text-[2rem] font-bold">Moderators</h1>
+        <h1 className="text-[1rem] md:text-[1.5rem] lg:text-[2rem] font-bold">Moderators</h1>
       </div>
       {isLoading && (
 
@@ -127,7 +127,7 @@ function Table() {
                   : i === headers.length - 1
                   ? "rounded-r-[20px]"
                   : ""
-                } px-3 py-4 lg:p-5 text-[12px] lg:text-[20px]`}
+                } px-3 py-4 md:p-5 text-[12px] md-[16px] lg:text-[20px]`}
                 >
                   <div className="flex items-center gap-2">{header}</div>
                 </th>
@@ -140,18 +140,18 @@ function Table() {
               key={i}
               className="border-b-2 border-solid border-Typo border-opacity-20 font-semibold"
               >
-                <td className="p-3 lg:px-4 lg:py-3 text-[14px] lg:text-[20px]">{data.id}</td>
-                <td className="p-3 lg:px-4 lg:py-3 text-[14px] lg:text-[20px]">{data.first_name}</td>
-                <td className="p-3 lg:px-4 lg:py-3 text-[14px] lg:text-[20px]">{data.last_name}</td>
-                <td className="p-3 lg:px-4 lg:py-3 text-[14px] lg:text-[20px]">{data.email}</td>
-                <td className="text-center p-2 lg:px-4 lg:py-3 text-[14px] lg:text-[20px]">
+                <td className="p-3 md:px-4 md:py-3 text-[14px] md:text-[16px] lg:text-[20px]">{data.id}</td>
+                <td className="p-3 md:px-4 md:py-3 text-[14px] md:text-[16px] lg:text-[20px]">{data.first_name}</td>
+                <td className="p-3 md:px-4 md:py-3 text-[14px] md:text-[16px] lg:text-[20px]">{data.last_name}</td>
+                <td className="p-3 md:px-4 md:py-3 text-[14px] md:text-[16px] lg:text-[20px]">{data.email}</td>
+                <td className="text-center p-2 lg:px-4 lg:py-3 text-[14px] md:text-[16px] lg:text-[20px]">
                   {data.is_active === true ? (
-                    <div className="flex items-center gap-2 p-2 lg:px-4 lg:py-3 text-[12px] lg:text-[20px]">
+                    <div className="flex items-center gap-2 p-2 md:px-4 md:py-3 text-[14px] md:text-[16px] lg:text-[20px]">
                       <div className="h-[10px] w-[10px] rounded-full bg-Spbtn self-center justify-center"></div>
                       <p className="">Active</p>
                     </div>
                   ) : (
-                    <div className="flex items-center gap-2 p-2 lg:px-4 lg:py-3 text-[12px] lg:text-[20px]">
+                    <div className="flex items-center gap-2 p-2 md:px-4 md:py-3 text-[12px] md:text-[16px] lg:text-[20px]">
                       <div className="h-[10px] w-[10px] rounded-full bg-[#D4382B] self-center justify-center"></div>
                       <p className="">Blocked</p>
                     </div>
@@ -178,11 +178,11 @@ function Table() {
                       >
                         {data.is_active === true ? (
                           <button onClick={() => handleAction(false, data.id)}>
-                            <p className="text-[12px] lg:text-[20px]">Block</p>
+                            <p className="text-[12px] md:text-[20px]">Block</p>
                           </button>
                         ) : (
                           <button onClick={() => handleAction(true, data.id)}>
-                            <p className="text-[12px] lg:text-[20px]">Activate</p>
+                            <p className="text-[12px] md:text-[20px]">Activate</p>
                           </button>
                         )}
                       </div>

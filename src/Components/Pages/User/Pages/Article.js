@@ -56,7 +56,7 @@ function Article(props) {
       </div>
     </div>
   ) : (
-    <div className="bg-white shadow-xl lg:w-[26vw] md:w-[40vw] rounded-[20px] flex flex-col items-center">
+    <div className="bg-white shadow-xl lg:w-[26vw] md:w-[40vw] rounded-[20px] flex flex-col items-center justify-between">
       <div className="w-[96%] bg-[#F0F0F0] flex item-center justify-center rounded-[8px] my-[1vw] py-16">
         <img src="/Article.svg" alt="article" />
       </div>
