@@ -169,7 +169,7 @@ function Table() {
                     </button>
                     {selectedRowIndex === i && (
                       <div
-                      className={`absolute top-[65%] right-[60%] lg:left-[60%] bg-white flex justify-center items-center py-2 w-[70px] lg:w-[100px] drop-shadow-special rounded-md hover:text-white
+                      className={`absolute top-[65%] right-[40%] bg-white flex justify-center items-center py-2 w-[70px] lg:w-[100px] drop-shadow-special rounded-md hover:text-white
                       ${
                         data.is_active
                         ? "hover:bg-Rose100"
