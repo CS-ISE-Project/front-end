@@ -99,7 +99,16 @@ function Table() {
         <h1 className="text-[1rem] md:text-[2rem] font-bold">Moderators</h1>
       </div>
       {isLoading && (
-        <div className="mx-auto ] w-full text-center">Loading....</div>
+        <div className="h-[70vh] w-full flex flex-col justify-center items-center gap-[10vh]">
+          <h1 className="max-w-[82vw] font-bold text-BlueDark text-[2.5rem] text-center text-Blue66">
+            Loading....
+          </h1>
+          <img
+            alt="wait"
+            className="animate-spin-slow"
+            src="/settings.png"
+          ></img>{" "}
+        </div>
       )}
       {!isLoading && (
         <table className="w-[84vw] mx-auto text-left">

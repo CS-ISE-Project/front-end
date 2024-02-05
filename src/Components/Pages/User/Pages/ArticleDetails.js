@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 function ArticleDetails() {
   const location = useLocation();
@@ -53,8 +53,10 @@ function ArticleDetails() {
           },
         }
       );
-      const data = response.json();
-      alert("Added to favorite!");
+      const data = await response.json();
+      if (data) {
+        alert("Added to favorite!");
+      }
     } catch (e) {
       console.error("Standard Search Failed :", e);
     }
@@ -77,7 +79,9 @@ function ArticleDetails() {
         }
       );
       const data = response.json();
-      alert("Remove from favorite!");
+      if (data) {
+        alert("Remove from favorite!");
+      }
     } catch (e) {
       console.error("Standard Search Failed :", e);
     }
