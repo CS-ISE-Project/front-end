@@ -38,11 +38,11 @@ function Navbar() {
           >
             <img
               alt="Logo"
-              className="sm:w-[9vw] md:w-[5vw] lg:w-[4vw] hover:cursor-pointer"
+              className="w-[10vw] md:w-[5vw] lg:w-[4vw] hover:cursor-pointer"
               src="/logo.png"
             ></img>
           </div>
-          <div className="flex gap-[48px] font-medium text-[1.4rem]">
+          <div className="flex gap-[48px] font-medium text-[.8rem] lg:text-[1.4rem]">
             <div
               onClick={() => {
                 setPage(1);
@@ -72,14 +72,14 @@ function Navbar() {
               Files
             </div>
           </div>
-          <div className="flex flex-col">
+          <div className=" text-[.8rem] lg:text-[1.4rem] flex flex-col">
             <div
-              className={`flex gap-[16px]  items-center ${
-                isDropdownOpen ? "mt-24 " : ""
+              className={`flex flex-row lg:flex-row gap-[5px] lg:gap-[16px] items-center ${
+                isDropdownOpen ? "mt-14 " : ""
               } `}
             >
               <div>
-                <p className="bg-Rose66 py-2 px-4 text-white rounded">Admin</p>
+                <p className="hidden lg:block bg-Rose66 py-2 px-4 text-white rounded">Admin</p>
               </div>
               <p className="font-bold text-Rose66">{userName}</p>
 
@@ -91,12 +91,16 @@ function Navbar() {
               />
             </div>
             {isDropdownOpen && (
-              <div className="flex flex-col mt-4 bg-white items-center drop-shadow-special px-[4vh]">
+              <div className="flex flex-col mt-4 bg-white items-center drop-shadow-special lg:px-[4vh]">
+                {/* <div className="w-full text-center">
+                    <p className="block lg:hidden bg-Rose66 py-2 px-4 text-white rounded">Admin</p>
+                  </div> */}
                 <div
                   className="flex flex-row items-center hover:cursor-pointer"
                   onClick={handleLogout}
                 >
                   <MdLogout className="text-Rose100"></MdLogout>
+                  
                   <div className="p-2 text-Rose100">Logout</div>
                 </div>
               </div>

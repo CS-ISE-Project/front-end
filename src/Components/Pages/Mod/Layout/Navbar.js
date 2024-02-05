@@ -46,11 +46,11 @@ function Navbar() {
           <div className="flex flex-col">
             <div
               className={`flex gap-[16px]  items-center ${
-                isDropdownOpen ? "mt-24 " : ""
+                isDropdownOpen ? "mt-14 " : ""
               } `}
             >
               <div>
-                <p className="bg-Blue66 py-2 px-4 text-white rounded">
+                <p className="hidden md:block bg-Blue66 py-2 px-4 text-white rounded">
                   Moderator
                 </p>
               </div>

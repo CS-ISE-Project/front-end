@@ -147,11 +147,11 @@ function SecondTable() {
 
   return (
     <div className="min-h-screen flex flex-col mt-[88px] md:mt-[200px] w-[84vw] m-auto gap-16 mb-[50vh]">
-      <div className="flex justify-between items-start">
-        <h1 className="text-[1rem] md:text-[2rem] font-bold">Articles</h1>
-        <div className="flex flex-col items-end">
+      <div className="flex flex-col lg:flex-row items-center justify-between lg:items-start gap-[12px] lg:gap-0">
+        <h1 className="text-[1rem] lg:text-[2rem] font-bold">Articles</h1>
+        <div className="flex flex-col items-center lg:items-end">
           <div className={`flex gap-[16px]  items-start`}>
-            <div className="font-bold py-4 px-4 text-white bg-Spbtn rounded flex gap-2 items-center ">
+            <div className="font-bold p-2 text-[12px] lg:text-[16px] lg:py-4 lg:px-4 text-white bg-Spbtn rounded flex gap-2 items-center ">
               Upload Article
               <FaChevronDown
                 className={`text-white transition-transform duration-300 hover:cursor-pointer  ${
@@ -166,11 +166,11 @@ function SecondTable() {
               <div
                 className="flex flex-row items-center hover:cursor-pointer border-t border-[#E6E6E6]" /*onClick={handleLogoutClick}*/
               >
-                <div className="py-4">
+                <div className="py-4 text-[12px] lg:text-[16px]">
                   <input type="file" onChange={handleFileChange} />
                 </div>
                 <p
-                  className="bg-Spbtn py-2 px-4 text-white"
+                  className="bg-Spbtn py-2 px-4 text-white text-[12px] lg:text-[16px]"
                   onClick={handleUpload}
                 >
                   Upload from your PC
@@ -180,9 +180,9 @@ function SecondTable() {
               <div
                 className="flex flex-row items-center hover:cursor-pointer border-t border-[#E6E6E6] gap-24" /*onClick={handleLogoutClick}*/
               >
-                <div className="py-4 ">
+                <div className="py-4 text-[12px] lg:text-[16px] ">
                   <input
-                    className="py-2 px-4"
+                    className="py-2 px-4 text-[12px] lg:text-[16px]"
                     placeholder="Google Drive link"
                     required={true}
                     value={url}
@@ -190,7 +190,7 @@ function SecondTable() {
                   />
                 </div>
                 <p
-                  className="bg-Spbtn py-2 px-4 text-white"
+                  className="bg-Spbtn py-2 px-4 text-[12px] lg:text-[16px] text-white"
                   onClick={handleUploadfromDrive}
                 >
                   Upload from Google Drive
@@ -213,19 +213,22 @@ function SecondTable() {
       </div>
       )}
       {!isLoading && (
-        <table className=" w-[84vw] mx-auto text-left">
+
+        <div className="overflow-auto">
+
+        <table className=" w-full mx-auto text-left">
           <thead className="bg-Blue66 text-white">
             <tr>
               {headers.map((header, i) => (
                 <th
-                  key={i}
-                  className={`${
-                    i === 0
-                      ? "rounded-l-[16px]"
-                      : i === headers.length - 1
-                      ? "rounded-r-[16px]"
-                      : ""
-                  } p-4`}
+                key={i}
+                className={`${
+                  i === 0
+                  ? "rounded-l-[16px]"
+                  : i === headers.length - 1
+                  ? "rounded-r-[16px]"
+                  : ""
+                } p-2 lg:p-4 text-[.8rem] lg:text-[1rem] `}
                 >
                   <div className="flex items-center gap-2">
                     {header}
@@ -238,32 +241,33 @@ function SecondTable() {
           <tbody className="text-Typo">
             {tableData.map((data, i) => (
               <tr
-                key={i}
-                className="border-b-2 border-solid border-Typo border-opacity-20 font-semibold max-h-[100px]"
+              key={i}
+              className="border-b-2 border-solid border-Typo border-opacity-20 font-semibold max-h-[100px]"
               >
-                <td className="p-4 max-w-[20%] max-h-[100px]">{data.id}</td>
-                <td className="p-4 max-w-[20%] max-h-[100px]">{data.title}</td>
+                <td className="p-2 lg:p-4 text-[.8rem] lg:text-[1rem] max-w-[20%] max-h-[70px] lg:max-h-[100px]">{data.id}</td>
+                <td className="p-2 lg:p-4 text-[.8rem] lg:text-[1rem] max-w-[20%] max-h-[70px] lg:max-h-[100px]">{data.title}</td>
                 <td
-                  className="p-4 max-w-[20%] max-h-[100px] hover:text-Blue66 hover:cursor-pointer underline"
+                  className="p-2 lg:p-4 text-[.8rem] lg:text-[1rem] max-w-[20%] max-h-[70px] lg:max-h-[100px] hover:text-Blue66 hover:cursor-pointer underline"
                   onClick={() => {
                     window.open(data.url, "_blank");
                   }}
-                >
+                  >
                   Article:{data.id}
                 </td>
-                <td className="p-4 max-w-[20%] max-h-[100px]">
+                <td className="p-2 lg:p-4 text-[.8rem] lg:text-[1rem] max-w-[20%] max-h-[70px] lg:max-h-[100px]">
                   {data.authors}
                 </td>
-                <td className="p-4 max-w-[20%] max-h-[100px]">
+                <td className="p-2 lg:p-4 text-[.8rem] lg:text-[1rem] max-w-[20%] max-h-[70px] lg:max-h-[100px]">
                   {data.institutes}
                 </td>
-                <td className="p-4 max-w-[20%] max-h-[100px]">
+                <td className="p-2 lg:p-4 text-[.8rem] lg:text-[1rem] max-w-[20%] max-h-[70px] lg:max-h-[100px]">
                   {data.publication_date}
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
+      </div>
       )}
     </div>
   );
