@@ -16,6 +16,7 @@ function Navbar() {
   };
 
   const handleProfileUser = async () => {
+    console.log(userid);
     try {
       const response = await fetch(
         `https://ise-project-api-production.up.railway.app/users/${userid}`,
@@ -28,8 +29,8 @@ function Navbar() {
       );
       const data = await response.json();
 
-      setDropdownOpen(false);
       navigate("/user/profile", { state: data });
+      setDropdownOpen(false);
     } catch (e) {
       console.error("Failed getting user:", e);
     }
@@ -52,10 +53,14 @@ function Navbar() {
     <>
       <nav className="w-full md:h-[112px] h-[88px] bg-white fixed top-0 z-[100]">
         <div className="flex items-center px-[8vw] h-full justify-between">
-          <div>
+          <div
+            onClick={() => {
+              navigate("/user");
+            }}
+          >
             <img
               alt="Logo"
-              className="sm:w-[9vw] md:w-[5vw] lg:w-[4vw]"
+              className="sm:w-[9vw] md:w-[5vw] lg:w-[4vw] hover:cursor-pointer"
               src="/logo.png"
             ></img>
           </div>

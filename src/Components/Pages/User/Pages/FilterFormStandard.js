@@ -36,7 +36,7 @@ const FilterForm = ({ onSubmit, Queryofsearch }) => {
             : [];
 
         const formData = {
-          query: JSON.stringify(Queryofsearch),
+          query: Queryofsearch,
           filter: {
             authors: authorArray,
             institutes: instituteArray,
@@ -49,18 +49,22 @@ const FilterForm = ({ onSubmit, Queryofsearch }) => {
           "institutes",
           "keywords",
         ]);
-
-        const response = await fetch(
-          `https://ise-project-api-production.up.railway.app/search/simple/filter`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-            body: JSON.stringify(formData),
-          }
-        );
+        let endpoint;
+        if (typeof Queryofsearch === "string") {
+          endpoint =
+            "https://ise-project-api-production.up.railway.app/search/simple/filter";
+        } else {
+          endpoint =
+            "https://ise-project-api-production.up.railway.app/search/advanced/filter";
+        }
+        const response = await fetch(endpoint, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify(formData),
+        });
         const responseData = await response.json();
         onSubmit(responseData);
       } catch (error) {
