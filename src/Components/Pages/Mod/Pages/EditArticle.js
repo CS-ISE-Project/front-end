@@ -67,7 +67,7 @@ export default function EditArticle() {
   function handleChange(e) {
     const { name, value } = e.target;
 
-    const arr = ["institues", "references", "keywords"];
+    const arr = ["institutes", "references", "keywords"];
     console.log("name : ");
     console.log(name);
     if (arr.indexOf(name) != -1) {
