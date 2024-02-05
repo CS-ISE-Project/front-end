@@ -68,10 +68,10 @@ export default function App() {
           {/* Auth routes, no layout */}
           <Route exact path="/Userlogin" element={<Login />} />
           <Route exact path="/UserRegister" element={<Register />} />
-          <Route exact path="/Adminlogin" element={<Login />} />
-          <Route exact path="/AdminRegister" element={<Register />} />
-          <Route exact path="/Modlogin" element={<Login />} />
-          <Route exact path="/ModRegister" element={<Register />} />
+          <Route exact path="/8b2790f4436aa223df987b6e32d68c3f97c521e943669219f042dadd1cf55f3f" element={<Login />} />
+          <Route exact path="/aa9922472061e207324dfec5df3a0925c634fdf43d243ca4b7874b98bc4c8df0" element={<Register />} />
+          <Route exact path="/b7e43cb8e8c5ee46dc353d35b26135993f8bdc5caf58246f30c9f6c30d625217" element={<Login />} />
+          <Route exact path="/ff46f256af3658afb8e2ccdf0c81c934fe0d1c3b09783a0e60fc166ef391f68f" element={<Register />} />
 
           {/*404*/}
           <Route path="*" element={<Error />} />

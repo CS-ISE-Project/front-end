@@ -1,7 +1,6 @@
 import React from "react";
 import LoginForm from "./LoginForm";
 
-
 function Login() {
   const path = window.location.pathname;
   return (
