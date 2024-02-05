@@ -24,7 +24,7 @@ function Navbar() {
     localStorage.removeItem("token");
     localStorage.removeItem("auth");
     alert("logout successful");
-    navigate("/ModLogin");
+    navigate("/b7e43cb8e8c5ee46dc353d35b26135993f8bdc5caf58246f30c9f6c30d625217");
   };
 
   return (
