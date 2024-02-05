@@ -39,6 +39,7 @@ function ArticleDetails() {
     };
     fetchData();
   }, []);
+
   const handleAddFavorite = async () => {
     setFav(1);
     try {
@@ -53,7 +54,7 @@ function ArticleDetails() {
         }
       );
       const data = response.json();
-      alert("Remove from favorite!");
+      alert("Added to favorite!");
     } catch (e) {
       console.error("Standard Search Failed :", e);
     }
@@ -76,7 +77,7 @@ function ArticleDetails() {
         }
       );
       const data = response.json();
-      alert("added to favorite!");
+      alert("Remove from favorite!");
     } catch (e) {
       console.error("Standard Search Failed :", e);
     }

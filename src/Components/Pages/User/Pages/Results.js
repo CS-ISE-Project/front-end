@@ -10,8 +10,9 @@ function Results() {
   const location = useLocation();
   const [filteredData, setFilteredData] = useState(location.state[0]);
   const query = location.state[1];
+  const length = Object.keys(filteredData).length;
   const lengthofPagination =
-    Math.floor(Object.keys(filteredData).length / 6) + 1;
+    length % 6 === 0 ? Math.floor(length / 6) : Math.floor(length / 6) + 1;
 
   const handleSubmit = (data) => {
     console.log("Filtered Data:", data);
@@ -89,7 +90,7 @@ function Results() {
             <FaChevronDown />
           </div>
         </div> */}
-        <FilterForm onSubmit={handleSubmit} Queryofsearch={query} />
+        <FilterForm onSubmit={handleSubmit} Queryofsearch={query}/>
       </div>
 
       {carousel ? (
