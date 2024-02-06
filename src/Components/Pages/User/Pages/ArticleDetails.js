@@ -9,15 +9,12 @@ function ArticleDetails() {
   const [fav, setFav] = useState(0);
   const favStatus = async () => {
     try {
-      const response = await fetch(
-        `${EndpointRoot}/favorites/`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
+      const response = await fetch(`${EndpointRoot}/favorites/`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       const favsArray = await response.json();
       return favsArray.includes(ArticleDetails.id);
     } catch (e) {
@@ -56,16 +53,14 @@ function ArticleDetails() {
   };
 
   const handleRedirectArticle = () => {
-    window.open(ArticleDetails.url, "_blank");
+    window.open(`${EndpointRoot}/${ArticleDetails.url}`, "_blank");
   };
 
   const handleRemoveFavorite = async () => {
     setFav(0);
     try {
       const response = await fetch(
-        `${EndpointRoot}/users/${localStorage.getItem(
-          "userid"
-        )}`,
+        `${EndpointRoot}/users/${localStorage.getItem("userid")}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -86,16 +81,13 @@ function ArticleDetails() {
 
   const RemoveFav = async (favoriteID) => {
     try {
-      const response = await fetch(
-        `${EndpointRoot}/favorites/${favoriteID}`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
+      const response = await fetch(`${EndpointRoot}/favorites/${favoriteID}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       if (response.status === 204 || response.status === 200) {
         alert("Remove from favorite!");
       }
@@ -155,7 +147,7 @@ function ArticleDetails() {
               onClick={handleRedirectArticle}
             >
               <img src="/PDF.svg" alt="pdf" />
-              Download Article
+              View Article
             </button>
             {!fav ? (
               <button onClick={handleAddFavorite}>

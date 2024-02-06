@@ -16,7 +16,9 @@ function SecondTable() {
   const [tableData, setTableData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
+  const [extracting, setExtracting] = useState(0);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const [vide, setVide] = useState(0);
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
   };
@@ -32,7 +34,12 @@ function SecondTable() {
           },
         });
         const data = await response.json();
-        setTableData(data);
+        if (response.status === 200) {
+          setTableData(data);
+        }
+        if (response.status === 404) {
+          setVide(1);
+        }
       } catch (e) {
         setError(e);
         console.log(error);
@@ -55,6 +62,7 @@ function SecondTable() {
   };
 
   const handleUpload = async () => {
+    toggleDropdown();
     const formData = new FormData();
     formData.append("file", file);
     try {
@@ -68,8 +76,9 @@ function SecondTable() {
 
       const data = await response.json();
       const key = data.file_key;
-      console.log("File uploaded successfully");
+      alert("File uploaded successfully");
       console.log(key);
+      setExtracting(1);
       try {
         const response = await fetch(
           `${EndpointRoot}/articles/uploaded?article_key=${key}
@@ -84,7 +93,8 @@ function SecondTable() {
 
         const article = await response.json();
         if (article || response.status === 200) {
-          alert("Article added successfully");
+          setExtracting(0);
+          window.location.reload(false);
         }
       } catch (error) {
         console.error("Error Storing file:", error);
@@ -95,7 +105,7 @@ function SecondTable() {
   };
 
   const handleUploadfromDrive = async () => {
-    console.log(url);
+    toggleDropdown();
     try {
       const response = await fetch(
         `${EndpointRoot}/upload/gdrive?link=${url}`,
@@ -109,9 +119,10 @@ function SecondTable() {
       );
 
       const data = await response.json();
+      console.log(data);
       const key = data.file_key;
-      console.log("File uploaded successfully");
-      console.log(key);
+      alert("File uploaded successfully");
+      setExtracting(1);
       try {
         const response = await fetch(
           `${EndpointRoot}/articles/uploaded?article_key=${key}
@@ -123,10 +134,10 @@ function SecondTable() {
             },
           }
         );
-
         const article = await response.json();
         if (article || response.status === 200) {
-          alert("Article added successfully");
+          setExtracting(0);
+          window.location.reload(false);
         }
       } catch (error) {
         console.error("Error Storing file:", error);
@@ -205,61 +216,80 @@ function SecondTable() {
       )}
       {!isLoading && (
         <div className="overflow-auto lg:overflow-visible">
-          <table className=" w-full mx-auto text-left">
-            <thead className="bg-Blue66 text-white">
-              <tr>
-                {headers.map((header, i) => (
-                  <th
-                    key={i}
-                    className={`${
-                      i === 0
-                        ? "rounded-l-[16px]"
-                        : i === headers.length - 1
-                        ? "rounded-r-[16px]"
-                        : ""
-                    } p-2 lg:p-4 text-[.8rem] lg:text-[1rem] `}
-                  >
-                    <div className="flex items-center gap-2">
-                      {header}
-                      {tableIcon.indexOf(header) !== -1}
-                    </div>
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody className="text-Typo">
-              {tableData.map((data, i) => (
-                <tr
-                  key={i}
-                  className="border-b-2 border-solid border-Typo border-opacity-20 font-semibold max-h-[100px]"
-                >
-                  <td className="p-2 lg:p-4 text-[.8rem] lg:text-[1rem] max-w-[20%] max-h-[70px] lg:max-h-[100px]">
-                    {data.id}
-                  </td>
-                  <td className="p-2 lg:p-4 text-[.8rem] lg:text-[1rem] max-w-[20%] max-h-[70px] lg:max-h-[100px]">
-                    {data.title}
-                  </td>
-                  <td
-                    className="p-2 lg:p-4 text-[.8rem] lg:text-[1rem] max-w-[20%] max-h-[70px] lg:max-h-[100px] hover:text-Blue66 hover:cursor-pointer underline"
-                    onClick={() => {
-                      window.open(data.url, "_blank");
-                    }}
-                  >
-                    Article:{data.id}
-                  </td>
-                  <td className="p-2 lg:p-4 text-[.8rem] lg:text-[1rem] max-w-[20%] max-h-[70px] lg:max-h-[100px]">
-                    {data.authors}
-                  </td>
-                  <td className="p-2 lg:p-4 text-[.8rem] lg:text-[1rem] max-w-[20%] max-h-[70px] lg:max-h-[100px]">
-                    {data.institutes}
-                  </td>
-                  <td className="p-2 lg:p-4 text-[.8rem] lg:text-[1rem] max-w-[20%] max-h-[70px] lg:max-h-[100px]">
-                    {data.publication_date}
-                  </td>
+          {extracting ? (
+            <div className="h-[70vh] w-full flex flex-col justify-center items-center gap-[10vh]">
+              <h1 className="max-w-[82vw] font-bold text-BlueDark text-[2.5rem] text-center text-Blue66">
+                Extracting....
+              </h1>
+              <img
+                alt="wait"
+                className="animate-spin-slow"
+                src="/settings.png"
+              ></img>{" "}
+            </div>
+          ) : vide ? (
+            <div className="h-[20vh] w-full flex flex-col justify-center items-center gap-[10vh] mx-auto">
+              <h1 className="max-w-[82vw] font-bold text-BlueDark text-[2.5rem] text-center text-Blue66">
+                No Article found....
+              </h1>
+            </div>
+          ) : (
+            <table className=" w-full mx-auto text-left">
+              <thead className="bg-Blue66 text-white">
+                <tr>
+                  {headers.map((header, i) => (
+                    <th
+                      key={i}
+                      className={`${
+                        i === 0
+                          ? "rounded-l-[16px]"
+                          : i === headers.length - 1
+                          ? "rounded-r-[16px]"
+                          : ""
+                      } p-2 lg:p-4 text-[.8rem] lg:text-[1rem] `}
+                    >
+                      <div className="flex items-center gap-2">
+                        {header}
+                        {tableIcon.indexOf(header) !== -1}
+                      </div>
+                    </th>
+                  ))}
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="text-Typo">
+                {tableData.map((data, i) => (
+                  <tr
+                    key={i}
+                    className="border-b-2 border-solid border-Typo border-opacity-20 font-semibold max-h-[100px]"
+                  >
+                    <td className="p-2 lg:p-4 text-[.8rem] lg:text-[1rem] max-w-[20%] max-h-[70px] lg:max-h-[100px]">
+                      {data.id}
+                    </td>
+                    <td className="p-2 lg:p-4 text-[.8rem] lg:text-[1rem] max-w-[20%] max-h-[70px] lg:max-h-[100px]">
+                      {data.title}
+                    </td>
+                    <td
+                      className="p-2 lg:p-4 text-[.8rem] lg:text-[1rem] max-w-[20%] max-h-[70px] lg:max-h-[100px] hover:text-Blue66 hover:cursor-pointer underline"
+                      onClick={() => {
+                        window.open(data.url, "_blank");
+                      }}
+                    >
+                      Article:{data.id}
+                    </td>
+                    <td className="p-2 lg:p-4 text-[.8rem] lg:text-[1rem] max-w-[20%] max-h-[70px] lg:max-h-[100px]">
+                      {data.authors.join(" | ")}
+                    </td>
+                    <td className="p-2 lg:p-4 text-[.8rem] lg:text-[1rem] max-w-[20%] max-h-[70px] lg:max-h-[100px]">
+                      {data.institutes.join(" | ")}
+                    </td>
+                    <td className="p-2 lg:p-4 text-[.8rem] lg:text-[1rem] max-w-[20%] max-h-[70px] lg:max-h-[100px]">
+                      {data.publication_date}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
         </div>
       )}
     </div>

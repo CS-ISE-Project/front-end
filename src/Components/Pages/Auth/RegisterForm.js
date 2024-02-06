@@ -66,9 +66,9 @@ function RegisterForm(props) {
 
       if (
         props.type ===
-          "/aa9922472061e207324dfec5df3a0925c634fdf43d243ca4b7874b98bc4c8df0" ||
+          "/ff46f256af3658afb8e2ccdf0c81c934fe0d1c3b09783a0e60fc166ef391f68f" ||
         props.type ===
-          "/Aa9922472061e207324dfec5df3a0925c634fdf43d243ca4b7874b98bc4c8df0"
+          "/Ff46f256af3658afb8e2ccdf0c81c934fe0d1c3b09783a0e60fc166ef391f68f"
       ) {
         if (response.status === 200) {
           alert("mod created successfully");
@@ -124,7 +124,7 @@ function RegisterForm(props) {
         break;
       case "last_name":
         formErrors.last_name =
-          !value || !/^[A-Z][^0-9]*$/.test(value)
+          !value || !/^[A-Za-z][^0-9]*$/.test(value)
             ? "Please enter a valid last name ."
             : "";
         break;
@@ -174,7 +174,7 @@ function RegisterForm(props) {
             <input
               className=" rounded-md text-black  bg-[#F2F3F6] w-full p-3 md:p-4"
               type="text"
-              placeholder="Prénom"
+              placeholder="First Name"
               onChange={handleChange}
               name="first_name"
             />

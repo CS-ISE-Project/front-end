@@ -9,7 +9,7 @@ function Articles() {
     "Url",
     "Authors",
     "Institutions",
-    "Publication Date"
+    "Publication Date",
   ];
   const tableIcon = ["Title", "Url", "Publication Date"];
   const [tableData, setTableData] = useState([]);
@@ -20,16 +20,13 @@ function Articles() {
     const fetchTableData = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch(
-          `${EndpointRoot}/articles/`,
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${window.localStorage.getItem("token")}`,
-              "Content-Type": "application/json",
-            },
-          }
-        );
+        const response = await fetch(`${EndpointRoot}/articles/`, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+            "Content-Type": "application/json",
+          },
+        });
         const data = await response.json();
         setTableData(data);
       } catch (e) {
@@ -62,75 +59,79 @@ function Articles() {
         </div>
       )}
       {!isLoading && (
-      <div className="overflow-auto lg:overflow-visible">
-        <table className=" w-[84vw] mx-auto text-left">
-          <thead className="bg-Blue66 text-white">
-            <tr>
-              {headers.map((header, i) => (
-                <th
-                key={i}
-                className={`${
-                  i === 0
-                  ? "rounded-l-[16px]"
-                  : i === headers.length - 1
-                  ? "rounded-r-[16px]"
-                  : ""
-                } p-2 lg:p-4 text-[.8rem] lg:text-[1rem] `}
-                >
-                  <div className="flex items-center gap-2">
-                    {header}
-                    {tableIcon.indexOf(header) !== -1}
-                  </div>
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody className="text-Typo p-4">
-            {tableData.map((data, i) => (
-              <tr
-              key={i}
-              className="border-b-2 p-4 border-solid border-Typo border-opacity-20 hover:bg-[#BED7FB] hover:cursor-pointer font-semibold max-h-[100px]"
-              onClick={() => {
-                navigate("/mod/EditArticle", {
-                  state: [
-                    data.id,
-                    data.title,
-                    data.url,
-                    data.authors,
-                    data.institutes,
-                    data.keywords,
-                    data.publication_date,
-                    data.abstract,
-                    data.content,
-                    data.references,
-                  ],
-                });
-              }}
-              >
-                <td className="p-2 lg:p-4 text-[.8rem] lg:text-[1rem] max-w-[20%] max-h-[70px] lg:max-h-[100px]">{data.id}</td>
-                <td className="p-2 lg:p-4 text-[.8rem] lg:text-[1rem] max-w-[20%] max-h-[70px] lg:max-h-[100px]">{data.title}</td>
-                <td
-                  className="p-2 lg:p-4 text-[.8rem] lg:text-[1rem] max-w-[20%] max-h-[70px] lg:max-h-[100px] hover:text-Blue66 hover:cursor-pointer underline"
-                  onClick={() => {
-                    window.open(data.url, "_blank");
-                  }}
+        <div className="overflow-auto lg:overflow-visible">
+          <table className=" w-[84vw] mx-auto text-left">
+            <thead className="bg-Blue66 text-white">
+              <tr>
+                {headers.map((header, i) => (
+                  <th
+                    key={i}
+                    className={`${
+                      i === 0
+                        ? "rounded-l-[16px]"
+                        : i === headers.length - 1
+                        ? "rounded-r-[16px]"
+                        : ""
+                    } p-2 lg:p-4 text-[.8rem] lg:text-[1rem] `}
                   >
-                  Article:{data.id}
-                </td>
-                <td className="p-2 lg:p-4 text-[.8rem] lg:text-[1rem] max-w-[20%] max-h-[70px] lg:max-h-[100px]">
-                  {data.authors}
-                </td>
-                <td className="p-2 lg:p-4 text-[.8rem] lg:text-[1rem] max-w-[20%] max-h-[70px] lg:max-h-[100px]">
-                  {data.institutes}
-                </td>
-                <td className="p-2 lg:p-4 text-[.8rem] lg:text-[1rem] max-w-[20%] max-h-[70px] lg:max-h-[100px]">
-                  {data.publication_date}
-                </td>
+                    <div className="flex items-center gap-2">
+                      {header}
+                      {tableIcon.indexOf(header) !== -1}
+                    </div>
+                  </th>
+                ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody className="text-Typo p-4">
+              {tableData.map((data, i) => (
+                <tr
+                  key={i}
+                  className="border-b-2 p-4 border-solid border-Typo border-opacity-20 hover:bg-[#BED7FB] hover:cursor-pointer font-semibold max-h-[100px]"
+                  onClick={() => {
+                    navigate("/mod/EditArticle", {
+                      state: [
+                        data.id,
+                        data.title,
+                        data.url,
+                        data.authors,
+                        data.institutes,
+                        data.keywords,
+                        data.publication_date,
+                        data.abstract,
+                        data.content,
+                        data.references,
+                      ],
+                    });
+                  }}
+                >
+                  <td className="p-2 lg:p-4 text-[.8rem] lg:text-[1rem] max-w-[20%] max-h-[70px] lg:max-h-[100px]">
+                    {data.id}
+                  </td>
+                  <td className="p-2 lg:p-4 text-[.8rem] lg:text-[1rem] max-w-[20%] max-h-[70px] lg:max-h-[100px]">
+                    {data.title}
+                  </td>
+                  <td
+                    className="p-2 lg:p-4 text-[.8rem] lg:text-[1rem] max-w-[20%] max-h-[70px] lg:max-h-[100px] hover:text-Blue66 hover:cursor-pointer underline"
+                    onClick={() => {
+                      window.open(`${EndpointRoot}/${data.url}`, "_blank");
+                    }}
+                  >
+                    Article:{data.id}
+                  </td>
+                  <td className="p-2 lg:p-4 text-[.8rem] lg:text-[1rem] max-w-[20%] max-h-[70px] lg:max-h-[100px]">
+                    {data.authors.join(" | ")}
+                  </td>
+                  <td className="p-2 lg:p-4 text-[.8rem] lg:text-[1rem] max-w-[20%] max-h-[70px] lg:max-h-[100px]">
+                    {data.institutes.join(" | ")}
+                  </td>
+                  <td className="p-2 lg:p-4 text-[.8rem] lg:text-[1rem] max-w-[20%] max-h-[70px] lg:max-h-[100px]">
+                    {data.publication_date}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
     </div>
   );

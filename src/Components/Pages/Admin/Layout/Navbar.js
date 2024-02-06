@@ -8,7 +8,11 @@ function Navbar() {
   const userName = localStorage.getItem("username");
   const navigate = useNavigate();
   const [isDropdownOpen, setDropdownOpen] = useState(false);
-  const [page, setPage] = useState(1);
+
+  const storedPage = localStorage.getItem("page");
+  const parsedPage = parseInt(storedPage);
+  const [page, setPage] = useState(parsedPage);
+
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
   };
@@ -22,8 +26,11 @@ function Navbar() {
     });
     localStorage.removeItem("token");
     localStorage.removeItem("auth");
+    localStorage.removeItem("page");
     alert("logout successful");
-    navigate("/8b2790f4436aa223df987b6e32d68c3f97c521e943669219f042dadd1cf55f3f");
+    navigate(
+      "/8b2790f4436aa223df987b6e32d68c3f97c521e943669219f042dadd1cf55f3f"
+    );
   };
   return (
     <>
@@ -32,6 +39,7 @@ function Navbar() {
           <div
             onClick={() => {
               setPage(1);
+              localStorage.setItem("page", 1);
               navigate("/admin");
             }}
           >
@@ -45,6 +53,7 @@ function Navbar() {
             <div
               onClick={() => {
                 setPage(1);
+                localStorage.setItem("page", 1);
                 setDropdownOpen(false);
                 navigate("/admin");
               }}
@@ -59,6 +68,7 @@ function Navbar() {
             <div
               onClick={() => {
                 setPage(0);
+                localStorage.setItem("page", 0);
                 setDropdownOpen(false);
                 navigate("/admin/article");
               }}
@@ -78,7 +88,9 @@ function Navbar() {
               } `}
             >
               <div>
-                <p className="hidden lg:block bg-Rose66 py-2 px-4 text-white rounded">Admin</p>
+                <p className="hidden lg:block bg-Rose66 py-2 px-4 text-white rounded">
+                  Admin
+                </p>
               </div>
               <p className="font-bold text-Rose66">{userName}</p>
 
@@ -99,7 +111,7 @@ function Navbar() {
                   onClick={handleLogout}
                 >
                   <MdLogout className="text-Rose100"></MdLogout>
-                  
+
                   <div className="p-2 text-Rose100">Logout</div>
                 </div>
               </div>
