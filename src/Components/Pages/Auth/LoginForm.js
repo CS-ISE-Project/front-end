@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Context } from "../../../App";
+import { Context, EndpointRoot } from "../../../App";
 
 function LoginForm(props) {
   const [auth, setAuth] = useContext(Context);
@@ -45,19 +45,19 @@ function LoginForm(props) {
   const login = async () => {
     let endpoint;
     if (props.type === "/UserLogin" || props.type === "/userLogin") {
-      endpoint = `https://ise-project-api-production.up.railway.app/auth/login?email=${formData.email}&password=${formData.password}`;
+      endpoint = `${EndpointRoot}/auth/login?email=${formData.email}&password=${formData.password}`;
     } else if (
       props.type ===
         "/b7e43cb8e8c5ee46dc353d35b26135993f8bdc5caf58246f30c9f6c30d625217" ||
       props.type ===
         "/B7e43cb8e8c5ee46dc353d35b26135993f8bdc5caf58246f30c9f6c30d625217"
     ) {
-      endpoint = `https://ise-project-api-production.up.railway.app/auth/mod/login?email=${formData.email}&password=${formData.password}`;
+      endpoint = `${EndpointRoot}/auth/mod/login?email=${formData.email}&password=${formData.password}`;
     } else if (
       props.type ===
       "/8b2790f4436aa223df987b6e32d68c3f97c521e943669219f042dadd1cf55f3f"
     ) {
-      endpoint = `https://ise-project-api-production.up.railway.app/auth/admin/login?email=${formData.email}&password=${formData.password}`;
+      endpoint = `${EndpointRoot}/auth/admin/login?email=${formData.email}&password=${formData.password}`;
     }
     try {
       const response = await fetch(endpoint, {
@@ -99,7 +99,7 @@ function LoginForm(props) {
           alert("Login successful");
           try {
             const mod = await fetch(
-              `https://ise-project-api-production.up.railway.app/moderators/${decodedToken.id}`,
+              `${EndpointRoot}/moderators/${decodedToken.id}`,
               {
                 headers: {
                   "Content-Type": "application/json",

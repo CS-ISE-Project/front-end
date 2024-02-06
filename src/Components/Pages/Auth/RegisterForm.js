@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { EndpointRoot } from "../../../App";
 
 function RegisterForm(props) {
   const navigate = useNavigate();
@@ -28,21 +29,21 @@ function RegisterForm(props) {
   const signUp = async () => {
     let endpoint;
     if (props.type === "/UserRegister" || props.type === "/userRegister") {
-      endpoint = `https://ise-project-api-production.up.railway.app/auth/signup`;
+      endpoint = `${EndpointRoot}/auth/signup`;
     } else if (
       props.type ===
         "/ff46f256af3658afb8e2ccdf0c81c934fe0d1c3b09783a0e60fc166ef391f68f" ||
       props.type ===
         "/Ff46f256af3658afb8e2ccdf0c81c934fe0d1c3b09783a0e60fc166ef391f68f"
     ) {
-      endpoint = `https://ise-project-api-production.up.railway.app/auth/mod/signup`;
+      endpoint = `${EndpointRoot}/auth/mod/signup`;
     } else if (
       props.type ===
         "/aa9922472061e207324dfec5df3a0925c634fdf43d243ca4b7874b98bc4c8df0" ||
       props.type ===
         "/Aa9922472061e207324dfec5df3a0925c634fdf43d243ca4b7874b98bc4c8df0"
     ) {
-      endpoint = `https://ise-project-api-production.up.railway.app/auth/admin/signup`;
+      endpoint = `${EndpointRoot}/auth/admin/signup`;
     }
     try {
       const response = await fetch(endpoint, {
@@ -71,7 +72,9 @@ function RegisterForm(props) {
       ) {
         if (response.status === 200) {
           alert("mod created successfully");
-          navigate("/b7e43cb8e8c5ee46dc353d35b26135993f8bdc5caf58246f30c9f6c30d625217");
+          navigate(
+            "/b7e43cb8e8c5ee46dc353d35b26135993f8bdc5caf58246f30c9f6c30d625217"
+          );
         }
       }
 
@@ -83,7 +86,9 @@ function RegisterForm(props) {
       ) {
         if (response.status === 200) {
           alert("Admin created successfully");
-          navigate("/8b2790f4436aa223df987b6e32d68c3f97c521e943669219f042dadd1cf55f3f");
+          navigate(
+            "/8b2790f4436aa223df987b6e32d68c3f97c521e943669219f042dadd1cf55f3f"
+          );
         }
       }
     } catch (e) {
@@ -139,14 +144,18 @@ function RegisterForm(props) {
       props.type ===
         "/Aa9922472061e207324dfec5df3a0925c634fdf43d243ca4b7874b98bc4c8df0"
     ) {
-      navigate("/b7e43cb8e8c5ee46dc353d35b26135993f8bdc5caf58246f30c9f6c30d625217");
+      navigate(
+        "/b7e43cb8e8c5ee46dc353d35b26135993f8bdc5caf58246f30c9f6c30d625217"
+      );
     } else if (
       props.type ===
         "/aa9922472061e207324dfec5df3a0925c634fdf43d243ca4b7874b98bc4c8df0" ||
       props.type ===
         "/Aa9922472061e207324dfec5df3a0925c634fdf43d243ca4b7874b98bc4c8df0"
     ) {
-      navigate("/8b2790f4436aa223df987b6e32d68c3f97c521e943669219f042dadd1cf55f3f");
+      navigate(
+        "/8b2790f4436aa223df987b6e32d68c3f97c521e943669219f042dadd1cf55f3f"
+      );
     }
   }
   return (

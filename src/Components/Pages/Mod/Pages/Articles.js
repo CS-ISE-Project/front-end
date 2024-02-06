@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { EndpointRoot } from "../../../../App";
 
 function Articles() {
   const headers = [
@@ -20,7 +21,7 @@ function Articles() {
       setIsLoading(true);
       try {
         const response = await fetch(
-          `https://ise-project-api-production.up.railway.app/articles/`,
+          `${EndpointRoot}/articles/`,
           {
             method: "GET",
             headers: {

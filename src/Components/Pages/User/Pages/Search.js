@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { EndpointRoot } from "../../../../App";
 
 function Search() {
   const navigate = useNavigate();
@@ -53,7 +54,7 @@ function Search() {
     setSearching(1);
     try {
       const response = await fetch(
-        "https://ise-project-api-production.up.railway.app/search/advanced",
+        `${EndpointRoot}/search/advanced`,
         {
           method: "POST",
           headers: {
@@ -76,7 +77,7 @@ function Search() {
     setSearching(1);
     try {
       const response = await fetch(
-        `https://ise-project-api-production.up.railway.app/search/simple?query=${queryStandard}`,
+        `${EndpointRoot}/search/simple?query=${queryStandard}`,
         {
           method: "POST",
           headers: {

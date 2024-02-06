@@ -1,5 +1,6 @@
 import React from "react";
 import { useFormik } from "formik";
+import { EndpointRoot } from "../../../../App";
 
 const FilterForm = ({ onSubmit, Queryofsearch }) => {
   function removeEmptyStringsFromProperties(obj, properties) {
@@ -52,10 +53,10 @@ const FilterForm = ({ onSubmit, Queryofsearch }) => {
         let endpoint;
         if (typeof Queryofsearch === "string") {
           endpoint =
-            "https://ise-project-api-production.up.railway.app/search/simple/filter";
+            `${EndpointRoot}/search/simple/filter`;
         } else {
           endpoint =
-            "https://ise-project-api-production.up.railway.app/search/advanced/filter";
+          `${EndpointRoot}/search/advanced/filter`;
         }
         const response = await fetch(endpoint, {
           method: "POST",

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { EndpointRoot } from "../../../../App";
 
 function ArticleDetails() {
   const location = useLocation();
@@ -9,7 +10,7 @@ function ArticleDetails() {
   const favStatus = async () => {
     try {
       const response = await fetch(
-        `https://ise-project-api-production.up.railway.app/favorites/`,
+        `${EndpointRoot}/favorites/`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -36,7 +37,7 @@ function ArticleDetails() {
     setFav(1);
     try {
       const response = await fetch(
-        `https://ise-project-api-production.up.railway.app/favorites/${ArticleDetails.id}`,
+        `${EndpointRoot}/favorites/${ArticleDetails.id}`,
         {
           method: "POST",
           headers: {
@@ -62,7 +63,7 @@ function ArticleDetails() {
     setFav(0);
     try {
       const response = await fetch(
-        `https://ise-project-api-production.up.railway.app/users/${localStorage.getItem(
+        `${EndpointRoot}/users/${localStorage.getItem(
           "userid"
         )}`,
         {
@@ -86,7 +87,7 @@ function ArticleDetails() {
   const RemoveFav = async (favoriteID) => {
     try {
       const response = await fetch(
-        `https://ise-project-api-production.up.railway.app/favorites/${favoriteID}`,
+        `${EndpointRoot}/favorites/${favoriteID}`,
         {
           method: "DELETE",
           headers: {

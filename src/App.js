@@ -17,8 +17,8 @@ import Inactive from "./Components/Pages/Mod/Pages/Inactive";
 import Articles from "./Components/Pages/Mod/Pages/Articles";
 import EditArticle from "./Components/Pages/Mod/Pages/EditArticle";
 
+export const EndpointRoot = "https://ise-project-api-production.up.railway.app"
 export const Context = createContext();
-
 export default function App() {
   const [auth, setAuth] = useState(
     JSON.parse(localStorage.getItem("auth")) || {

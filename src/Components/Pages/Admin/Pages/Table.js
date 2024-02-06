@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { EndpointRoot } from "../../../../App";
 
 function Table() {
   const headers = ["ID", "Last Name", "First Name", "Email", "Status", ""];
@@ -12,14 +13,13 @@ function Table() {
   const [modData, setModData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
-  const [page, setPage] = useState(0);
 
   useEffect(() => {
     const fetchTableData = async () => {
       setIsLoading(true);
       try {
         const response = await fetch(
-          `https://ise-project-api-production.up.railway.app/moderators/`,
+          `${EndpointRoot}/moderators/`,
           {
             method: "GET",
             headers: {
@@ -43,8 +43,6 @@ function Table() {
     return <div> Something went wrong ! please try again</div>;
   }
 
-  const tableIcon = ["Nom", "Prenom", "Status"];
-
   const handleAction = async (isactive, modID) => {
     const activateMod = async () => {
       const form = {
@@ -53,7 +51,7 @@ function Table() {
       };
       try {
         const response = await fetch(
-          `https://ise-project-api-production.up.railway.app/moderation/activation`,
+          `${EndpointRoot}/moderation/activation`,
           {
             method: "PUT",
             headers: {
@@ -73,7 +71,7 @@ function Table() {
     const refreshData = async () => {
       try {
         const response = await fetch(
-          `https://ise-project-api-production.up.railway.app/moderators/`,
+          `${EndpointRoot}/moderators/`,
           {
             method: "GET",
             headers: {

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FaChevronDown } from "react-icons/fa";
+import { EndpointRoot } from "../../../../App";
 
 function SecondTable() {
   const headers = [
@@ -11,13 +12,10 @@ function SecondTable() {
     "Publication Date",
   ];
 
-  const tableImg = <img src="BiSort.svg" />;
   const tableIcon = ["Title", "Url", "Publication Date"];
-  const [selectedRowIndex, setSelectedRowIndex] = useState(null);
   const [tableData, setTableData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
-  const [page, setPage] = useState(0);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
@@ -26,20 +24,18 @@ function SecondTable() {
     const fetchTableData = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch(
-          `https://ise-project-api-production.up.railway.app/articles/`,
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${window.localStorage.getItem("token")}`,
-              "Content-Type": "application/json",
-            },
-          }
-        );
+        const response = await fetch(`${EndpointRoot}/articles/`, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+            "Content-Type": "application/json",
+          },
+        });
         const data = await response.json();
         setTableData(data);
       } catch (e) {
         setError(e);
+        console.log(error);
       } finally {
         setIsLoading(false);
       }
@@ -62,16 +58,13 @@ function SecondTable() {
     const formData = new FormData();
     formData.append("file", file);
     try {
-      const response = await fetch(
-        `https://ise-project-api-production.up.railway.app/upload/local`,
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${window.localStorage.getItem("token")}`,
-          },
-          body: formData,
-        }
-      );
+      const response = await fetch(`${EndpointRoot}/upload/local`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+        },
+        body: formData,
+      });
 
       const data = await response.json();
       const key = data.file_key;
@@ -79,7 +72,7 @@ function SecondTable() {
       console.log(key);
       try {
         const response = await fetch(
-          `https://ise-project-api-production.up.railway.app/articles/uploaded?article_key=${key}
+          `${EndpointRoot}/articles/uploaded?article_key=${key}
           `,
           {
             method: "POST",
@@ -90,8 +83,7 @@ function SecondTable() {
         );
 
         const article = await response.json();
-        console.log(response.status);
-        if (response.status === 200) {
+        if (article || response.status === 200) {
           alert("Article added successfully");
         }
       } catch (error) {
@@ -106,7 +98,7 @@ function SecondTable() {
     console.log(url);
     try {
       const response = await fetch(
-        `https://ise-project-api-production.up.railway.app/upload/gdrive?link=${url}`,
+        `${EndpointRoot}/upload/gdrive?link=${url}`,
         {
           method: "POST",
           headers: {
@@ -122,7 +114,7 @@ function SecondTable() {
       console.log(key);
       try {
         const response = await fetch(
-          `https://ise-project-api-production.up.railway.app/articles/uploaded?article_key=${key}
+          `${EndpointRoot}/articles/uploaded?article_key=${key}
           `,
           {
             method: "POST",
@@ -133,8 +125,7 @@ function SecondTable() {
         );
 
         const article = await response.json();
-        console.log(response.status);
-        if (response.status === 200) {
+        if (article || response.status === 200) {
           alert("Article added successfully");
         }
       } catch (error) {
@@ -202,72 +193,74 @@ function SecondTable() {
       </div>
       {isLoading && (
         <div className="h-[70vh] w-full flex flex-col justify-center items-center gap-[10vh]">
-        <h1 className="max-w-[82vw] font-bold text-BlueDark text-[2.5rem] text-center text-Blue66">
-          Loading....
-        </h1>
-        <img
-          alt="wait"
-          className="animate-spin-slow"
-          src="/settings.png"
-        ></img>{" "}
-      </div>
+          <h1 className="max-w-[82vw] font-bold text-BlueDark text-[2.5rem] text-center text-Blue66">
+            Loading....
+          </h1>
+          <img
+            alt="wait"
+            className="animate-spin-slow"
+            src="/settings.png"
+          ></img>{" "}
+        </div>
       )}
       {!isLoading && (
-
         <div className="overflow-auto lg:overflow-visible">
-
-        <table className=" w-full mx-auto text-left">
-          <thead className="bg-Blue66 text-white">
-            <tr>
-              {headers.map((header, i) => (
-                <th
-                key={i}
-                className={`${
-                  i === 0
-                  ? "rounded-l-[16px]"
-                  : i === headers.length - 1
-                  ? "rounded-r-[16px]"
-                  : ""
-                } p-2 lg:p-4 text-[.8rem] lg:text-[1rem] `}
-                >
-                  <div className="flex items-center gap-2">
-                    {header}
-                    {tableIcon.indexOf(header) !== -1}
-                  </div>
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody className="text-Typo">
-            {tableData.map((data, i) => (
-              <tr
-              key={i}
-              className="border-b-2 border-solid border-Typo border-opacity-20 font-semibold max-h-[100px]"
-              >
-                <td className="p-2 lg:p-4 text-[.8rem] lg:text-[1rem] max-w-[20%] max-h-[70px] lg:max-h-[100px]">{data.id}</td>
-                <td className="p-2 lg:p-4 text-[.8rem] lg:text-[1rem] max-w-[20%] max-h-[70px] lg:max-h-[100px]">{data.title}</td>
-                <td
-                  className="p-2 lg:p-4 text-[.8rem] lg:text-[1rem] max-w-[20%] max-h-[70px] lg:max-h-[100px] hover:text-Blue66 hover:cursor-pointer underline"
-                  onClick={() => {
-                    window.open(data.url, "_blank");
-                  }}
+          <table className=" w-full mx-auto text-left">
+            <thead className="bg-Blue66 text-white">
+              <tr>
+                {headers.map((header, i) => (
+                  <th
+                    key={i}
+                    className={`${
+                      i === 0
+                        ? "rounded-l-[16px]"
+                        : i === headers.length - 1
+                        ? "rounded-r-[16px]"
+                        : ""
+                    } p-2 lg:p-4 text-[.8rem] lg:text-[1rem] `}
                   >
-                  Article:{data.id}
-                </td>
-                <td className="p-2 lg:p-4 text-[.8rem] lg:text-[1rem] max-w-[20%] max-h-[70px] lg:max-h-[100px]">
-                  {data.authors}
-                </td>
-                <td className="p-2 lg:p-4 text-[.8rem] lg:text-[1rem] max-w-[20%] max-h-[70px] lg:max-h-[100px]">
-                  {data.institutes}
-                </td>
-                <td className="p-2 lg:p-4 text-[.8rem] lg:text-[1rem] max-w-[20%] max-h-[70px] lg:max-h-[100px]">
-                  {data.publication_date}
-                </td>
+                    <div className="flex items-center gap-2">
+                      {header}
+                      {tableIcon.indexOf(header) !== -1}
+                    </div>
+                  </th>
+                ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody className="text-Typo">
+              {tableData.map((data, i) => (
+                <tr
+                  key={i}
+                  className="border-b-2 border-solid border-Typo border-opacity-20 font-semibold max-h-[100px]"
+                >
+                  <td className="p-2 lg:p-4 text-[.8rem] lg:text-[1rem] max-w-[20%] max-h-[70px] lg:max-h-[100px]">
+                    {data.id}
+                  </td>
+                  <td className="p-2 lg:p-4 text-[.8rem] lg:text-[1rem] max-w-[20%] max-h-[70px] lg:max-h-[100px]">
+                    {data.title}
+                  </td>
+                  <td
+                    className="p-2 lg:p-4 text-[.8rem] lg:text-[1rem] max-w-[20%] max-h-[70px] lg:max-h-[100px] hover:text-Blue66 hover:cursor-pointer underline"
+                    onClick={() => {
+                      window.open(data.url, "_blank");
+                    }}
+                  >
+                    Article:{data.id}
+                  </td>
+                  <td className="p-2 lg:p-4 text-[.8rem] lg:text-[1rem] max-w-[20%] max-h-[70px] lg:max-h-[100px]">
+                    {data.authors}
+                  </td>
+                  <td className="p-2 lg:p-4 text-[.8rem] lg:text-[1rem] max-w-[20%] max-h-[70px] lg:max-h-[100px]">
+                    {data.institutes}
+                  </td>
+                  <td className="p-2 lg:p-4 text-[.8rem] lg:text-[1rem] max-w-[20%] max-h-[70px] lg:max-h-[100px]">
+                    {data.publication_date}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
     </div>
   );

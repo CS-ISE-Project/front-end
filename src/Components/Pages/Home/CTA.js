@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { EndpointRoot } from "../../../App";
 
 function CTA() {
   const getNumberUsers = async () => {
     try {
       const response = await fetch(
-        `https://ise-project-api-production.up.railway.app/users/`,
+        `${EndpointRoot}/users/`,
         {
           headers: {
             "Content-Type": "application/json",

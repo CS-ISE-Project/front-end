@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { EndpointRoot } from "../../../../App";
 
 function Article(props) {
   const navigate = useNavigate();
@@ -7,7 +8,7 @@ function Article(props) {
   const handleArticleDetails = async () => {
     try {
       const response = await fetch(
-        `https://ise-project-api-production.up.railway.app/articles/${props.id}`,
+        `${EndpointRoot}/articles/${props.id}`,
         {
           headers: {
             "Content-Type": "application/json",

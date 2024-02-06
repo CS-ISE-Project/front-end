@@ -1,12 +1,11 @@
 import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { FaChevronDown } from "react-icons/fa";
 import { MdLogout } from "react-icons/md";
 import { Context } from "../../../../App";
 
 function Navbar() {
   const userName = localStorage.getItem("username");
-  const userid = localStorage.getItem("userid");
   const navigate = useNavigate();
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [page, setPage] = useState(1);

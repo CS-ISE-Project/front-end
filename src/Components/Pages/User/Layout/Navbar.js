@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { FaChevronDown } from "react-icons/fa";
 import { MdLogout } from "react-icons/md";
 import { FaRegUser } from "react-icons/fa6";
-import { Context } from "../../../../App";
+import { Context, EndpointRoot } from "../../../../App";
 
 function Navbar() {
   const userName = localStorage.getItem("username");
@@ -19,7 +19,7 @@ function Navbar() {
     console.log(userid);
     try {
       const response = await fetch(
-        `https://ise-project-api-production.up.railway.app/users/${userid}`,
+        `${EndpointRoot}/users/${userid}`,
         {
           headers: {
             "Content-Type": "application/json",
