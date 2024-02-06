@@ -122,6 +122,7 @@ function LoginForm(props) {
       ) {
         if (response.status === 200) {
           setAuth({ isAdmin: 1, isMod: 0, isUser: 0 });
+          localStorage.setItem("page", 1);
           alert("Login successful");
           localStorage.setItem(
             "auth",

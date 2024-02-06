@@ -57,6 +57,7 @@ export default function EditArticle() {
     }
     setModify(false);
   };
+
   const [formData, setFormData] = useState({
     url: ArticleDetails[2],
     publication_date: ArticleDetails[6],
@@ -69,33 +70,15 @@ export default function EditArticle() {
     references: ArticleDetails[9],
   });
 
-  let refre = "";
+  console.log(formData);
 
-  if (formData.references !== undefined && formData.references !== null) {
-    formData.references.map((r) => {
-      refre += `${r} \n`;
-    });
-  }
-
-  function handleChange(e) {
+  const handleChange = (e) => {
     const { name, value } = e.target;
-    const arr = ["institutes", "references", "keywords"];
-    if (arr.indexOf(name) !== -1) {
-      setFormData((formData) => {
-        return {
-          ...formData,
-          [name]: [value],
-        };
-      });
-    } else {
-      setFormData((formData) => {
-        return {
-          ...formData,
-          [name]: value,
-        };
-      });
-    }
-  }
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: Array.isArray(prevFormData[name]) ? value.split("\n") : value,
+    }));
+  };
 
   return (
     <div className="flex flex-col items-center w-[84vw] lg:gap-[72px] md:my-[200px] my-[160px] mx-auto">
@@ -269,19 +252,19 @@ export default function EditArticle() {
               </h3>
               <div className="flex gap-4 flex-wrap">
                 {!modify ? (
-                  <input
-                    value={formData.keywords}
+                  <textarea
+                    value={formData.keywords.join("\n")}
                     onChange={handleChange}
                     name="keywords"
-                    className="truncate overflow-x-scroll w-[100%] bg-[#E6EEFC] px-8 py-4 flex items-center justify-center rounded-[4px]"
+                    className="w-[100%] bg-[#E6EEFC] px-6 py-4 md:px-8 md:py-4 flex items-center justify-center rounded-[4px]"
                     readOnly
                   />
                 ) : (
-                  <input
-                    value={formData.keywords}
+                  <textarea
+                    value={formData.keywords.join("\n")}
                     onChange={handleChange}
                     name="keywords"
-                    className="truncate overflow-x-scroll w-[100%] bg-[#E6EEFC] px-8 py-4 flex items-center justify-center rounded-[4px]"
+                    className="w-[100%] bg-[#E6EEFC] px-6 py-4 md:px-8 md:py-4 flex items-center justify-center rounded-[4px]"
                   />
                 )}
               </div>
@@ -293,19 +276,19 @@ export default function EditArticle() {
               </h3>
               <div className="flex gap-4 flex-wrap">
                 {!modify ? (
-                  <input
-                    value={formData.institutes}
+                  <textarea
+                    value={formData.institutes.join("\n")}
                     onChange={handleChange}
                     name="institutes"
-                    className="truncate overflow-x-scroll  w-[100%] bg-[#FEF5F7] px-6 py-4 md:px-8 md:py-4 flex items-center justify-center rounded-[4px]"
+                    className="w-[100%] bg-[#FEF5F7] px-6 py-4 md:px-8 md:py-4 flex items-center justify-center rounded-[4px]"
                     readOnly
                   />
                 ) : (
-                  <input
-                    value={formData.institutes}
+                  <textarea
+                    value={formData.institutes.join("\n")}
                     onChange={handleChange}
                     name="institutes"
-                    className="truncate overflow-x-scroll  w-[100%] bg-[#FEF5F7] px-6 py-4 md:px-8 md:py-4 flex items-center justify-center rounded-[4px]"
+                    className="w-[100%] bg-[#FEF5F7] px-6 py-4 md:px-8 md:py-4 flex items-center justify-center rounded-[4px]"
                   />
                 )}
               </div>
@@ -318,7 +301,7 @@ export default function EditArticle() {
               <div className="flex gap-4 flex-wrap">
                 {!modify ? (
                   <textarea
-                    value={refre}
+                    value={formData.references.join("\n")}
                     onChange={handleChange}
                     name="references"
                     className="text-wrap bg-Purple33 px-8 py-4 md:px-8 md:py-4 flex items-center justify-center rounded-[4px] w-[100%] h-[200px]"
@@ -326,7 +309,7 @@ export default function EditArticle() {
                   />
                 ) : (
                   <textarea
-                    value={refre}
+                    value={formData.references.join("\n")}
                     onChange={handleChange}
                     name="references"
                     className="text-wrap bg-Purple33 px-8 py-4 md:px-8 md:py-4 flex items-center justify-center rounded-[4px] w-[100%] h-[200px]"
