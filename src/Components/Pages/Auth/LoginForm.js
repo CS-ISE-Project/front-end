@@ -74,10 +74,7 @@ function LoginForm(props) {
 
       if (props.type === "/UserLogin" || props.type === "/userLogin") {
         if (response.status === 200) {
-          setAuth((prev) => ({
-            ...prev,
-            isUser: 1,
-          }));
+          setAuth({ isAdmin: 0, isMod: 0, isUser: 1 });
           alert("Login successful");
           localStorage.setItem(
             "auth",
@@ -92,10 +89,7 @@ function LoginForm(props) {
           "/B7e43cb8e8c5ee46dc353d35b26135993f8bdc5caf58246f30c9f6c30d625217"
       ) {
         if (response.status === 200) {
-          setAuth((prev) => ({
-            ...prev,
-            isMod: 1,
-          }));
+          setAuth({ isAdmin: 0, isMod: 1, isUser: 0 });
           alert("Login successful");
           try {
             const mod = await fetch(
@@ -109,10 +103,7 @@ function LoginForm(props) {
             );
             const modResult = await mod.json();
             if (modResult.is_active === true) {
-              setAuth((prev) => ({
-                ...prev,
-                isMod: 1,
-              }));
+              setAuth({ isAdmin: 0, isMod: 1, isUser: 0 });
               localStorage.setItem(
                 "auth",
                 JSON.stringify({ isMod: 1, isAdmin: 0, isUser: 0 })
@@ -130,10 +121,7 @@ function LoginForm(props) {
         "/8b2790f4436aa223df987b6e32d68c3f97c521e943669219f042dadd1cf55f3f"
       ) {
         if (response.status === 200) {
-          setAuth((prev) => ({
-            ...prev,
-            isAdmin: 1,
-          }));
+          setAuth({ isAdmin: 1, isMod: 0, isUser: 0 });
           alert("Login successful");
           localStorage.setItem(
             "auth",
