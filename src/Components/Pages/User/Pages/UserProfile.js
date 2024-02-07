@@ -39,8 +39,8 @@ const UserProfile = () => {
         <div className="lg:order-last mb-[4vh] flex justify-center items-center">
           <img
             className="h-[20vh] md:h-[25vh] lg:h-[40vh] xl:h-[45vh]  "
-            src="/profileImage.png"
-            alt="f"
+            src="/ProfileImage.png"
+            alt="Profile"
           />
         </div>
 
