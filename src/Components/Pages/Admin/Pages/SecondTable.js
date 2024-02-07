@@ -271,7 +271,7 @@ function SecondTable() {
                     <td
                       className="p-2 lg:p-4 text-[.8rem] lg:text-[1rem] max-w-[20%] max-h-[70px] lg:max-h-[100px] hover:text-Blue66 hover:cursor-pointer underline"
                       onClick={() => {
-                        window.open(data.url, "_blank");
+                        window.open(`${EndpointRoot}/${data.url}`, "_blank");
                       }}
                     >
                       Article:{data.id}
